@@ -4,13 +4,21 @@ EOSDevHelper是一个跨平台PC端EOS钱包工具，由[OracleChain团队](http
 
 EOSDevHelper is a cross-platform EOS PC wallet,which is developed by [OracleChain.io](https://oraclechain.io).
 
-# 简介/Overview
+
+* [简介/Overview](#1)
+* [钱包功能/Wallet Functions](#1)
+* [账号功能/Account Functions](#1)
+* [合约功能/Contract Functions](#1)
+* [交易核查/Transaction Checker](#1)
+* [有关欧链/About OracleChain](#1)
+
+<h1 id="1">简介/Overview</h1>
 
 EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基础的钱包功能，包含了私钥加密管理、签名校验模块。开发者可以使用EOS开发助手连接EOSIO网络，更便捷地对钱包、账号、合约接口等进行开发和测试。
 
 The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It provides private key admistrator with encryptions, signature and validation functions.Developer can use this tool connect the EOSIO testnet, and test the wallet/account/contracts interface in a convenient way.
 
-# 钱包功能/Wallet Functions
+<h1 id="1">钱包功能/Wallet Functions</h1>
 
 ### 设置/Settings
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/setting.PNG)
@@ -24,7 +32,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It 
 ### 锁定和解锁钱包/Lock/Unlock a wallet
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/UnlockWallet.PNG)
 
-# 账号功能/Account Functions
+<h1 id="1">账号功能/Account Functions</h1>
 
 ### 创建账号/Create account
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/account.PNG)
@@ -39,7 +47,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It 
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetServants.PNG)
 
 
-# 合约功能/Contract Functions
+<h1 id="1">合约功能/Contract Functions</h1>
 
 ### 发起合约调用/Send a transaction
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/Push.PNG)
@@ -47,13 +55,12 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It 
 ### 查看合约数据表/Get data table of a contract
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetTable.PNG)
 
-# 交易核查/Transaction Checker
+<h1 id="1">交易核查/Transaction Checker</h1>
 
-### 根据交易原文和签名，验证链上某交易是否成立。
-### Using the action message with its signature,we can check if a transaction is signed by the owener of a given public key. 
+### 根据交易原文和签名，验证链上某交易是否成立/Using the action message with its signature,we can check if a transaction is signed by the owener of a given public key. 
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/Checker.PNG)
 
-# [有关欧链/About OracleChain](https://oraclechain.io)
+<h1 id="1">有关欧链/About OracleChain</h1>
 
 OracleChain（欧链）作为全球第一个直面区块链生态Oracle（预言机）需求的基础应用，将区块链技术服务和现实生活中的多种需求场景直接高效对接，深耕这个百亿美金估值的巨大市场。
 
