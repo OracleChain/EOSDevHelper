@@ -3,7 +3,7 @@ a cross-platform PC wallet contribute to EOS ecology.
 
 ## 简介/Overview
 
-EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基础的钱包功能，包含了私钥加密管理、签名校验模块。开发者可以使用EOS开发助手连接EOSIO网络，对钱包、账号、合约接口等进行测试。
+EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基础的钱包功能，包含了私钥加密管理、签名校验模块。开发者可以使用EOS开发助手连接EOSIO网络，更便捷地对钱包、账号、合约接口等进行开发和测试。
 
 The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It provides private key admistrator with encryptions, signature and validation functions.Developer can use this tool connect the EOSIO testnet, and test the wallet/account/contracts interface in a convenient way.
 
