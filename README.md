@@ -10,49 +10,46 @@ EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基
 
 The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It provides private key admistrator with encryptions, signature and validation functions.Developer can use this tool connect the EOSIO testnet, and test the wallet/account/contracts interface in a convenient way.
 
+通过EOS开发助手，配合EOSIO的合约框架，我们可以对合约进行快速开发和联调。
+
+Using EOSDevHelper combined with EOSIO contracts framework,we can build contract and making test in a most convenient way.
+
 # 钱包功能/Wallet Functions
 
 设置/Settings
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/setting.PNG)
 
 创建钱包/Create a wallet
-
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/wallet.PNG)
 
 创建和导入私钥/Create & import a private key
-
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/wallet.PNG)
 
 锁定和解锁钱包/Lock/Unlock a wallet
-
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/wallet.PNG)
 
 # 账号功能/Account Functions
 
 创建账号/Create account
-
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/account.PNG)
 
 账号状态/Get Account Status
-
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetAccount.PNG)
 
 账号交易历史/Get Account History
-
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetAccount.PNG)
 
 账号子集/Get Account Servants
-
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetAccount.PNG)
 
 
 # 合约功能/Contract Functions
 
-通过EOS开发助手，配合EOSIO的合约框架，我们可以对合约进行快速开发和联调。
-
-Using EOSDevHelper combined with EOSIO contracts framework,we can build contract and making test in a most convenient way.
-
+发起合约调用/Send a transaction
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/Push.PNG)
+
+查看合约数据表/Get data table of a contract
+![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetTable.PNG)
 
 # 交易核查/Transaction Checker
 
@@ -61,6 +58,8 @@ Using EOSDevHelper combined with EOSIO contracts framework,we can build contract
 Using the action message with its signature,we can check if a transaction is signed by the owener of a given public key. 
 
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/Checker.PNG)
+
+
 
 # 有关欧链/About OracleChain
 
