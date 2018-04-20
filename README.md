@@ -4,11 +4,6 @@ EOSDevHelper是一个跨平台PC端EOS钱包工具，由[OracleChain团队](http
 
 EOSDevHelper is a cross-platform EOS PC wallet,which is developed by [OracleChain.io](https://oraclechain.io).
 
-
-* [1.简介/Overview](#1)
-
-<h2 id="1">简介/Overview</h2>
-
 # 简介/Overview
 
 EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基础的钱包功能，包含了私钥加密管理、签名校验模块。开发者可以使用EOS开发助手连接EOSIO网络，更便捷地对钱包、账号、合约接口等进行开发和测试。
@@ -24,10 +19,10 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It 
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/wallet.PNG)
 
 ### 创建和导入私钥/Create & import a private key
-![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/wallet.PNG)
+![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/ImportKey.PNG)
 
 ### 锁定和解锁钱包/Lock/Unlock a wallet
-![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/wallet.PNG)
+![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/UnlockWallet.PNG)
 
 # 账号功能/Account Functions
 
@@ -38,10 +33,10 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It 
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetAccount.PNG)
 
 ### 账号交易历史/Get Account History
-![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetAccount.PNG)
+![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetTransaction.PNG)
 
 ### 账号子集/Get Account Servants
-![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetAccount.PNG)
+![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetServants.PNG)
 
 
 # 合约功能/Contract Functions
