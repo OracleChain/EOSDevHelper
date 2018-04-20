@@ -22,7 +22,7 @@ EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基
 
 The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It provides private key admistrator with encryptions, signature and validation functions.Developer can use this tool connect the EOSIO testnet, and test the wallet/account/contracts interface in a convenient way.
 
-------------------------------
+
 <h2 id="1">钱包功能/Wallet Functions</h2>
 
 ### 设置/Settings
@@ -37,7 +37,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It 
 ### 锁定和解锁钱包/Lock/Unlock a wallet
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/UnlockWallet.PNG)
 
-------------------------------
+
 <h2 id="1">账号功能/Account Functions</h2>
 
 ### 创建账号/Create account
@@ -53,7 +53,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It 
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetServants.PNG)
 
 
-------------------------------
+
 <h2 id="1">合约功能/Contract Functions</h2>
 
 ### 发起合约调用/Send a transaction
@@ -62,7 +62,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecosystem.It 
 ### 查看合约数据表/Get data table of a contract
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetTable.PNG)
 
-------------------------------
+
 <h2 id="1">交易核查/Transaction Checker</h2>
 
 ### 根据交易原文和签名，验证链上某交易是否成立/Using the action message with its signature,we can check if a transaction is signed by the owener of a given public key. 
