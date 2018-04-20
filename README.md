@@ -4,6 +4,11 @@ EOSDevHelper是一个跨平台PC端EOS钱包工具，由[OracleChain团队](http
 
 EOSDevHelper is a cross-platform EOS PC wallet,which is developed by [OracleChain.io](https://oraclechain.io).
 
+
+* [1.简介/Overview](#1)
+
+<h2 id="1">简介/Overview</h2>
+
 # 简介/Overview
 
 EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基础的钱包功能，包含了私钥加密管理、签名校验模块。开发者可以使用EOS开发助手连接EOSIO网络，更便捷地对钱包、账号、合约接口等进行开发和测试。
