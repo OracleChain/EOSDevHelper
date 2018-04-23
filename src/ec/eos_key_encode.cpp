@@ -69,7 +69,7 @@ std::vector<unsigned char> eos_key::get_public_key_by_pri(std::vector<unsigned c
     uint8_t pub[64];
     unsigned char * priKey = new unsigned char [pri.size() + 1];
     int i;
-    for (i = 0; i < pri.size(); ++i) {
+    for (i = 0; i < (int)pri.size(); ++i) {
         priKey[i] = pri.at(i);
     }
     priKey[i] = '\0';
@@ -78,6 +78,8 @@ std::vector<unsigned char> eos_key::get_public_key_by_pri(std::vector<unsigned c
     for (auto c: pub) {
         result.push_back(c);
     }
+
+    delete priKey;
 
     return result;
 }
@@ -117,6 +119,8 @@ std::string eos_key::get_eos_public_key_by_wif(std::string wif)
     memcpy(result, cpub, 33);
     memcpy(result+33, hash, 4);
     b58enc(base, &len, result, 37);
+
+    free(hash);
 
     eos_pub = "EOS";
     eos_pub += base;
