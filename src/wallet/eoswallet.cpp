@@ -2,7 +2,6 @@
 #include "utility/packer.h"
 
 #include <QFile>
-#include <QTextStream>
 #include <QMessageBox>
 
 EOSWallet::EOSWallet()
