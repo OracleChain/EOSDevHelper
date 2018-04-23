@@ -31,30 +31,36 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 
 **开发运行环境/ENVIRONMENT：**
 
-MACOS、WINDOWS、UBUNTU
+> MACOS、WINDOWS、UBUNTU
 
-[QT](https://www.qt.io/download) >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with [QT](https://www.qt.io/download))
+> [QT](https://www.qt.io/download) >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with [QT](https://www.qt.io/download))
+
+**下载试用/DOWNLOAD & TRY**
+
+> |版本|MD5|
+> |------|---|
+> |[Windows_v1.0](https://github.com/OracleChain/EOSDevHelper/files/1937575/EOSDevHelper_Windows_Release.zip)|aa0539bddc17007fb47938b5ff9c80c6|
 
 **依赖库/DEPENDENCYS:**
 
-1.椭圆曲线算法实现来自micro-ecc
+> 1.椭圆曲线算法实现来自micro-ecc
 
-our ECDSA is based on micro-ecc
+> our ECDSA is based on micro-ecc
 
-https://github.com/kmackay/micro-ecc
+> https://github.com/kmackay/micro-ecc
 
-2.我们在椭圆曲线secp256k1上实现了Schoenmakers在crypto99上提出的Publicly Verifiable Secret Sharing
+> 2.我们在椭圆曲线secp256k1上实现了Schoenmakers在crypto99上提出的Publicly Verifiable Secret Sharing
 
-We build a Publicly Verifiable Secret Sharing on secp256k1 which is published by Schoenmakers on crypto99 conference.
+> We build a Publicly Verifiable Secret Sharing on secp256k1 which is published by Schoenmakers on crypto99 conference.
 
-https://github.com/songgeng87/PubliclyVerifiableSecretSharing
+> https://github.com/songgeng87/PubliclyVerifiableSecretSharing
 
 
 **欧链官方Telegram群组/OracleChain official Telegram Group**
 
-中文群：https://t.me/OracleChainChatCN
+> 中文群：https://t.me/OracleChainChatCN
 
-ENGLISH GROUP：https://t.me/OracleChainChat
+> ENGLISH GROUP：https://t.me/OracleChainChat
 
 
 <h2 id="3">钱包功能/Wallet Functions</h2>
