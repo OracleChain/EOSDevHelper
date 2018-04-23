@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>930</width>
+    <height>621</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>14</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>EOSDevHelper</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(32, 32, 32);
+border-color: rgba(255, 255, 255, 0);</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTabWidget::pane { /* The tab widget frame */
+    border: 0px;
+}
+
+QTabBar {
+	color: rgb(255, 255, 255);
+	background-color: rgb(32, 32, 32);
+	selection-background-color: rgb(0, 0, 0);
+}
+
+border-color: rgba(255, 255, 255, 0);
+
+QTabBar::tab:selected {
+	border: 0px;
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+	border-top-color: transparent;
+	border-right-color: transparent;
+}</string>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="documentMode">
+       <bool>false</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>false</bool>
+      </property>
+      <property name="movable">
+       <bool>false</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="tabWallet">
+       <attribute name="title">
+        <string>Wallet</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabAccount">
+       <attribute name="title">
+        <string>Account</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabPush">
+       <attribute name="title">
+        <string>Push</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabGetTable">
+       <attribute name="title">
+        <string>Get Table</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabChecker">
+       <attribute name="title">
+        <string>Checker</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabSettings">
+       <attribute name="title">
+        <string>Settings</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

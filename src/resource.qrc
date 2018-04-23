@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>resource/oraclechain.png</file>
+        <file>resource/telegram.png</file>
+        <file>resource/twitter.png</file>
+    </qresource>
+</RCC>
