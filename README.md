@@ -35,6 +35,12 @@ MACOS、WINDOWS、UBUNTU
 
 [QT](https://www.qt.io/download) >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with [QT](https://www.qt.io/download))
 
+**下载试用/DOWNLOAD & TRY**
+
+|版本|MD5|  
+|------|---|
+|[Windows_v1.0](https://github.com/OracleChain/EOSDevHelper/files/1937575/EOSDevHelper_Windows_Release.zip|aa0539bddc17007fb47938b5ff9c80c6|
+
 **依赖库/DEPENDENCYS:**
 
 1.椭圆曲线算法实现来自micro-ecc
