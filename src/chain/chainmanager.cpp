@@ -3,8 +3,6 @@
 #include "signedtransaction.h"
 #include "ec/eos_key_encode.h"
 
-#include <QFile>
-
 namespace ChainManager {
 
 SignedTransaction createTransaction(const std::string &contract, const std::string &actionName, const std::string &hexData, const std::vector<std::string> &permissions, const QByteArray &info)
