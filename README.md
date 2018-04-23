@@ -14,6 +14,7 @@
 * [合约功能/Contract Functions](#5)
 * [交易核查/Transaction Checker](#6)
 * [有关欧链/About OracleChain](#7)
+* [版权/LICENSE](#8)
 
 ------------------------------
 
@@ -114,3 +115,9 @@ OracleChain will nurture and serve those blockchain applications that change the
 OracleChain的使命是“让世界与区块链互联”，立志成为链接现实世界与区块链世界的基础设施，通过把外部数据引入区块链来实现链内链外的数据互通，OracleChian将是未来区块链世界中最高效的获取链外数据的服务提供平台。
 
 By achieving intra-chain and extra-chain data connectivity, we aspire to create a service provisioning platform that can most efficiently gain access to extra-chain data in the future blockchain world.
+
+<h2 id="8">版权/LICENSE</h2>
+
+**License**
+
+Released under GNU/GPL Version 3
