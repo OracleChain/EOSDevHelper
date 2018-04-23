@@ -26,9 +26,7 @@ CreateAccountFrame::CreateAccountFrame(QWidget *parent) :
     httpc(new HttpClient)
 {
     ui->setupUi(this);
-
-    QRegExp accountRegex(eos_account_regex);
-    QRegExpValidator *accountVadt = new QRegExpValidator(accountRegex, this);
+    QRegExpValidator *accountVadt = new QRegExpValidator(QRegExp(eos_account_regex), this);
     ui->lineEditCreatorName->setValidator(accountVadt);
     ui->lineEditNewName->setValidator(accountVadt);
 }

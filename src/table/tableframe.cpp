@@ -12,9 +12,7 @@ TableFrame::TableFrame(QWidget *parent) :
     httpc(new HttpClient)
 {
     ui->setupUi(this);
-    QRegExp accountRegex(eos_account_regex);
-    QRegExpValidator *accountVadt = new QRegExpValidator(accountRegex, this);
-    ui->lineEditScope->setValidator(accountVadt);
+    ui->lineEditScope->setValidator(new QRegExpValidator(QRegExp(eos_account_regex), this));
 }
 
 TableFrame::~TableFrame()
