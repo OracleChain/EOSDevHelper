@@ -35,12 +35,6 @@ MACOS、WINDOWS、UBUNTU
 
 QT >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with QT)
 
-**欧链官方Telegram群组/OracleChain official Telegram Group**
-
-中文群：https://t.me/OracleChainChatCN
-
-ENGLISH GROUP：https://t.me/OracleChainChat
-
 **依赖库/DEPENDENCYS:**
 
 1.椭圆曲线算法实现来自micro-ecc
@@ -55,6 +49,12 @@ We build a Publicly Verifiable Secret Sharing on secp256k1 which is published by
 
 https://github.com/songgeng87/PubliclyVerifiableSecretSharing
 
+
+**欧链官方Telegram群组/OracleChain official Telegram Group**
+
+中文群：https://t.me/OracleChainChatCN
+
+ENGLISH GROUP：https://t.me/OracleChainChat
 
 
 <h2 id="3">钱包功能/Wallet Functions</h2>
