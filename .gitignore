@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Qt's
+src/*.pro.user
+build-EOSDevHelper*
