@@ -8,7 +8,7 @@
 
 # 目录/Menu
 * [简介/Overview](#1)
-* [开发和使用环境/ENV](#2)
+* [开发和使用环境/ENVIRONMENT](#2)
 * [钱包功能/Wallet Functions](#3)
 * [账号功能/Account Functions](#4)
 * [合约功能/Contract Functions](#5)
@@ -29,11 +29,11 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 ------------------------------
 <h2 id="2">开发和使用环境/ENVIRONMENT</h2>
 
-**开发运行环境/ENVIROMENT：**
+**开发运行环境/ENVIRONMENT：**
 
 MACOS、WINDOWS、UBUNTU
 
-QT >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with QT)
+[QT](https://www.qt.io/download) >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with [QT](https://www.qt.io/download))
 
 **依赖库/DEPENDENCYS:**
 
@@ -68,7 +68,7 @@ ENGLISH GROUP：https://t.me/OracleChainChat
 ### 创建和导入私钥/Create & import a private key
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/ImportKey.PNG)
 
-### 锁定和解锁钱包/Lock/Unlock a wallet
+### 锁定和解锁钱包/Lock or Unlock a wallet
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/UnlockWallet.PNG)
 
 
