@@ -10,12 +10,8 @@
 
 #include "wallet/eoswallet.h"
 
-Packer::Packer()
-{
-
-}
-
-std::vector<char> Packer::pack(const plain_keys &data)
+namespace Packer {
+std::vector<char> pack(const plain_keys &data)
 {
     std::vector<char> vec;
 
@@ -54,7 +50,7 @@ std::vector<char> Packer::pack(const plain_keys &data)
     return vec;
 }
 
-void Packer::unpack(const std::vector<char> &arr, plain_keys &pk)
+void unpack(const std::vector<char> &arr, plain_keys &pk)
 {
     QByteArray ba;
     for (const auto& c : arr) {
@@ -84,4 +80,6 @@ void Packer::unpack(const std::vector<char> &arr, plain_keys &pk)
         QString key = list.at(0);
         pk.keys.insert(key, objKey.value(key).toString());
     }
+}
+
 }
