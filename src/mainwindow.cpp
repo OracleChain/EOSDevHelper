@@ -24,8 +24,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabWidget->setTabPosition(QTabWidget::West);
     ui->tabWidget->tabBar()->setStyle(new CustomTabStyle);
 
-    pushOutput = new OutputFrame(ui->tabPush);
-
     InitUI();
 }
 
@@ -42,6 +40,8 @@ void MainWindow::InitUI()
     acntFrame = new AccountFrame(ui->tabAccount);
     QVBoxLayout *accountVLayout = new QVBoxLayout(ui->tabAccount);
     accountVLayout->addWidget(acntFrame);
+
+    pushOutput = new OutputFrame(ui->tabPush);
 
     QHBoxLayout *pushHLayout = new QHBoxLayout(ui->tabPush);
     pushHLayout->addWidget(new PushFrame(ui->tabPush));
