@@ -45,6 +45,8 @@ const QString wallet_sign_trx = wallet_func_base + "/sign_transaction";
 
 const QString content_type_application_json = "application/json";
 
+const QString eos_account_regex = "([.1-5a-z]{3,13}$)";
+
 QString make_url(const QString& api_url);
 
 class HttpClient : public QObject

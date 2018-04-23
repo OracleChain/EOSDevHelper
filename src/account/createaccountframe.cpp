@@ -27,7 +27,7 @@ CreateAccountFrame::CreateAccountFrame(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QRegExp accountRegex("([.1-5a-z]{3,13}$)");
+    QRegExp accountRegex(eos_account_regex);
     QRegExpValidator *accountVadt = new QRegExpValidator(accountRegex, this);
     ui->lineEditCreatorName->setValidator(accountVadt);
     ui->lineEditNewName->setValidator(accountVadt);

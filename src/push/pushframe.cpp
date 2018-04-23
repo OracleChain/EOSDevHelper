@@ -21,7 +21,7 @@ PushFrame::PushFrame(QWidget *parent) :
     httpc(new HttpClient)
 {
     ui->setupUi(this);
-    QRegExp accountRegex("([.1-5a-z]{3,13}$)");
+    QRegExp accountRegex(eos_account_regex);
     QRegExpValidator *accountVadt = new QRegExpValidator(accountRegex, this);
     ui->lineEditContractAccount->setValidator(accountVadt);
 }
