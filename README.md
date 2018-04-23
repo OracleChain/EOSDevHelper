@@ -33,7 +33,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 
 MACOS、WINDOWS、UBUNTU
 
-QT >= 5.8(使用QT导入项目，编译即可/just need to import and build the project)
+QT >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with QT)
 
 **欧链官方Telegram群组/OracleChain official Telegram Group**
 
