@@ -43,7 +43,7 @@ our ECDSA is based on micro-ecc
 
 https://github.com/kmackay/micro-ecc
 
-2.我们在椭圆曲线secp256k1上实现了Schoenmakers在crypto99上提出的Publicly Verifiable Secret Sharing on secp256k1 which is invented by 方案
+2.我们在椭圆曲线secp256k1上实现了Schoenmakers在crypto99上提出的Publicly Verifiable Secret Sharing
 
 We build a Publicly Verifiable Secret Sharing on secp256k1 which is published by Schoenmakers on crypto99 conference.
 
