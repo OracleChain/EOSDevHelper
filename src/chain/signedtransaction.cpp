@@ -1,7 +1,6 @@
 #include "signedtransaction.h"
 #include "eosbytewriter.h"
 #include "Crypto/libbase58.h"
-#include <QFile>
 
 extern "C"
 {
