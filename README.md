@@ -33,7 +33,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 
 MACOS、WINDOWS、UBUNTU
 
-QT >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with QT)
+[QT](https://www.qt.io/download) >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with [QT](https://www.qt.io/download))
 
 **依赖库/DEPENDENCYS:**
 
