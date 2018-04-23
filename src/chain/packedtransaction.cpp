@@ -1,7 +1,6 @@
 #include "packedtransaction.h"
 #include "eosbytewriter.h"
-
-#include <QDebug>
+#include "utility/utils.h"
 
 PackedTransaction::PackedTransaction(const SignedTransaction &signedTxn, const std::string &compress)
 {
@@ -15,12 +14,12 @@ PackedTransaction::PackedTransaction(const SignedTransaction &signedTxn, const s
         ct = compress_type::COMPRESS_ZLIB;
     }
 
-    std::vector<unsigned char> hexPkedTxn = convertBytesToHexStr(packTxn(signedTxn, ct));
+    std::vector<unsigned char> hexPkedTxn = Utils::convertBytesToHexStr(packTxn(signedTxn, ct));
 
     packed_trx = std::string(hexPkedTxn.begin(), hexPkedTxn.end());
 
     std::vector<std::string> ctxFreeData = signedTxn.getCtxFreeData();
-    std::vector<unsigned char> hexPkedCtx = convertBytesToHexStr(packCtxFreeData(ctxFreeData, ct));
+    std::vector<unsigned char> hexPkedCtx = Utils::convertBytesToHexStr(packCtxFreeData(ctxFreeData, ct));
 
     packed_context_free_data = std::string(hexPkedCtx.begin(), hexPkedCtx.end());
 }
@@ -72,7 +71,7 @@ std::vector<unsigned char> PackedTransaction::packCtxFreeData(const std::vector<
 
     for (int i = 0; i < ctxCnt; ++i) {
         std::string hexStr = ctxFreeData.at(i);
-        std::vector<unsigned char> bytes = convertHexStrToBytes(std::vector<unsigned char>(hexStr.begin(), hexStr.end()));
+        std::vector<unsigned char> bytes = Utils::convertHexStrToBytes(std::vector<unsigned char>(hexStr.begin(), hexStr.end()));
 
         writer.putBytes(bytes.data(), bytes.size());
     }

@@ -1,5 +1,6 @@
 #include "transactionheader.h"
 #include "eosbytewriter.h"
+#include "utility/utils.h"
 
 #include <QDateTime>
 #include <QVariant>
@@ -67,7 +68,7 @@ void TransactionHeader::setReferenceBlock(const std::string &ref)
 {
     QString ref_block = QString::fromStdString(ref);
     ref_block_num = ref_block.left(8).toInt(nullptr, 16);
-    ref_block_prefix = convertEndian(ref_block.mid(16, 8).toUInt(nullptr, 16));
+    ref_block_prefix = Utils::convertEndian(ref_block.mid(16, 8).toUInt(nullptr, 16));
 }
 
 void TransactionHeader::setNetUsageWords(long long net_usage)

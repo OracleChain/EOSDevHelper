@@ -1,6 +1,7 @@
 #include "signedtransaction.h"
 #include "eosbytewriter.h"
 #include "Crypto/libbase58.h"
+#include "utility/utils.h"
 
 extern "C"
 {
@@ -111,7 +112,7 @@ bool SignedTransaction::signTest(const std::vector<unsigned char> &signatureHex,
     uint8_t packedSha256[SHA256_DIGEST_LENGTH];
     sha256_Raw(packedBytes.data(), packedBytes.size(), packedSha256);
 
-    std::vector<unsigned char> signature = convertHexStrToBytes(signatureHex);
+    std::vector<unsigned char> signature = Utils::convertHexStrToBytes(signatureHex);
     signature.erase(signature.begin());   //remove headerBytes
 
     return checkSignature(pubKey.data(), packedSha256, signature.data()) != -1;

@@ -1,5 +1,6 @@
 #include "action.h"
 #include "eosbytewriter.h"
+#include "utility/utils.h"
 
 #include <QStringList>
 
@@ -31,7 +32,7 @@ void Action::serialize(EOSByteWriter *writer) const
         SerializeCollection<TypePermissionLevel>(authorization, writer);
         //writer->putCollection(authorization);
 
-        std::vector<unsigned char> bytes = convertHexStrToBytes(std::vector<unsigned char>(data.begin(), data.end()));
+        std::vector<unsigned char> bytes = Utils::convertHexStrToBytes(std::vector<unsigned char>(data.begin(), data.end()));
 
         if (!bytes.empty()) {
             writer->putVariableUInt(bytes.size());

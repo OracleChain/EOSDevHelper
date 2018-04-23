@@ -1,5 +1,6 @@
 #include "eosnewaccount.h"
 #include "eosbytewriter.h"
+#include "utility/utils.h"
 
 EOSNewAccount::EOSNewAccount()
 {
@@ -55,5 +56,5 @@ std::vector<unsigned char> EOSNewAccount::data()
 
 std::vector<unsigned char> EOSNewAccount::dataAsHex()
 {
-    return convertBytesToHexStr(data());;
+    return Utils::convertBytesToHexStr(data());;
 }
