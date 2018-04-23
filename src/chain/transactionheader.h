@@ -26,6 +26,9 @@ private:
     LONG net_usage_words;
     LONG kcpu_usage;
     LONG delay_seconds;
+
+private:
+    const static int EXPIRATION_SEC = 30;
 };
 
 #endif // TRANSACTIONHEADER_H

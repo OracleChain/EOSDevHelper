@@ -17,7 +17,8 @@ TransactionHeader::TransactionHeader()
 void TransactionHeader::serialize(EOSByteWriter *writer) const
 {
    if (writer) {
-       writer->putIntLE((int)(QDateTime::fromString(QString::fromStdString(expiration), Qt::ISODate).toMSecsSinceEpoch() / 1000 + 28800 + 30));
+       QDateTime date = QDateTime::fromString(QString::fromStdString(expiration), Qt::ISODate);
+       writer->putIntLE((int)(date.toMSecsSinceEpoch() / 1000 + date.offsetFromUtc() + EXPIRATION_SEC));
        writer->putShortLE((short)(region & 0xFFFF));
        writer->putShortLE((short)ref_block_num & 0xFFFF);
        writer->putIntLE((int)(ref_block_prefix & 0xFFFFFFFF));
