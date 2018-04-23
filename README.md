@@ -33,13 +33,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 
 MACOS、WINDOWS、UBUNTU
 
-QT >= 5.8(使用QT导入项目，编译即可/just need to import and build the project)
-
-**欧链官方Telegram群组/OracleChain official Telegram Group**
-
-中文群：https://t.me/OracleChainChatCN
-
-ENGLISH GROUP：https://t.me/OracleChainChat
+QT >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with QT)
 
 **依赖库/DEPENDENCYS:**
 
@@ -55,6 +49,12 @@ We build a Publicly Verifiable Secret Sharing on secp256k1 which is published by
 
 https://github.com/songgeng87/PubliclyVerifiableSecretSharing
 
+
+**欧链官方Telegram群组/OracleChain official Telegram Group**
+
+中文群：https://t.me/OracleChainChatCN
+
+ENGLISH GROUP：https://t.me/OracleChainChat
 
 
 <h2 id="3">钱包功能/Wallet Functions</h2>
