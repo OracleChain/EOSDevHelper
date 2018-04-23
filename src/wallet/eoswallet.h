@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "ec/eos_key_encode.h"
+#include "ec/sha512.h"
 
 struct wallet_data
 {

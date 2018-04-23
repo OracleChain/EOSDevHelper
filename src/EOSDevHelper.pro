@@ -65,7 +65,8 @@ SOURCES += main.cpp\
     misc/aboutframe.cpp \
     chain/chainmanager.cpp \
     chain/packedtransaction.cpp \
-    utility/utils.cpp
+    utility/utils.cpp \
+    ec/sha512.cpp
 
 HEADERS  += mainwindow.h \
     wallet/walletframe.h \
@@ -113,7 +114,8 @@ HEADERS  += mainwindow.h \
     misc/aboutframe.h \
     chain/chainmanager.h \
     chain/packedtransaction.h \
-    utility/utils.h
+    utility/utils.h \
+    ec/sha512.h
 
 FORMS    += mainwindow.ui \
     wallet/walletframe.ui \
