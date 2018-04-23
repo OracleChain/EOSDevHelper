@@ -68,7 +68,7 @@ ENGLISH GROUP：https://t.me/OracleChainChat
 ### 创建和导入私钥/Create & import a private key
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/ImportKey.PNG)
 
-### 锁定和解锁钱包/Lock/Unlock a wallet
+### 锁定和解锁钱包/Lock or Unlock a wallet
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/UnlockWallet.PNG)
 
 
