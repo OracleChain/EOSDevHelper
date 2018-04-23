@@ -27,8 +27,8 @@ public:
     void loadSetting()
     {
         if (settings) {
-            base_url = settings->value("Network/url", "159.89.197.162").toString();
-            url_port = settings->value("Network/port", "8888").toString();
+            base_url = settings->value("Network/url", "").toString();
+            url_port = settings->value("Network/port", "").toString();
             skip_signature = settings->value("Common/skip-signature", 1).toBool();
         }
     }

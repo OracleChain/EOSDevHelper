@@ -4,8 +4,8 @@
 #include <QNetworkReply>
 #include <QUrlQuery>
 
-QString base_url = "159.89.197.162";
-QString url_port = "8888";
+QString base_url;
+QString url_port;
 bool skip_signature = true;
 
 QString make_url(const QString& api_url)
