@@ -51,8 +51,6 @@ QString EOSWalletManager::create(const QString &name)
 
     wallets.insert(name, wallet);
 
-    savePasswords();
-
     return password;
 }
 
@@ -221,6 +219,8 @@ void EOSWalletManager::addPasswords(const QString &walletName, const QString &pa
     } else {
         passwords[walletName] = passwd;
     }
+
+    savePasswords();
 }
 
 QString EOSWalletManager::getPassword(const QString &walletName)
