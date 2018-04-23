@@ -63,7 +63,7 @@ eos_key::eos_key()
     free(hash);
 }
 
-std::vector<unsigned char> eos_key::get_public_key_by_pri(std::vector<unsigned char> pri)
+std::vector<unsigned char> eos_key::get_public_key_by_pri(const std::vector<unsigned char>& pri)
 {
     std::vector<unsigned char> result;
     uint8_t pub[64];
@@ -84,7 +84,7 @@ std::vector<unsigned char> eos_key::get_public_key_by_pri(std::vector<unsigned c
     return result;
 }
 
-std::string eos_key::get_eos_public_key_by_wif(std::string wif)
+std::string eos_key::get_eos_public_key_by_wif(const std::string& wif)
 {
     std::string eos_pub;
     unsigned char pri[32];
@@ -168,21 +168,29 @@ std::vector<unsigned char> eos_key::get_private_key_by_wif(const std::string &wi
 
 std::vector<unsigned char> eos_key::get_public_key_char(const std::string &eoskey){
     std::string epk = eoskey.substr(3,-1);
-    unsigned char lpk[100];
+    unsigned char lpk[100] = { 0 };
     unsigned int lpklen = 37;
-    //unsigned char *rhash = nullptr;
     std::vector<unsigned char> result;
     if(!(b58tobin(lpk,&lpklen,epk.c_str(),epk.size()))){
         return result;
     }
 
-    //rhash = RMD(lpk,33);
-//    for(int i=0;i<4;i++){
-//        if(rhash[i] != lpk[i+33]) return result;
-//    }
-
     for (int j = 0; j < 33; ++j) {
         result.push_back(lpk[j]);
+    }
+
+    return result;
+}
+
+std::vector<unsigned char> eos_key::get_public_key_by_eos_pub(const std::string &pub)
+{
+    std::vector<unsigned char> base = eos_key::get_public_key_char(pub);
+    unsigned char pk[64];
+    uECC_decompress(base.data(), pk);
+
+    std::vector<unsigned char> result;
+    for (int i = 0; i < 64; ++i) {
+        result.push_back(pk[i]);
     }
 
     return result;
