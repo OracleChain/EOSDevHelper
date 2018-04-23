@@ -8,7 +8,7 @@
 
 # 目录/Menu
 * [简介/Overview](#1)
-* [开发和使用环境/ENV](#2)
+* [开发和使用环境/ENVIRONMENT](#2)
 * [钱包功能/Wallet Functions](#3)
 * [账号功能/Account Functions](#4)
 * [合约功能/Contract Functions](#5)
@@ -29,7 +29,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 ------------------------------
 <h2 id="2">开发和使用环境/ENVIRONMENT</h2>
 
-**开发运行环境/ENVIROMENT：**
+**开发运行环境/ENVIRONMENT：**
 
 MACOS、WINDOWS、UBUNTU
 
