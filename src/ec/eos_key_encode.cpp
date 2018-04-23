@@ -167,9 +167,9 @@ std::vector<unsigned char> eos_key::get_private_key_by_wif(const std::string &wi
 std::vector<unsigned char> eos_key::get_public_key_char(const std::string &eoskey){
     std::string epk = eoskey.substr(3,-1);
     unsigned char lpk[100] = { 0 };
-    unsigned int lpklen = 37;
+    size_t lpklen = 37;
     std::vector<unsigned char> result;
-    if(!(b58tobin(lpk,&lpklen,epk.c_str(),epk.size()))){
+    if(!(b58tobin(lpk, &lpklen, epk.c_str(), epk.size()))){
         return result;
     }
 
