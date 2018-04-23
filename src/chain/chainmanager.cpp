@@ -46,7 +46,7 @@ void ValidateSignature(const std::string &raw, const std::string &signature, con
         return;
     }
 
-    std::vector<unsigned char> pub = eos_key::get_public_key_char(pubKey);
+    std::vector<unsigned char> pub = eos_key::get_public_key_by_eos_pub(pubKey);
     std::vector<unsigned char> signatureHex(signature.begin(), signature.end());
 
     SignedTransaction sigedTxn;

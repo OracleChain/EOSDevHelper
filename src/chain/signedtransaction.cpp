@@ -114,8 +114,7 @@ bool SignedTransaction::signTest(const std::vector<unsigned char> &signatureHex,
     std::vector<unsigned char> signature = convertHexStrToBytes(signatureHex);
     signature.erase(signature.begin());   //remove headerBytes
 
-    int recId = checkSignature(pubKey.data(), packedSha256, signature.data());
-    return recId != -1;
+    return checkSignature(pubKey.data(), packedSha256, signature.data()) != -1;
 }
 
 std::vector<unsigned char> SignedTransaction::getDigestForSignature(const TypeChainId &cid)
