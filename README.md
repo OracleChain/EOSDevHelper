@@ -28,11 +28,11 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 ------------------------------
 <h2 id="2">开发和使用环境/ENVIRONMENT</h2>
 
-开发运行环境/ENVIROMENT：
+**开发运行环境/ENVIROMENT：**
 MACOS、WINDOWS、UBUNTU
 qt-creator >= 5.8
 
-依赖库/DEPENDENCYS:
+**依赖库/DEPENDENCYS:**
 
 1.椭圆曲线算法实现来自micro-ecc
 
