@@ -1,18 +1,19 @@
-# EOS开发助手/EOSDevHelper
+# 关于/About
 
-EOSDevHelper是一个跨平台PC端EOS钱包工具，由[OracleChain团队](https://oraclechain.io)研发。
+**EOSDevHelper**是一个跨平台PC端EOS钱包工具，由[OracleChain团队](https://oraclechain.io)研发。
 
-EOSDevHelper is a cross-platform EOS PC wallet tool,which is developed by [OracleChain.io](https://oraclechain.io).
+**EOSDevHelper** is a cross-platform EOS PC wallet tool,which is developed by [OracleChain.io](https://oraclechain.io).
 
 ------------------------------
 
-# 目录
+# 目录/Menu
 * [简介/Overview](#1)
-* [钱包功能/Wallet Functions](#2)
-* [账号功能/Account Functions](#2)
-* [合约功能/Contract Functions](#2)
-* [交易核查/Transaction Checker](#2)
-* [有关欧链/About OracleChain](#2)
+* [开发和使用环境/ENV](#2)
+* [钱包功能/Wallet Functions](#3)
+* [账号功能/Account Functions](#4)
+* [合约功能/Contract Functions](#5)
+* [交易核查/Transaction Checker](#6)
+* [有关欧链/About OracleChain](#7)
 
 ------------------------------
 
@@ -23,7 +24,32 @@ EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基
 The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It provides private basic key store with encryptions, signature, validation functions, and etc. Developer can use this tool connect the EOSIO testnet, and test the wallet/account/contracts interface in a more convenient way.
 
 
-<h2 id="1">钱包功能/Wallet Functions</h2>
+
+------------------------------
+
+<h2 id="2">开发和使用环境/ENVIROMENT</h2>
+
+开发运行环境/ENVIROMENT：
+MACOS、WINDOWS、UBUNTU
+qt-creator >= 5.8
+
+依赖库/DEPENDENCYS:
+
+1.椭圆曲线算法实现来自micro-ecc
+
+our ECDSA is based on micro-ecc
+
+https://github.com/kmackay/micro-ecc
+
+2.我们在椭圆曲线secp256k1上实现了Schoenmakers在crypto99上提出的Publicly Verifiable Secret Sharing on secp256k1 which is invented by 方案
+
+We build a Publicly Verifiable Secret Sharing on secp256k1 which is published by Schoenmakers on crypto99 conference.
+
+https://github.com/songgeng87/PubliclyVerifiableSecretSharing
+
+
+
+<h2 id="3">钱包功能/Wallet Functions</h2>
 
 ### 设置/Settings
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/setting.PNG)
@@ -38,7 +64,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/UnlockWallet.PNG)
 
 
-<h2 id="1">账号功能/Account Functions</h2>
+<h2 id="4">账号功能/Account Functions</h2>
 
 ### 创建账号/Create account
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/account.PNG)
@@ -54,7 +80,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 
 
 
-<h2 id="1">合约功能/Contract Functions</h2>
+<h2 id="5">合约功能/Contract Functions</h2>
 
 ### 发起合约调用/Send a transaction
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/Push.PNG)
@@ -63,13 +89,15 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/GetTable.PNG)
 
 
-<h2 id="1">交易核查/Transaction Checker</h2>
+<h2 id="6">交易核查/Transaction Checker</h2>
 
 ### 根据交易原文和签名，验证链上某交易是否成立/Using the action message with its signature,we can check if a transaction is signed by the owener of a given public key. 
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/Checker.PNG)
 
+
+
 ------------------------------
-<h2 id="1">有关欧链/About OracleChain</h2>
+<h2 id="7">有关欧链/About OracleChain</h2>
 
 OracleChain（欧链）作为全球第一个直面区块链生态Oracle（预言机）需求的基础应用，将区块链技术服务和现实生活中的多种需求场景直接高效对接，深耕这个百亿美金估值的巨大市场。
 
