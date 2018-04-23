@@ -2840,65 +2840,10 @@ int uECC_sign_forbc(const uint8_t private_key[uECC_BYTES],
 int getRecId(const uint8_t private_key[uECC_BYTES],
              const uint8_t hash[uECC_BYTES],
              const uint8_t signature[uECC_BYTES*2]){
-    int recid = -1;
-    EccPoint  R,sum;
-    uECC_word_t r[uECC_WORDS];
-    uECC_word_t s[uECC_WORDS];
-    uECC_word_t e[uECC_WORDS];
     uint8_t public_key[uECC_BYTES*2];
-    uECC_word_t x[uECC_WORDS];
-    
-    uECC_word_t s3[uECC_WORDS];
-    
-    uint8_t  deR[uECC_BYTES+1];
-    uint8_t  coR[uECC_BYTES*2];
-    
-    uint8_t comp_pk[uECC_BYTES*2];
-    
+
     uECC_compute_public_key(private_key, public_key);
-    
-    vli_bytesToNative(r,signature);
-    vli_bytesToNative(s,signature+uECC_BYTES);
-    vli_bytesToNative(e, hash);
-    
-    vli_modSub(e, curve_n, e, curve_n);
-    vli_modInv(r, r, curve_n);
-    
-    vli_modMult_n(s, s, r);
-    vli_modMult_n(e, e, r);
-    
-    vli_bytesToNative(x,signature);
-    vli_sub(s3, curve_p, curve_n);
-    
-    for(recid = 0; recid <4; recid ++){
-        if( recid & 2 ){
-            if ((vli_cmp(s3, x)>=0)){
-                vli_add(x,x,curve_n);
-            }else{
-                return -1;
-            }
-        }
-
-        deR[0] = (uint8_t)(0x02+(recid&1));
-        
-        vli_nativeToBytes(deR+1, x);
-        uECC_decompress(deR, coR);
-        
-        vli_bytesToNative(R.x, coR);
-        vli_bytesToNative(R.y, coR+uECC_BYTES);
-        
-        EccPoint_mult(&R,&R,s,0,vli_numBits(s, uECC_N_WORDS));
-        EccPoint_mult(&sum,&curve_G,e,0,vli_numBits(e, uECC_N_WORDS));
-        EccPoint_add(sum.x, sum.y, R.x, R.y);
-        
-        vli_nativeToBytes(comp_pk, sum.x);
-        vli_nativeToBytes(comp_pk + uECC_BYTES, sum.y);
-
-        if(comp_char(public_key,comp_pk)){
-            return recid;
-        }
-    }
-    return -1;
+    return checkSignature(public_key, hash, signature);
 }
 
 int checkSignature(const uint8_t *public_key, const uint8_t *hash, const uint8_t *signature)
