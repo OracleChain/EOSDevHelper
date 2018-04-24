@@ -116,8 +116,6 @@ std::string eos_key::get_eos_public_key_by_wif(const std::string& wif)
     memcpy(result+33, hash, 4);
     b58enc(base, &len, result, 37);
 
-    free(hash);
-
     eos_pub = "EOS";
     eos_pub += base;
 
