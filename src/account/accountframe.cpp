@@ -69,7 +69,7 @@ void AccountFrame::formatPrint(const QJsonDocument &doc, QTextEdit *edit)
     }
 
     QByteArray formatData = doc.toJson(QJsonDocument::Indented);
-    edit->setText(QString::fromStdString(formatData.toStdString()));
+    edit->setText(std::move(QString::fromStdString(formatData.toStdString())));
 }
 
 void AccountFrame::on_pushButtonGetAccount_clicked()
@@ -116,7 +116,7 @@ void AccountFrame::on_pushButtonGetServants_clicked()
         formatPrint(doc, ui->textEditGetServantsInput);
 
         QByteArray data = doc.toJson();
-        httpcGetServants->get_controlled_accounts(QString::fromStdString(data.toStdString()));
+        httpcGetServants->get_controlled_accounts(std::move(QString::fromStdString(data.toStdString())));
         connect(httpcGetServants, &HttpClient::responseData, [=](const QByteArray& data){
             formatPrint(QJsonDocument::fromJson(data), ui->textEditGetServantsOutput);
         });
