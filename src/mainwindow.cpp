@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(windowFlags()& ~Qt::WindowMaximizeButtonHint);
     ui->tabWidget->setTabPosition(QTabWidget::West);
-    ui->tabWidget->tabBar()->setStyle(new CustomTabStyle);
+    ui->tabWidget->tabBar()->setStyle(std::move(new CustomTabStyle));
 
     InitUI();
 }
@@ -35,7 +35,7 @@ MainWindow::~MainWindow()
 void MainWindow::InitUI()
 {
     QHBoxLayout *walletHLayout = new QHBoxLayout(ui->tabWallet);
-    walletHLayout->addWidget(new WalletFrame(ui->tabWallet));
+    walletHLayout->addWidget(std::move(new WalletFrame(ui->tabWallet)));
 
     acntFrame = new AccountFrame(ui->tabAccount);
     QVBoxLayout *accountVLayout = new QVBoxLayout(ui->tabAccount);
@@ -44,23 +44,22 @@ void MainWindow::InitUI()
     pushOutput = new OutputFrame(ui->tabPush);
 
     QHBoxLayout *pushHLayout = new QHBoxLayout(ui->tabPush);
-    pushHLayout->addWidget(new PushFrame(ui->tabPush));
+    pushHLayout->addWidget(std::move(new PushFrame(ui->tabPush)));
     pushHLayout->addWidget(pushOutput);
     pushHLayout->setStretch(0, 1);
     pushHLayout->setStretch(1, 4);
 
     QHBoxLayout *tableHLayout = new QHBoxLayout(ui->tabGetTable);
-    tableHLayout->addWidget(new TableFrame(ui->tabGetTable));
+    tableHLayout->addWidget(std::move(new TableFrame(ui->tabGetTable)));
 
     QHBoxLayout *checkerLayout = new QHBoxLayout(ui->tabChecker);
-    checkerLayout->addWidget(new CheckerFrame(ui->tabChecker));
+    checkerLayout->addWidget(std::move(new CheckerFrame(ui->tabChecker)));
 
     QHBoxLayout *settingLayout = new QHBoxLayout(ui->tabSettings);
-    settingLayout->addWidget(new SettingsFrame(ui->tabSettings));
+    settingLayout->addWidget(std::move(new SettingsFrame(ui->tabSettings)));
 
     AboutFrame *about = new AboutFrame(this);
-    QRect rect = this->rect();
-    about->move(rect.bottomLeft());
+    about->move(this->rect().bottomLeft());
 }
 
 void MainWindow::on_tabWidget_tabBarClicked(int index)
