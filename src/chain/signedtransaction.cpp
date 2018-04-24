@@ -94,7 +94,6 @@ void SignedTransaction::sign(const std::vector<unsigned char> &pri_key, const Ty
 
         rmdhash = RMD(bin,65);
         memcpy(bin + 1 +  uECC_BYTES * 2, rmdhash, 4);
-        free(rmdhash);
 
         char sigbin[100] = { 0 };
         size_t sigbinlen = 100;

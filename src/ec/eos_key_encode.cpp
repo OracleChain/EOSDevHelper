@@ -57,8 +57,6 @@ eos_key::eos_key()
 
     eos_public_key = "EOS";
     eos_public_key += base;
-
-    free(hash);
 }
 
 std::vector<unsigned char> eos_key::get_public_key_by_pri(const std::vector<unsigned char>& pri)
