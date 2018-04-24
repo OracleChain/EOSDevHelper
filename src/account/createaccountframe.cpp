@@ -73,7 +73,7 @@ void CreateAccountFrame::get_info_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->get_required_keys(QString::fromStdString(param.toStdString()));
+        httpc->get_required_keys(std::move(QString::fromStdString(param.toStdString())));
         connect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::get_required_keys_returned);
     }
 }
@@ -94,7 +94,7 @@ void CreateAccountFrame::get_required_keys_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->push_transaction(QString::fromStdString(param.toStdString()));
+        httpc->push_transaction(std::move(QString::fromStdString(param.toStdString())));
         connect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::push_transaction_returned);
     }
 }
@@ -115,8 +115,8 @@ void CreateAccountFrame::push_transaction_returned(const QByteArray &data)
     }
 
     QString walletName = ui->comboBoxWallet->currentData().toString();
-    EOSWalletManager::instance().importKey(walletName, QString::fromStdString(keys.at(0).get_wif_private_key()));
-    EOSWalletManager::instance().importKey(walletName, QString::fromStdString(keys.at(1).get_wif_private_key()));
+    EOSWalletManager::instance().importKey(walletName, std::move(QString::fromStdString(keys.at(0).get_wif_private_key())));
+    EOSWalletManager::instance().importKey(walletName, std::move(QString::fromStdString(keys.at(1).get_wif_private_key())));
 }
 
 void CreateAccountFrame::geneate_keys()
@@ -147,8 +147,8 @@ QByteArray CreateAccountFrame::packGetRequiredKeysParam()
 
     std::vector<unsigned char> hexData = newAccount.dataAsHex();
 
-    signedTxn = ChainManager::createTransaction(EOS_SYSTEM_ACCOUNT, newAccount.getActionName(),
-                                                            std::string(hexData.begin(), hexData.end()), ChainManager::getActivePermission(creator.toStdString()), getInfoData);
+    signedTxn = ChainManager::createTransaction(EOS_SYSTEM_ACCOUNT, newAccount.getActionName(), std::string(hexData.begin(), hexData.end()),
+                                                ChainManager::getActivePermission(creator.toStdString()), getInfoData);
     QJsonObject txnObj = signedTxn.toJson().toObject();
 
     QJsonArray avaibleKeys;
