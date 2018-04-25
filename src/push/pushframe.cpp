@@ -199,8 +199,8 @@ void PushFrame::get_required_keys_returned(const QByteArray &data)
 
     if (httpc) {
         httpc->push_transaction(QString::fromStdString(param.toStdString()));
-        connect(httpc, &HttpClient::responseData, [=](const QByteArray& data){
-            w->pushOutputFrame()->setResponseOutput(3, data);
+        connect(httpc, &HttpClient::responseData, [=](const QByteArray& d){
+            w->pushOutputFrame()->setResponseOutput(3, d);
         });
     }
 }
