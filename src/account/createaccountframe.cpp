@@ -47,6 +47,8 @@ void CreateAccountFrame::on_pushButtonOk_clicked()
         return;
     }
 
+    w->accountFrame()->clearOutput();
+
     geneate_keys();
 
     w->accountFrame()->printCreateAccountInfo(0, true, QByteArray(), "get_info");

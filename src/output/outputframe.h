@@ -17,6 +17,7 @@ public:
 
     void setRequestOutput(int index, const QString& title, const QByteArray& data);
     void setResponseOutput(int index, const QByteArray& data);
+    void clearOutput();
 
 private:
     Ui::OutputFrame *ui;

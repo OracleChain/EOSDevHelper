@@ -134,6 +134,8 @@ void PushFrame::on_pushButtonSend_clicked()
         return;
     }
 
+    w->pushOutputFrame()->clearOutput();
+
     w->pushOutputFrame()->setRequestOutput(0, "abi_json_to_bin", param);
 
     if (httpc) {

@@ -62,6 +62,11 @@ void AccountFrame::printCreateAccountInfo(int index, bool request, const QByteAr
     }
 }
 
+void AccountFrame::clearOutput()
+{
+    createOutPutFrame->clearOutput();
+}
+
 void AccountFrame::formatPrint(const QJsonDocument &doc, QTextEdit *edit)
 {
     if (!edit || doc.isNull()) {

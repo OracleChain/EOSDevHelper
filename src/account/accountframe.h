@@ -27,6 +27,7 @@ public:
 
     void refreshCreateAccountFrame();
     void printCreateAccountInfo(int index, bool request, const QByteArray& data, const QString& title = "");
+    void clearOutput();
 
 private:
     void formatPrint(const QJsonDocument& doc, QTextEdit *edit);

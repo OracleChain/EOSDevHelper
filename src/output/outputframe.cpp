@@ -97,3 +97,22 @@ void OutputFrame::setResponseOutput(int index, const QByteArray &data)
     QByteArray formatData = doc.toJson(QJsonDocument::Indented);
     textEdit->setText(QString::fromStdString(formatData.toStdString()));
 }
+
+void OutputFrame::clearOutput()
+{
+    ui->labelTitle_1->clear();
+    ui->textEditRequest_1->clear();
+    ui->textEditResponse_1->clear();
+
+    ui->labelTitle_2->clear();
+    ui->textEditRequest_2->clear();
+    ui->textEditResponse_2->clear();
+
+    ui->labelTitle_3->clear();
+    ui->textEditRequest_3->clear();
+    ui->textEditResponse_3->clear();
+
+    ui->labelTitle_4->clear();
+    ui->textEditRequest_4->clear();
+    ui->textEditResponse_4->clear();
+}
