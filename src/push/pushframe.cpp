@@ -54,7 +54,16 @@ QByteArray PushFrame::packAbiJsonToBinParam()
     QJsonObject obj;
     obj.insert("code", QJsonValue(code));
     obj.insert("action", QJsonValue(action));
-    obj.insert("args", doc.object());
+
+    if (doc.isObject()) {
+        obj.insert("args", doc.object());
+    } else if (doc.isArray()) {
+        obj.insert("args", doc.array());
+    } else {
+        return param;
+    }
+
+    Q_ASSERT(obj.contains("args"));
 
     param = QJsonDocument(obj).toJson();
     return param;
