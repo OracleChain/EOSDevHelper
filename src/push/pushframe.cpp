@@ -75,8 +75,10 @@ QByteArray PushFrame::packGetRequiredKeysParam()
     QString binargs = abiBinObj.value("binargs").toString();
     QString code = ui->lineEditContractAccount->text();
     QString action = ui->lineEditContractAction->text();
+    QString permission = ui->lineEditPermission->text();
 
-    signedTxn = ChainManager::createTransaction(code.toStdString(), action.toStdString(), binargs.toStdString(), ChainManager::getActivePermission(EOS_SYSTEM_ACCOUNT), getInfoData);
+    signedTxn = ChainManager::createTransaction(code.toStdString(), action.toStdString(), binargs.toStdString(),
+                                                ChainManager::getActivePermission(permission.toStdString()), getInfoData);
 
     QJsonObject txnObj = signedTxn.toJson().toObject();
 
