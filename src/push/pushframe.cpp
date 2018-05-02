@@ -21,7 +21,10 @@ PushFrame::PushFrame(QWidget *parent) :
     httpc(new HttpClient)
 {
     ui->setupUi(this);
-    ui->lineEditContractAccount->setValidator(new QRegExpValidator(QRegExp(eos_account_regex), this));
+
+    QRegExpValidator *accountVadt = new QRegExpValidator(QRegExp(eos_account_regex), this);
+    ui->lineEditContractAccount->setValidator(accountVadt);
+    ui->lineEditPermission->setValidator(accountVadt);
 }
 
 PushFrame::~PushFrame()
