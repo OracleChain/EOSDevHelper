@@ -13,14 +13,12 @@
 #include "checker/checkerframe.h"
 #include "misc/customtabstyle.h"
 #include "setting/settingsframe.h"
-#include "misc/aboutframe.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowFlags(windowFlags()& ~Qt::WindowMaximizeButtonHint);
     ui->tabWidget->setTabPosition(QTabWidget::West);
     ui->tabWidget->tabBar()->setStyle(std::move(new CustomTabStyle));
 
@@ -30,6 +28,13 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    QMainWindow::resizeEvent(event);
+
+    updateAbout();
 }
 
 void MainWindow::InitUI()
@@ -58,8 +63,18 @@ void MainWindow::InitUI()
     QHBoxLayout *settingLayout = new QHBoxLayout(ui->tabSettings);
     settingLayout->addWidget(std::move(new SettingsFrame(ui->tabSettings)));
 
-    AboutFrame *about = new AboutFrame(this);
-    about->move(this->rect().bottomLeft());
+    about = new AboutFrame(this);
+    updateAbout();
+}
+
+void MainWindow::updateAbout()
+{
+    if (about) {
+        QPoint p(this->rect().bottomLeft().x(), this->rect().bottomLeft().y());
+        QRect rect = about->geometry();
+        p.setY(p.y() - rect.height());
+        about->move(p);
+    }
 }
 
 void MainWindow::on_tabWidget_tabBarClicked(int index)
