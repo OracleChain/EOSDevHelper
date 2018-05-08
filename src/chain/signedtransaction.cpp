@@ -98,7 +98,7 @@ void SignedTransaction::sign(const std::vector<unsigned char> &pri_key, const Ty
         char sigbin[100] = { 0 };
         size_t sigbinlen = 100;
         b58enc(sigbin, &sigbinlen, bin, binlen);
-        std::string sig = "EOS";
+        std::string sig = "SIG_K1_";
         sig += sigbin;
 
         signatures.push_back(sig);
