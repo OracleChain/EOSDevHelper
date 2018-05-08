@@ -56,7 +56,7 @@ The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It p
 > https://github.com/songgeng87/PubliclyVerifiableSecretSharing
 
 
-**欧链官方Telegram群组/OracleChain official Telegram Group**
+**相关问题反馈，请加欧链官方Telegram群组/Any questions pls join our official Telegram Group below**
 
 > 中文群：https://t.me/OracleChainChatCN
 
@@ -134,4 +134,4 @@ By achieving intra-chain and extra-chain data connectivity, we aspire to create 
 
 **License**
 
-Released under GNU/GPL Version 3
+Released under GNU/LGPL Version 3
