@@ -15,7 +15,7 @@ std::vector<unsigned char> convertBytesToHexStr(const std::vector<unsigned char>
 {
     std::vector<unsigned char> dst;
     for (int i = 0; i < (int)src.size(); ++i) {
-        unsigned char hex[2];
+        unsigned char hex[3];
         unsigned char c = src.at(i);
         sprintf((char*)&hex[0], "%02x", c);
         dst.push_back(hex[0]);
