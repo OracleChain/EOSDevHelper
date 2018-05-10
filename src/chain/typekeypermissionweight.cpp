@@ -1,6 +1,5 @@
 #include "typekeypermissionweight.h"
 #include "eosbytewriter.h"
-#include "ec/eos_key_encode.h"
 
 TypeKeyPermissionWeight::TypeKeyPermissionWeight()
 {
