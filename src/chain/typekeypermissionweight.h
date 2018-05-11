@@ -2,6 +2,7 @@
 #define TYPEKEYPERMISSIONWEIGHT_H
 
 #include "chainbase.h"
+#include "ec/eos_key_encode.h"
 #include <string>
 
 class TypeKeyPermissionWeight : public ISerializer
