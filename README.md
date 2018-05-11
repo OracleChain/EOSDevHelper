@@ -20,9 +20,9 @@
 
 <h2 id="1">Overview/简介</h2>
 
-The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It provides private basic key store with encryptions, signature, validation functions, and etc. Developer can use this tool connect the EOSIO testnet, and test the wallet/account/contracts interface in a more convenient way.
+&emsp;&emsp;The EOSDevHelper program is a light weighted wallet build on EOSIO ecology. It provides private basic key store with encryptions, signature, validation functions, and etc. Developer can use this tool connect the EOSIO testnet, and test the wallet/account/contracts interface in a more convenient way.
 
-EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基础的钱包功能，包含了私钥加密管理、签名校验模块。开发者可以使用EOS开发助手连接EOSIO网络，更便捷地对钱包、账号、合约接口等进行开发和测试。
+&emsp;&emsp;EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基础的钱包功能，包含了私钥加密管理、签名校验模块。开发者可以使用EOS开发助手连接EOSIO网络，更便捷地对钱包、账号、合约接口等进行开发和测试。
 
 
 ------------------------------
@@ -30,45 +30,45 @@ EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基
 
 **ENVIRONMENT/开发运行环境：**
 
-MACOS、WINDOWS、UBUNTU
+&emsp;MACOS、WINDOWS、UBUNTU
 
-1.install [QT](https://www.qt.io/download) >= 5.8
+&emsp;1.install [QT](https://www.qt.io/download) >= 5.8
 
-2.download our git repository.
+&emsp;2.download our git repository.
 
-3.open QT and choose "Open Project", select the "src/EOSDevHelper.pro" and open
+&emsp;3.open QT and choose "Open Project", select the "src/EOSDevHelper.pro" and open
 
-4.select Build from QT menu and Run it.
+&emsp;4.select Build from QT menu and Run it.
 
 
 **DOWNLOAD & TRY/下载试用**
 
-|Version|MD5|
-|------|---|
-|[WINDOWS_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/files/1937575/EOSDevHelper_Windows_Release.zip)|aa0539bddc17007fb47938b5ff9c80c6|
-|[MAC_OSX_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/releases/download/1.0/EOSDevHelper_OSX_Release.zip)|65e580e2372646a99af9a4f0d14e4340|
+&emsp;|Version|MD5|
+&emsp;|------|---|
+&emsp;|[WINDOWS_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/files/1937575/EOSDevHelper_Windows_Release.zip)|aa0539bddc17007fb47938b5ff9c80c6|
+&emsp;|[MAC_OSX_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/releases/download/1.0/EOSDevHelper_OSX_Release.zip)|65e580e2372646a99af9a4f0d14e4340|
 
 
 **DEPENDENCYS/依赖库:**
 
-1.our ECDSA is based on micro-ecc
+&emsp;1.our ECDSA is based on micro-ecc
 
-椭圆曲线算法实现来自micro-ecc
+&emsp;&emsp;椭圆曲线算法实现来自micro-ecc
 
-https://github.com/kmackay/micro-ecc
+&emsp;&emsp;https://github.com/kmackay/micro-ecc
 
-2.We build a Publicly Verifiable Secret Sharing on secp256k1 which is published by Schoenmakers on crypto99 conference.
+&emsp;2.We build a Publicly Verifiable Secret Sharing on secp256k1 which is published by Schoenmakers on crypto99 conference.
 
-我们在椭圆曲线secp256k1上实现了Schoenmakers在crypto99上提出的Publicly Verifiable Secret Sharing
+&emsp;&emsp;我们在椭圆曲线secp256k1上实现了Schoenmakers在crypto99上提出的Publicly Verifiable Secret Sharing
 
-https://github.com/songgeng87/PubliclyVerifiableSecretSharing
+&emsp;&emsp;https://github.com/songgeng87/PubliclyVerifiableSecretSharing
 
 
 **Any questions pls join our official Telegram Group below/相关问题反馈，请加欧链官方Telegram群组**
 
-中文群：https://t.me/OracleChainChatCN
+&emsp;中文群：https://t.me/OracleChainChatCN
 
-ENGLISH GROUP：https://t.me/OracleChainChat
+&emsp;ENGLISH GROUP：https://t.me/OracleChainChat
 
 ------------------------------
 
