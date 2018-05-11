@@ -42,31 +42,31 @@ EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基
 
 **DOWNLOAD & TRY/下载试用**
 
-> |Version|MD5|
-> |------|---|
-> |[WINDOWS_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/files/1937575/EOSDevHelper_Windows_Release.zip)|aa0539bddc17007fb47938b5ff9c80c6|
-> |[MAC_OSX_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/releases/download/1.0/EOSDevHelper_OSX_Release.zip)|65e580e2372646a99af9a4f0d14e4340|
+|Version|MD5|
+|------|---|
+|[WINDOWS_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/files/1937575/EOSDevHelper_Windows_Release.zip)|aa0539bddc17007fb47938b5ff9c80c6|
+|[MAC_OSX_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/releases/download/1.0/EOSDevHelper_OSX_Release.zip)|65e580e2372646a99af9a4f0d14e4340|
 
 **DEPENDENCYS/依赖库:**
 
 > 1.our ECDSA is based on micro-ecc
 
-> 椭圆曲线算法实现来自micro-ecc
+椭圆曲线算法实现来自micro-ecc
 
-> https://github.com/kmackay/micro-ecc
+https://github.com/kmackay/micro-ecc
 
 > 2.We build a Publicly Verifiable Secret Sharing on secp256k1 which is published by Schoenmakers on crypto99 conference.
 
-> 我们在椭圆曲线secp256k1上实现了Schoenmakers在crypto99上提出的Publicly Verifiable Secret Sharing
+我们在椭圆曲线secp256k1上实现了Schoenmakers在crypto99上提出的Publicly Verifiable Secret Sharing
 
-> https://github.com/songgeng87/PubliclyVerifiableSecretSharing
+https://github.com/songgeng87/PubliclyVerifiableSecretSharing
 
 
 **Any questions pls join our official Telegram Group below/相关问题反馈，请加欧链官方Telegram群组**
 
-> 中文群：https://t.me/OracleChainChatCN
+中文群：https://t.me/OracleChainChatCN
 
-> ENGLISH GROUP：https://t.me/OracleChainChat
+ENGLISH GROUP：https://t.me/OracleChainChat
 
 
 <h2 id="3">Wallet Functions/钱包功能</h2>
