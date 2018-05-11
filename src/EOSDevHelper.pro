@@ -140,3 +140,5 @@ DISTFILES +=
 
 RESOURCES += \
     resource.qrc
+
+CONFIG += c++11
