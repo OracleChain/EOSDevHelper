@@ -32,7 +32,13 @@ EOS开发助手是一个建立在EOSIO生态上的钱包工具。它提供了基
 
 > MACOS、WINDOWS、UBUNTU
 
-> [QT](https://www.qt.io/download) >= 5.8(使用QT导入项目，编译即可/just need to import and build the project with [QT](https://www.qt.io/download))
+1.install [QT](https://www.qt.io/download) >= 5.8
+
+2.download our git repository.
+
+3.open QT and choose "Open Project", select the "src/EOSDevHelper.pro" and open
+
+4.select Build from QT menu and Run it.
 
 **DOWNLOAD & TRY/下载试用**
 
