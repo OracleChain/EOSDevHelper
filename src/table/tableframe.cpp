@@ -1,6 +1,7 @@
 #include "tableframe.h"
 #include "ui_tableframe.h"
-#include "utility/httpclient.h"
+
+#include "codebase/utility/httpclient.h"
 
 #include <QJsonObject>
 #include <QJsonDocument>

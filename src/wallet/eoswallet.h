@@ -5,8 +5,8 @@
 #include <QMap>
 #include <vector>
 
-#include "ec/eos_key_encode.h"
-#include "ec/sha512.h"
+#include "codebase/ec/eos_key_encode.h"
+#include "codebase/ec/sha512.h"
 
 struct wallet_data
 {

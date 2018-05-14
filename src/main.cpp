@@ -3,6 +3,10 @@
 #include <QApplication>
 #include <time.h>
 
+QString base_url;
+QString url_port;
+bool skip_signature;
+
 MainWindow *w;
 int main(int argc, char *argv[])
 {

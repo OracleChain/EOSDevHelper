@@ -2,7 +2,8 @@
 #define PUSHFRAME_H
 
 #include <QFrame>
-#include "chain/signedtransaction.h"
+
+#include "codebase/chain/signedtransaction.h"
 
 namespace Ui {
 class PushFrame;

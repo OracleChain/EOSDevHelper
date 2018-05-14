@@ -1,7 +1,8 @@
 #include "settingsframe.h"
 #include "ui_settingsframe.h"
-#include "httpclient.h"
 #include "misc/config.h"
+
+#include "codebase/utility/httpclient.h"
 
 #include <QJsonDocument>
 

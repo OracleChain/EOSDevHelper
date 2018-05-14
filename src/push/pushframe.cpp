@@ -1,10 +1,11 @@
 #include "pushframe.h"
 #include "ui_pushframe.h"
-#include "utility/httpclient.h"
 #include "mainwindow.h"
-#include "chain/chainmanager.h"
-#include "chain/packedtransaction.h"
 #include "wallet/eoswalletmanager.h"
+
+#include "codebase/utility/httpclient.h"
+#include "codebase/chain/chainmanager.h"
+#include "codebase/chain/packedtransaction.h"
 
 #include <QFileDialog>
 #include <QTextStream>

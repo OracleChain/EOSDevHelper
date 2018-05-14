@@ -1,5 +1,6 @@
 #include "eoswallet.h"
-#include "utility/packer.h"
+
+#include "packer.h"
 
 #include <QFile>
 #include <QMessageBox>

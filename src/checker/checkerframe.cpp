@@ -1,6 +1,7 @@
 #include "checkerframe.h"
 #include "ui_checkerframe.h"
-#include "chain/chainmanager.h"
+
+#include "codebase/chain/chainmanager.h"
 
 #include <QMessageBox>
 

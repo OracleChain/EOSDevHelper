@@ -4,7 +4,7 @@
 #include <QFrame>
 #include <QPair>
 
-#include "chain/signedtransaction.h"
+#include "codebase/chain/signedtransaction.h"
 
 namespace Ui {
 class CreateAccountFrame;

@@ -1,0 +1,3 @@
+[submodule "src/codebase"]
+	path = src/codebase
+	url = https://github.com/OracleChain/codebase.git

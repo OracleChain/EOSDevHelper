@@ -2,7 +2,8 @@
 #include "ui_accountframe.h"
 #include "createaccountframe.h"
 #include "output/outputframe.h"
-#include "utility/httpclient.h"
+
+#include "codebase/utility/httpclient.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>

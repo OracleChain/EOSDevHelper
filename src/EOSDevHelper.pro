@@ -30,14 +30,6 @@ SOURCES += main.cpp\
     table/tableframe.cpp \
     account/accountframe.cpp \
     output/outputframe.cpp \
-    Crypto/base58.c \
-    Crypto/rmd160.c \
-    Crypto/sha2.c \
-    Crypto/sha3.c \
-    Crypto/uECC.c \
-    utility/httpclient.cpp \
-    ec/eos_key_encode.cpp \
-    ec/typechainid.cpp \
     checker/checkerframe.cpp \
     wallet/walletpassworddialog.cpp \
     wallet/eoswallet.cpp \
@@ -45,28 +37,36 @@ SOURCES += main.cpp\
     wallet/walletitemframe.cpp \
     wallet/importkeydialog.cpp \
     wallet/keysunlockeddialog.cpp \
-    utility/packer.cpp \
     wallet/unlockwalletdialog.cpp \
-    Crypto/aes.c \
-    chain/eosbytewriter.cpp \
-    chain/typename.cpp \
-    chain/action.cpp \
-    chain/transactionheader.cpp \
-    chain/transaction.cpp \
-    chain/signedtransaction.cpp \
-    chain/eosnewaccount.cpp \
-    chain/typeauthority.cpp \
-    chain/typeaccountpermissionweight.cpp \
-    chain/typepermissionlevel.cpp \
-    chain/typekeypermissionweight.cpp \
     misc/customtabstyle.cpp \
     account/createaccountframe.cpp \
     setting/settingsframe.cpp \
     misc/aboutframe.cpp \
-    chain/chainmanager.cpp \
-    chain/packedtransaction.cpp \
-    utility/utils.cpp \
-    ec/sha512.cpp
+    wallet/packer.cpp \
+    codebase/chain/action.cpp \
+    codebase/chain/chainmanager.cpp \
+    codebase/chain/eosbytewriter.cpp \
+    codebase/chain/eosnewaccount.cpp \
+    codebase/chain/packedtransaction.cpp \
+    codebase/chain/signedtransaction.cpp \
+    codebase/chain/transaction.cpp \
+    codebase/chain/transactionheader.cpp \
+    codebase/chain/typeaccountpermissionweight.cpp \
+    codebase/chain/typeauthority.cpp \
+    codebase/chain/typekeypermissionweight.cpp \
+    codebase/chain/typename.cpp \
+    codebase/chain/typepermissionlevel.cpp \
+    codebase/Crypto/aes.c \
+    codebase/Crypto/base58.c \
+    codebase/Crypto/rmd160.c \
+    codebase/Crypto/sha2.c \
+    codebase/Crypto/sha3.c \
+    codebase/Crypto/uECC.c \
+    codebase/ec/eos_key_encode.cpp \
+    codebase/ec/sha512.cpp \
+    codebase/ec/typechainid.cpp \
+    codebase/utility/httpclient.cpp \
+    codebase/utility/utils.cpp
 
 HEADERS  += mainwindow.h \
     wallet/walletframe.h \
@@ -74,15 +74,6 @@ HEADERS  += mainwindow.h \
     table/tableframe.h \
     account/accountframe.h \
     output/outputframe.h \
-    Crypto/libbase58.h \
-    Crypto/macros.h \
-    Crypto/options.h \
-    Crypto/rmd160.h \
-    Crypto/sha2.h \
-    Crypto/sha3.h \
-    Crypto/uECC.h \
-    utility/httpclient.h \
-    ec/eos_key_encode.h \
     checker/checkerframe.h \
     wallet/walletpassworddialog.h \
     wallet/eoswallet.h \
@@ -91,31 +82,40 @@ HEADERS  += mainwindow.h \
     wallet/importkeydialog.h \
     wallet/keysunlockeddialog.h \
     misc/config.h \
-    utility/packer.h \
     wallet/unlockwalletdialog.h \
-    Crypto/aes.h \
-    Crypto/aes.hpp \
-    chain/chainbase.h \
-    chain/eosbytewriter.h \
-    ec/typechainid.h \
-    chain/typename.h \
-    chain/action.h \
-    chain/transactionheader.h \
-    chain/transaction.h \
-    chain/signedtransaction.h \
-    chain/eosnewaccount.h \
-    chain/typeauthority.h \
-    chain/typeaccountpermissionweight.h \
-    chain/typepermissionlevel.h \
-    chain/typekeypermissionweight.h \
     misc/customtabstyle.h \
     account/createaccountframe.h \
     setting/settingsframe.h \
     misc/aboutframe.h \
-    chain/chainmanager.h \
-    chain/packedtransaction.h \
-    utility/utils.h \
-    ec/sha512.h
+    wallet/packer.h \
+    codebase/chain/action.h \
+    codebase/chain/chainbase.h \
+    codebase/chain/chainmanager.h \
+    codebase/chain/eosbytewriter.h \
+    codebase/chain/eosnewaccount.h \
+    codebase/chain/packedtransaction.h \
+    codebase/chain/signedtransaction.h \
+    codebase/chain/transaction.h \
+    codebase/chain/transactionheader.h \
+    codebase/chain/typeaccountpermissionweight.h \
+    codebase/chain/typeauthority.h \
+    codebase/chain/typekeypermissionweight.h \
+    codebase/chain/typename.h \
+    codebase/chain/typepermissionlevel.h \
+    codebase/Crypto/aes.h \
+    codebase/Crypto/aes.hpp \
+    codebase/Crypto/libbase58.h \
+    codebase/Crypto/macros.h \
+    codebase/Crypto/options.h \
+    codebase/Crypto/rmd160.h \
+    codebase/Crypto/sha2.h \
+    codebase/Crypto/sha3.h \
+    codebase/Crypto/uECC.h \
+    codebase/ec/eos_key_encode.h \
+    codebase/ec/sha512.h \
+    codebase/ec/typechainid.h \
+    codebase/utility/httpclient.h \
+    codebase/utility/utils.h
 
 FORMS    += mainwindow.ui \
     wallet/walletframe.ui \
@@ -132,9 +132,6 @@ FORMS    += mainwindow.ui \
     account/createaccountframe.ui \
     setting/settingsframe.ui \
     misc/aboutframe.ui
-
-INCLUDEPATH += Crypto \
-    utility
 
 DISTFILES +=
 

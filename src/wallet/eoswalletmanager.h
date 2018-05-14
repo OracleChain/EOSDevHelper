@@ -7,7 +7,8 @@
 #include <QPair>
 
 #include "eoswallet.h"
-#include "chain/signedtransaction.h"
+
+#include "codebase/chain/signedtransaction.h"
 
 class EOSWalletManager
 {

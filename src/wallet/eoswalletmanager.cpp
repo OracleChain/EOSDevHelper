@@ -1,6 +1,7 @@
 #include "eoswalletmanager.h"
-#include "ec/eos_key_encode.h"
 #include "eoswallet.h"
+
+#include "codebase/ec/eos_key_encode.h"
 
 #include <QFile>
 #include <QFileInfo>
