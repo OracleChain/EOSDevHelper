@@ -49,7 +49,7 @@
 |[MAC_OSX_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/releases/download/1.0/EOSDevHelper_OSX_Release.zip)|65e580e2372646a99af9a4f0d14e4340|
 |[UBUNTU_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/releases/download/1.0/EOSDevHelper_Ubuntu_Release.zip)|d20869f374cdd6fc39ed842114ad658c|
 
-> For Ubuntu: Tested on Ubuntu 16.04 x64, you should `chmox +x start.sh`, then use `./start.sh` . 
+> For Ubuntu: Tested on Ubuntu 16.04 x64, you should `chmod +x start.sh`, then use `./start.sh` . 
 
 
 **DEPENDENCYS/依赖库:**
