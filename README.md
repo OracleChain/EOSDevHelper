@@ -28,7 +28,7 @@
 ------------------------------
 <h2 id="2">ENVIRONMENT/开发和使用环境</h2>
 
-**ENVIRONMENT/开发运行环境：**
+**Compile from source code/如何从源码编译：**
 
 &emsp;MACOS、WINDOWS、UBUNTU
 
