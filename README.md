@@ -37,7 +37,7 @@
 &emsp;2. download our git repository.
 >`git clone --recurse-submodules https://github.com/OracleChain/EOSDevHelper.git`
 
-&emsp;3. open QT and choose "Open Project", select the "src/EOSDevHelper.pro" and open
+&emsp;3. open Qt Creator and choose "Open Project", select the "src/EOSDevHelper.pro" and open
 
 &emsp;4. select Build from QT menu and Run it.
 
