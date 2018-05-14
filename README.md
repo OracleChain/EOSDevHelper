@@ -91,7 +91,7 @@
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/UnlockWallet.PNG)
 
 
-<h2 id="4">账号功能/Account Functions</h2>
+<h2 id="4">Account Functions/账号功能</h2>
 
 ### Create account/创建账号
 ![](https://github.com/OracleChain/EOSDevHelper/raw/master/screenshots/account.PNG)
