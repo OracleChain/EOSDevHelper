@@ -32,14 +32,14 @@
 
 &emsp;MACOS、WINDOWS、UBUNTU
 
-&emsp;1.install [QT](https://www.qt.io/download) >= 5.8
+&emsp;1. install [QT](https://www.qt.io/download) >= 5.8
 
-&emsp;2.download our git repository.
+&emsp;2. download our git repository.
 >`git clone --recurse-submodules https://github.com/OracleChain/EOSDevHelper.git`
 
-&emsp;3.open QT and choose "Open Project", select the "src/EOSDevHelper.pro" and open
+&emsp;3. open QT and choose "Open Project", select the "src/EOSDevHelper.pro" and open
 
-&emsp;4.select Build from QT menu and Run it.
+&emsp;4. select Build from QT menu and Run it.
 
 
 **DOWNLOAD & TRY/下载试用**
