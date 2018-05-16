@@ -70,7 +70,7 @@
 &emsp;&emsp;https://github.com/songgeng87/PubliclyVerifiableSecretSharing
 
 
-**Any questions pls join our official Telegram Group below/相关问题反馈，请加欧链官方Telegram群组**
+**Any questions pls join our official Telegram Group below/相关问题反馈，请加欧链官方Telegram群组:**
 
 &emsp;中文群：https://t.me/OracleChainChatCN
 
