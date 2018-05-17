@@ -54,9 +54,9 @@ void TableFrame::on_pushButtonGetTable_clicked()
     formatPrint(data, ui->textEditInput);
 
     if (httpc) {
-        httpc->get_table(QString::fromStdString(data.toStdString()));
-        connect(httpc, &HttpClient::responseData, [=](const QByteArray& data){
-            formatPrint(data, ui->textEditOutput);
+        httpc->get_table(data);
+        connect(httpc, &HttpClient::responseData, [=](const QByteArray& d){
+            formatPrint(d, ui->textEditOutput);
         });
     }
 }

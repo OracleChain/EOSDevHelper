@@ -76,7 +76,7 @@ void CreateAccountFrame::get_info_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->get_required_keys(std::move(QString::fromStdString(param.toStdString())));
+        httpc->get_required_keys(param);
         connect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::get_required_keys_returned);
     }
 }
@@ -97,7 +97,7 @@ void CreateAccountFrame::get_required_keys_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->push_transaction(std::move(QString::fromStdString(param.toStdString())));
+        httpc->push_transaction(param);
         connect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::push_transaction_returned);
     }
 }

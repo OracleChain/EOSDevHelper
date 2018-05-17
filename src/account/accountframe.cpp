@@ -87,10 +87,9 @@ void AccountFrame::on_pushButtonGetAccount_clicked()
         QJsonDocument doc(obj);
         formatPrint(doc, ui->textEditGetAccountInput);
 
-        QByteArray data = doc.toJson();
-        httpcGetAccount->get_account(QString::fromStdString(data.toStdString()));
-        connect(httpcGetAccount, &HttpClient::responseData, [=](const QByteArray& data){
-            formatPrint(QJsonDocument::fromJson(data), ui->textEditGetAccountOutput);
+        httpcGetAccount->get_account(doc.toJson());
+        connect(httpcGetAccount, &HttpClient::responseData, [=](const QByteArray& d){
+            formatPrint(QJsonDocument::fromJson(d), ui->textEditGetAccountOutput);
         });
     }
 }
@@ -104,10 +103,9 @@ void AccountFrame::on_pushButtonGetTransactions_clicked()
         QJsonDocument doc(obj);
         formatPrint(doc, ui->textEditGetTransactionsInput);
 
-        QByteArray data = doc.toJson();
-        httpcGetTransaction->get_transactions(QString::fromStdString(data.toStdString()));
-        connect(httpcGetTransaction, &HttpClient::responseData, [=](const QByteArray& data){
-            formatPrint(QJsonDocument::fromJson(data), ui->textEditGetTransactionsOutput);
+        httpcGetTransaction->get_transactions(doc.toJson());
+        connect(httpcGetTransaction, &HttpClient::responseData, [=](const QByteArray& d){
+            formatPrint(QJsonDocument::fromJson(d), ui->textEditGetTransactionsOutput);
         });
     }
 }
@@ -121,10 +119,9 @@ void AccountFrame::on_pushButtonGetServants_clicked()
         QJsonDocument doc(obj);
         formatPrint(doc, ui->textEditGetServantsInput);
 
-        QByteArray data = doc.toJson();
-        httpcGetServants->get_controlled_accounts(std::move(QString::fromStdString(data.toStdString())));
-        connect(httpcGetServants, &HttpClient::responseData, [=](const QByteArray& data){
-            formatPrint(QJsonDocument::fromJson(data), ui->textEditGetServantsOutput);
+        httpcGetServants->get_controlled_accounts(doc.toJson());
+        connect(httpcGetServants, &HttpClient::responseData, [=](const QByteArray& d){
+            formatPrint(QJsonDocument::fromJson(d), ui->textEditGetServantsOutput);
         });
     }
 }
