@@ -46,9 +46,9 @@
 
 |Version|MD5|
 |------|---|
-|[WINDOWS v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/dawn-4.0/EOSDevHelper_Windows_Release_Dawn4.zip)|d3ca786997b66cddeea9d0314a4fb3a1|
+|[WINDOWS_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/dawn-4.0/EOSDevHelper_Windows_Release_Dawn4.zip)|d3ca786997b66cddeea9d0314a4fb3a1|
 |[MAC_OSX_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/files/2008592/EOSDevHelper_OSX_Release_Dawn4.zip)|fe5a84a76e274169d7edb8af141b02f8|
-|[UBUNTU v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/dawn-4.0/EOSDevHelper_Ubuntu_Release_Dawn4.zip)|478a115eeab9578223120a33b58e33d3|
+|[UBUNTU_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/dawn-4.0/EOSDevHelper_Ubuntu_Release_Dawn4.zip)|478a115eeab9578223120a33b58e33d3|
 |[WINDOWS_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/files/1937575/EOSDevHelper_Windows_Release.zip)|aa0539bddc17007fb47938b5ff9c80c6|
 |[MAC_OSX_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/releases/download/1.0/EOSDevHelper_OSX_Release.zip)|65e580e2372646a99af9a4f0d14e4340|
 |[UBUNTU_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/releases/download/1.0/EOSDevHelper_Ubuntu_Release.zip)|d20869f374cdd6fc39ed842114ad658c|
