@@ -98,12 +98,12 @@ void AccountFrame::on_pushButtonGetTransactions_clicked()
 {
     if (httpcGetServants) {
         QJsonObject obj;
-        obj.insert("account_name", ui->lineEditGetTransactions->text());
+        obj.insert("id", ui->lineEditGetTransactions->text());
 
         QJsonDocument doc(obj);
         formatPrint(doc, ui->textEditGetTransactionsInput);
 
-        httpcGetTransaction->get_transactions(doc.toJson());
+        httpcGetTransaction->get_transaction(doc.toJson());
         connect(httpcGetTransaction, &HttpClient::responseData, [=](const QByteArray& d){
             formatPrint(QJsonDocument::fromJson(d), ui->textEditGetTransactionsOutput);
         });

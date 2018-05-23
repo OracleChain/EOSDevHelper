@@ -335,7 +335,7 @@ border-radius: 4px;</string>
 color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
-            <string>Get transactions</string>
+            <string>Get transaction</string>
            </property>
           </widget>
          </item>
