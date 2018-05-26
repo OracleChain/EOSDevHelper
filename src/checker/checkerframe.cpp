@@ -2,8 +2,10 @@
 #include "ui_checkerframe.h"
 
 #include "codebase/chain/chainmanager.h"
+#include "codebase/utility/httpclient.h"
 
 #include <QMessageBox>
+#include <QEventLoop>
 
 CheckerFrame::CheckerFrame(QWidget *parent) :
     QFrame(parent),
@@ -34,7 +36,19 @@ void CheckerFrame::on_pushButtonCheck_clicked()
     QString pubKey = ui->textEditPublicKey->toPlainText();
 
     std::string result;
-    ChainManager::ValidateSignature(rawAction.toStdString(), signature.toStdString(), pubKey.toStdString(), result);
+
+    HttpClient httpc;
+    QEventLoop loop;
+    connect(&httpc, &HttpClient::responseData, [&](const QByteArray& d){
+        QJsonObject obj = QJsonDocument::fromJson(d).object();
+        if (!obj.isEmpty()) {
+            ChainManager::ValidateSignature(rawAction.toStdString(), signature.toStdString(), pubKey.toStdString(), obj.value("chain_id").toString().toStdString(), result);
+            loop.quit();
+        }
+
+    });
+
+    loop.exec();
 
     ui->textEditOutput->setText(QString::fromStdString(result));
 }

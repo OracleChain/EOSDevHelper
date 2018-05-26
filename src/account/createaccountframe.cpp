@@ -184,7 +184,12 @@ QByteArray CreateAccountFrame::packPushTransactionParam()
         keys.push_back(key);
     }
 
-    EOSWalletManager::instance().signTransaction(signedTxn, keys, TypeChainId());
+    QJsonObject infoObj = QJsonDocument::fromJson(getInfoData).object();
+    if (infoObj.isEmpty()) {
+        return QByteArray();
+    }
+
+    EOSWalletManager::instance().signTransaction(signedTxn, keys, TypeChainId::fromHex(infoObj.value("chain_id").toString().toStdString()));
     PackedTransaction packedTxn(signedTxn, "none");
 
     QJsonObject obj = packedTxn.toJson().toObject();
