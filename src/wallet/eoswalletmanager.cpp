@@ -145,7 +145,9 @@ void EOSWalletManager::importKey(const QString &name, const QString &wif)
         return;
     }
 
-    wallet.importKey(wif);
+    if (!wallet.importKey(wif)) {
+        QMessageBox::warning(nullptr, "Error", "Import key failed!");
+    }
 }
 
 QMap<QString, EOSWallet> EOSWalletManager::listKeys(wallet_state state)

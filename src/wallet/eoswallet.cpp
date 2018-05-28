@@ -103,6 +103,10 @@ bool EOSWallet::importKey(const QString &wif)
     }
 
     QString eos_pub = QString::fromStdString(eos_key::get_eos_public_key_by_wif(wif.toStdString()));
+    if (eos_pub.isEmpty()) {
+        return false;
+    }
+
     auto itr = this->keys.find(eos_pub);
     if (itr == this->keys.end()) {
         keys.insert(eos_pub, wif);
