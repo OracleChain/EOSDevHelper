@@ -4,6 +4,10 @@
 
 **EOSDevHelper**是一个跨平台PC端EOS钱包工具，由[OracleChain团队](https://oraclechain.io)研发。
 
+  > 注意：此工具用于辅助智能合约开发，并不是真正的钱包，钱包功能仅用于开发测试，请不要将EOS主网私钥导入此工具中，安全性不能保证。
+  
+  > ATTENTION: This Tool is used for developing EOS smart contract, it is NOT a real EOS wallet. The wallet in this tool is testnet only, please do NOT import your EOS private keys. 
+
 -------------------------------
 
 # Menu/目录
