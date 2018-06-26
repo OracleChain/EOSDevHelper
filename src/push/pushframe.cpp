@@ -159,7 +159,7 @@ void PushFrame::on_pushButtonSend_clicked()
     w->pushOutputFrame()->setRequestOutput(0, "abi_json_to_bin", param);
 
     if (httpc) {
-        httpc->abi_json_to_bin(param);
+        httpc->request(FunctionID::abi_json_to_bin, param);
         connect(httpc, &HttpClient::responseData, this, &PushFrame::abi_json_to_bin_returned);
     }
 }
@@ -176,7 +176,7 @@ void PushFrame::abi_json_to_bin_returned(const QByteArray &data)
     w->pushOutputFrame()->setRequestOutput(1, "get_info", QByteArray());
 
     if (httpc) {
-        httpc->get_info();
+        httpc->request(FunctionID::get_info);
         connect(httpc, &HttpClient::responseData, this, &PushFrame::get_info_returned);
     }
 }
@@ -198,7 +198,7 @@ void PushFrame::get_info_returned(const QByteArray &data)
     w->pushOutputFrame()->setRequestOutput(2, "get_required_keys", param);
 
     if (httpc) {
-        httpc->get_required_keys(param);
+        httpc->request(FunctionID::get_required_keys, param);
         connect(httpc, &HttpClient::responseData, this, &PushFrame::get_required_keys_returned);
     }
 }
@@ -220,7 +220,7 @@ void PushFrame::get_required_keys_returned(const QByteArray &data)
     w->pushOutputFrame()->setRequestOutput(3, "push_transaction", param);
 
     if (httpc) {
-        httpc->push_transaction(param);
+        httpc->request(FunctionID::push_transaction, param);
         connect(httpc, &HttpClient::responseData, [=](const QByteArray& d){
             w->pushOutputFrame()->setResponseOutput(3, d);
         });

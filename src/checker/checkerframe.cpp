@@ -47,7 +47,7 @@ void CheckerFrame::on_pushButtonCheck_clicked()
         }
 
     });
-    httpc.get_info();
+    httpc.request(FunctionID::get_info);
 
     loop.exec();
 

@@ -44,7 +44,7 @@ void SettingsFrame::on_pushButtonConnect_clicked()
     cfg.saveSettings();
 
     if (httpc) {
-        httpc->get_info();
+        httpc->request(FunctionID::get_info);
         connect(httpc, &HttpClient::responseData, [=](const QByteArray& data){
             QJsonDocument doc = QJsonDocument::fromJson(data);
             QByteArray formatData = doc.toJson(QJsonDocument::Indented);

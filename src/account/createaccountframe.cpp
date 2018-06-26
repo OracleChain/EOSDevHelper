@@ -55,7 +55,7 @@ void CreateAccountFrame::on_pushButtonOk_clicked()
     w->accountFrame()->printCreateAccountInfo(0, true, QByteArray(), "get_info");
 
     if (httpc) {
-        httpc->get_info();
+        httpc->request(FunctionID::get_info);
         connect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::get_info_returned);
     }
 }
@@ -76,7 +76,7 @@ void CreateAccountFrame::get_info_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->get_required_keys(param);
+        httpc->request(FunctionID::get_required_keys, param);
         connect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::get_required_keys_returned);
     }
 }
@@ -97,7 +97,7 @@ void CreateAccountFrame::get_required_keys_returned(const QByteArray &data)
     }
 
     if (httpc) {
-        httpc->push_transaction(param);
+        httpc->request(FunctionID::push_transaction, param);
         connect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::push_transaction_returned);
     }
 }
