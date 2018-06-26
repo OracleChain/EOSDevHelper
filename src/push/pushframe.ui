@@ -20,7 +20,8 @@
    <string>Frame</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(37, 37, 37);</string>
+   <string notr="true">background-color: rgb(37, 37, 37);
+color: rgb(255, 255, 255);</string>
   </property>
   <property name="frameShape">
    <enum>QFrame::StyledPanel</enum>
@@ -93,6 +94,52 @@ border-radius: 4px;</string>
     </spacer>
    </item>
    <item>
+    <widget class="QPushButton" name="pushButtonGetAbi">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(95, 94, 94);
+color: rgb(255, 255, 255);
+border-radius: 4px;</string>
+     </property>
+     <property name="text">
+      <string>GET ABI</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
     <widget class="QLabel" name="labelContractAction">
      <property name="minimumSize">
       <size>
@@ -116,7 +163,7 @@ color: rgb(255, 255, 255);</string>
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEditContractAction">
+    <widget class="QComboBox" name="comboBoxContractAction">
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -133,9 +180,6 @@ color: rgb(255, 255, 255);</string>
       <string notr="true">background-color: rgb(68, 67, 67);
 color: rgb(255, 255, 255);
 border-radius: 4px;</string>
-     </property>
-     <property name="placeholderText">
-      <string/>
      </property>
     </widget>
    </item>
@@ -158,7 +202,7 @@ border-radius: 4px;</string>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="labelImportFile">
+      <widget class="QPushButton" name="pushButtonFormInput">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -168,35 +212,6 @@ border-radius: 4px;</string>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>Arial</family>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(37, 37, 37);
-color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Import action json file and edit:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButtonImportFile">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>150</width>
          <height>16777215</height>
         </size>
        </property>
@@ -212,7 +227,37 @@ color: rgb(255, 255, 255);
 border-radius: 4px;</string>
        </property>
        <property name="text">
-        <string> Import file</string>
+        <string>FORM INPUT</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButtonImportFile">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(95, 94, 94);
+color: rgb(255, 255, 255);
+border-radius: 4px;</string>
+       </property>
+       <property name="text">
+        <string> IMPORT JSON</string>
        </property>
       </widget>
      </item>

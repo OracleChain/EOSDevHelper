@@ -24,6 +24,8 @@ private:
     QByteArray packGetRequiredKeysParam();
     QByteArray packPushTransactionParam();
 
+    void UpdateActionList();
+
 private slots:
     void on_pushButtonImportFile_clicked();
 
@@ -33,6 +35,8 @@ private slots:
     void get_info_returned(const QByteArray& data);
     void get_required_keys_returned(const QByteArray& data);
 
+    void on_pushButtonGetAbi_clicked();
+
 private:
     Ui::PushFrame *ui;
 
@@ -41,6 +45,8 @@ private:
     QByteArray abiJsonToBinData;
     QByteArray getInfoData;
     QByteArray getRequiredKeysData;
+
+    QByteArray contractAbi;
 
     SignedTransaction signedTxn;
 };

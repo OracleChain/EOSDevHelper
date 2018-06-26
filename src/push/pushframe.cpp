@@ -53,7 +53,7 @@ QByteArray PushFrame::packAbiJsonToBinParam()
     }
 
     QString code = ui->lineEditContractAccount->text();
-    QString action = ui->lineEditContractAction->text();
+    QString action = ui->comboBoxContractAction->currentData().toString();  // we could use currentText(), but currentData() is a more accurate way.
 
     QJsonObject obj;
     obj.insert("code", QJsonValue(code));
@@ -78,7 +78,7 @@ QByteArray PushFrame::packGetRequiredKeysParam()
     QJsonObject abiBinObj = QJsonDocument::fromJson(abiJsonToBinData).object();
     QString binargs = abiBinObj.value("binargs").toString();
     QString code = ui->lineEditContractAccount->text();
-    QString action = ui->lineEditContractAction->text();
+    QString action = ui->comboBoxContractAction->currentData().toString();
     QString permission = ui->lineEditPermission->text();
 
     signedTxn = ChainManager::createTransaction(code.toStdString(), action.toStdString(), binargs.toStdString(),
@@ -126,6 +126,40 @@ QByteArray PushFrame::packPushTransactionParam()
     QJsonObject obj = packedTxn.toJson().toObject();
 
     return QJsonDocument(obj).toJson();
+}
+
+void PushFrame::UpdateActionList()
+{
+    if (contractAbi.isEmpty()) {
+        return;
+    }
+
+    QJsonObject obj = QJsonDocument::fromJson(contractAbi).object();
+    if (obj.isEmpty()) {
+        return;
+    }
+
+    QJsonValue abi = obj.value("abi");
+    if (!abi.isObject()) {
+        return;
+    }
+
+    QJsonArray actions = abi.toObject().value("actions").toArray();
+    if (actions.isEmpty()) {
+        return;
+    }
+
+    ui->comboBoxContractAction->clear();
+    for (int i = 0; i < actions.size(); ++i) {
+        QJsonObject tmp = actions.at(i).toObject();
+        if (tmp.isEmpty()) {
+            continue;
+        }
+
+        QString name = tmp.value("name").toString();
+        QString type = tmp.value("type").toString();
+        ui->comboBoxContractAction->addItem(name, type);
+    }
 }
 
 void PushFrame::on_pushButtonImportFile_clicked()
@@ -223,6 +257,43 @@ void PushFrame::get_required_keys_returned(const QByteArray &data)
         httpc->request(FunctionID::push_transaction, param);
         connect(httpc, &HttpClient::responseData, [=](const QByteArray& d){
             w->pushOutputFrame()->setResponseOutput(3, d);
+        });
+    }
+}
+
+void PushFrame::on_pushButtonGetAbi_clicked()
+{
+    contractAbi.clear();
+    ui->comboBoxContractAction->clear();
+
+    QString contract = ui->lineEditContractAccount->text();
+    if (contract.isEmpty()) {
+        QMessageBox::warning(nullptr, "Error", "Empty contract account!");
+        return;
+    }
+
+    QJsonObject obj;
+    obj.insert("account_name", QJsonValue(contract));
+    QByteArray param = QJsonDocument(obj).toJson();
+
+    w->pushOutputFrame()->setRequestOutput(0, "get_abi", param);
+
+    if (httpc) {
+        httpc->request(FunctionID::get_abi, param);
+        connect(httpc, &HttpClient::responseData, [&](const QByteArray& d){
+            w->pushOutputFrame()->setResponseOutput(0, d);
+
+            QJsonObject obj = QJsonDocument::fromJson(d).object();
+            if (obj.isEmpty()) {
+                return;
+            }
+
+            if (obj.contains("code") || obj.contains("error")) {
+                return;
+            }
+
+            contractAbi = d;
+            UpdateActionList();
         });
     }
 }
