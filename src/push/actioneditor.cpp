@@ -70,28 +70,15 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
 
         std::string t = type.toStdString();
         if (parser.is_array(t)) {
-            object = new QVBoxLayout(this);
-            QComboBox *combo = new QComboBox(nullptr);
-            int i = 1;
-            QStringList numList;
-            while(i <= 30) {
-                numList.append(QString::number(i));
-                ++i;
+            object = new QVBoxLayout(nullptr);
+            QList<QVariant> secondList;
+            for (int j = 0; j < 10; ++j) {
+                QLineEdit *lineEdit = new QLineEdit;
+                secondList.append(QVariant((int)lineEdit));
+                dynamic_cast<QVBoxLayout*>(object)->addWidget(lineEdit);
             }
-            combo->addItems(numList);
-            dynamic_cast<QVBoxLayout*>(object)->addWidget(combo);
-            connect(combo, QComboBox::currentTextChanged, [&](const QString& str){
-                //combo->hide();
-                QList<QVariant> secondList;
-                int num = str.toInt();
-                for (int j = 0; j < num; ++j) {
-                    QLineEdit *lineEdit = new QLineEdit;
-                    secondList.append(QVariant((int)lineEdit));
-                    dynamic_cast<QVBoxLayout*>(object)->addWidget(lineEdit);
-                }
 
-                firstMap.insert(name, secondList);
-            });
+            firstMap.insert(name, secondList);
 
         } else {
             object = new QLineEdit(this);
