@@ -37,6 +37,8 @@ private slots:
 
     void on_pushButtonGetAbi_clicked();
 
+    void on_pushButtonFormInput_clicked();
+
 private:
     Ui::PushFrame *ui;
 
