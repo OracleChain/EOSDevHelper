@@ -11,8 +11,6 @@ namespace Ui {
 class PushFrame;
 }
 
-class HttpClient;
-
 class PushFrame : public QFrame
 {
     Q_OBJECT
@@ -31,16 +29,13 @@ private:
 
 private slots:
     void on_pushButtonImportFile_clicked();
-
     void on_pushButtonSend_clicked();
+    void on_pushButtonGetAbi_clicked();
+    void on_pushButtonFormInput_clicked();
 
     void abi_json_to_bin_returned(const QByteArray& data);
     void get_info_returned(const QByteArray& data);
     void get_required_keys_returned(const QByteArray& data);
-
-    void on_pushButtonGetAbi_clicked();
-
-    void on_pushButtonFormInput_clicked();
 
 private:
     Ui::PushFrame *ui;

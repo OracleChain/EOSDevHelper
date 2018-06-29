@@ -4,7 +4,6 @@
 #include "wallet/eoswalletmanager.h"
 #include "actioneditor.h"
 
-#include "codebase/utility/httpclient.h"
 #include "codebase/chain/chainmanager.h"
 #include "codebase/chain/packedtransaction.h"
 

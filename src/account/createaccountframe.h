@@ -3,15 +3,16 @@
 
 #include <QFrame>
 #include <QPair>
+#include <QMap>
 
 #include "codebase/chain/signedtransaction.h"
+#include "codebase/utility/httpclient.h"
 
 namespace Ui {
 class CreateAccountFrame;
 }
 
 class eos_key;
-class HttpClient;
 
 class CreateAccountFrame : public QFrame
 {
@@ -22,6 +23,7 @@ public:
     ~CreateAccountFrame();
 
     void initWallets();
+    void initHttpClients();
 
 private slots:
     void on_pushButtonOk_clicked();
@@ -40,7 +42,7 @@ private:
     Ui::CreateAccountFrame *ui;
 
     QVector<eos_key> keys;
-    HttpClient *httpc;
+    QMap<FunctionID, HttpClient*> httpcs;
 
     QByteArray getInfoData;
     QByteArray getRequiredKeysData;

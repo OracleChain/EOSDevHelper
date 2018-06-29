@@ -3,7 +3,6 @@
 #include "wallet/eoswalletmanager.h"
 #include "mainwindow.h"
 
-#include "codebase/utility/httpclient.h"
 #include "codebase/chain/eosnewaccount.h"
 #include "codebase/chain/eosbytewriter.h"
 #include "codebase/chain/action.h"
@@ -23,19 +22,24 @@ extern MainWindow *w;
 
 CreateAccountFrame::CreateAccountFrame(QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::CreateAccountFrame),
-    httpc(new HttpClient)
+    ui(new Ui::CreateAccountFrame)
 {
     ui->setupUi(this);
     QRegExpValidator *accountVadt = new QRegExpValidator(QRegExp(eos_account_regex), this);
     ui->lineEditCreatorName->setValidator(accountVadt);
     ui->lineEditNewName->setValidator(accountVadt);
+
+    initHttpClients();
 }
 
 CreateAccountFrame::~CreateAccountFrame()
 {
     delete ui;
-    delete httpc;
+
+    for (auto itr = httpcs.begin(); itr != httpcs.end(); ++itr) {
+        delete itr.value();
+    }
+    httpcs.clear();
 }
 
 void CreateAccountFrame::on_pushButtonOk_clicked()
@@ -54,15 +58,13 @@ void CreateAccountFrame::on_pushButtonOk_clicked()
 
     w->accountFrame()->printCreateAccountInfo(0, true, QByteArray(), "get_info");
 
-    if (httpc) {
-        httpc->request(FunctionID::get_info);
-        connect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::get_info_returned);
-    }
+    httpcs[FunctionID::get_info]->request(FunctionID::get_info);
+    connect(httpcs[FunctionID::get_info], &HttpClient::responseData, this, &CreateAccountFrame::get_info_returned);
 }
 
 void CreateAccountFrame::get_info_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::get_info_returned);
+    disconnect(httpcs[FunctionID::get_info], &HttpClient::responseData, this, &CreateAccountFrame::get_info_returned);
 
     w->accountFrame()->printCreateAccountInfo(0, false, data, "get_info");
 
@@ -75,15 +77,13 @@ void CreateAccountFrame::get_info_returned(const QByteArray &data)
         return;
     }
 
-    if (httpc) {
-        httpc->request(FunctionID::get_required_keys, param);
-        connect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::get_required_keys_returned);
-    }
+    httpcs[FunctionID::get_required_keys]->request(FunctionID::get_required_keys, param);
+    connect(httpcs[FunctionID::get_required_keys], &HttpClient::responseData, this, &CreateAccountFrame::get_required_keys_returned);
 }
 
 void CreateAccountFrame::get_required_keys_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::get_required_keys_returned);
+    disconnect(httpcs[FunctionID::get_required_keys], &HttpClient::responseData, this, &CreateAccountFrame::get_required_keys_returned);
 
     w->accountFrame()->printCreateAccountInfo(1, false, data);
 
@@ -96,15 +96,13 @@ void CreateAccountFrame::get_required_keys_returned(const QByteArray &data)
         return;
     }
 
-    if (httpc) {
-        httpc->request(FunctionID::push_transaction, param);
-        connect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::push_transaction_returned);
-    }
+    httpcs[FunctionID::push_transaction]->request(FunctionID::push_transaction, param);
+    connect(httpcs[FunctionID::push_transaction], &HttpClient::responseData, this, &CreateAccountFrame::push_transaction_returned);
 }
 
 void CreateAccountFrame::push_transaction_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &CreateAccountFrame::push_transaction_returned);
+    disconnect(httpcs[FunctionID::push_transaction], &HttpClient::responseData, this, &CreateAccountFrame::push_transaction_returned);
 
     w->accountFrame()->printCreateAccountInfo(2, false, data);
 
@@ -206,4 +204,11 @@ void CreateAccountFrame::initWallets()
          itr != wallets.cend(); ++itr) {
         ui->comboBoxWallet->addItem(itr->first, itr->first);
     }
+}
+
+void CreateAccountFrame::initHttpClients()
+{
+    httpcs[FunctionID::get_info] = new HttpClient;
+    httpcs[FunctionID::get_required_keys] = new HttpClient;
+    httpcs[FunctionID::push_transaction] = new HttpClient;
 }
