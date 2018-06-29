@@ -2,6 +2,7 @@
 #include "ui_pushframe.h"
 #include "mainwindow.h"
 #include "wallet/eoswalletmanager.h"
+#include "actioneditor.h"
 
 #include "codebase/utility/httpclient.h"
 #include "codebase/chain/chainmanager.h"
@@ -295,5 +296,45 @@ void PushFrame::on_pushButtonGetAbi_clicked()
             contractAbi = d;
             UpdateActionList();
         });
+    }
+}
+
+void PushFrame::on_pushButtonFormInput_clicked()
+{
+    QString action = ui->comboBoxContractAction->currentData().toString();
+    if (action.isEmpty()) {
+        return;
+    }
+
+    QJsonObject obj = QJsonDocument::fromJson(contractAbi).object();
+    if (obj.isEmpty()) {
+        return;
+    }
+
+    QJsonObject abi = obj.value("abi").toObject();
+    if (abi.isEmpty()) {
+        return;
+    }
+
+    QJsonArray structs = abi.value("structs").toArray();
+    if (structs.isEmpty()) {
+        return;
+    }
+
+    for (int i = 0; i < structs.size(); ++i) {
+        QJsonObject tmp = structs.at(i).toObject();
+        if (tmp.isEmpty()) {
+            continue;
+        }
+
+        QString name = tmp.value("name").toString();
+        if (name == action) {
+            ActionEditor editor(action, QJsonDocument(tmp.value("fields").toArray()).toJson());
+            connect(&editor, &ActionEditor::ActionFinish, [&](const QByteArray& ba){
+                ui->textEditAction->setText(QString::fromStdString(ba.toStdString()));
+            });
+            editor.exec();
+            break;
+        }
     }
 }

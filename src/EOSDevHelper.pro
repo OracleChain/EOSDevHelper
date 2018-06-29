@@ -69,7 +69,8 @@ SOURCES += main.cpp\
     codebase/utility/utils.cpp \
     codebase/chain/transactionextension.cpp \
     codebase/chain/typewaitweight.cpp \
-    codebase/ec/sha256.cpp
+    codebase/ec/sha256.cpp \
+    push/actioneditor.cpp
 
 HEADERS  += mainwindow.h \
     wallet/walletframe.h \
@@ -121,7 +122,8 @@ HEADERS  += mainwindow.h \
     codebase/utility/utils.h \
     codebase/chain/transactionextension.h \
     codebase/chain/typewaitweight.h \
-    codebase/ec/sha256.h
+    codebase/ec/sha256.h \
+    push/actioneditor.h
 
 FORMS    += mainwindow.ui \
     wallet/walletframe.ui \
@@ -137,7 +139,8 @@ FORMS    += mainwindow.ui \
     wallet/unlockwalletdialog.ui \
     account/createaccountframe.ui \
     setting/settingsframe.ui \
-    misc/aboutframe.ui
+    misc/aboutframe.ui \
+    push/actioneditor.ui
 
 DISTFILES +=
 
