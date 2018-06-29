@@ -19,20 +19,25 @@ extern MainWindow *w;
 
 PushFrame::PushFrame(QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::PushFrame),
-    httpc(new HttpClient)
+    ui(new Ui::PushFrame)
 {
     ui->setupUi(this);
 
     QRegExpValidator *accountVadt = new QRegExpValidator(QRegExp(eos_account_regex), this);
     ui->lineEditContractAccount->setValidator(accountVadt);
     ui->lineEditPermission->setValidator(accountVadt);
+
+    initHttpClients();
 }
 
 PushFrame::~PushFrame()
 {
     delete ui;
-    delete httpc;
+
+    for (auto itr = httpcs.begin(); itr != httpcs.end(); ++itr) {
+        delete itr.value();
+    }
+    httpcs.clear();
 }
 
 QByteArray PushFrame::packAbiJsonToBinParam()
@@ -129,7 +134,7 @@ QByteArray PushFrame::packPushTransactionParam()
     return QJsonDocument(obj).toJson();
 }
 
-void PushFrame::UpdateActionList()
+void PushFrame::updateActionList()
 {
     if (contractAbi.isEmpty()) {
         return;
@@ -163,6 +168,15 @@ void PushFrame::UpdateActionList()
     }
 }
 
+void PushFrame::initHttpClients()
+{
+    httpcs[FunctionID::get_info] = new HttpClient;
+    httpcs[FunctionID::abi_json_to_bin] = new HttpClient;
+    httpcs[FunctionID::get_required_keys] = new HttpClient;
+    httpcs[FunctionID::push_transaction] = new HttpClient;
+    httpcs[FunctionID::get_abi] = new HttpClient;
+}
+
 void PushFrame::on_pushButtonImportFile_clicked()
 {
     QString filePath = QFileDialog::getOpenFileName(this, "Choose file", "");
@@ -193,15 +207,13 @@ void PushFrame::on_pushButtonSend_clicked()
 
     w->pushOutputFrame()->setRequestOutput(0, "abi_json_to_bin", param);
 
-    if (httpc) {
-        httpc->request(FunctionID::abi_json_to_bin, param);
-        connect(httpc, &HttpClient::responseData, this, &PushFrame::abi_json_to_bin_returned);
-    }
+    httpcs[FunctionID::abi_json_to_bin]->request(FunctionID::abi_json_to_bin, param);
+    connect(httpcs[FunctionID::abi_json_to_bin], &HttpClient::responseData, this, &PushFrame::abi_json_to_bin_returned);
 }
 
 void PushFrame::abi_json_to_bin_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &PushFrame::abi_json_to_bin_returned);
+    disconnect(httpcs[FunctionID::abi_json_to_bin], &HttpClient::responseData, this, &PushFrame::abi_json_to_bin_returned);
 
     w->pushOutputFrame()->setResponseOutput(0, data);
 
@@ -210,15 +222,13 @@ void PushFrame::abi_json_to_bin_returned(const QByteArray &data)
 
     w->pushOutputFrame()->setRequestOutput(1, "get_info", QByteArray());
 
-    if (httpc) {
-        httpc->request(FunctionID::get_info);
-        connect(httpc, &HttpClient::responseData, this, &PushFrame::get_info_returned);
-    }
+    httpcs[FunctionID::get_info]->request(FunctionID::get_info);
+    connect(httpcs[FunctionID::get_info], &HttpClient::responseData, this, &PushFrame::get_info_returned);
 }
 
 void PushFrame::get_info_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &PushFrame::get_info_returned);
+    disconnect(httpcs[FunctionID::get_info], &HttpClient::responseData, this, &PushFrame::get_info_returned);
 
     w->pushOutputFrame()->setResponseOutput(1, data);
 
@@ -232,15 +242,13 @@ void PushFrame::get_info_returned(const QByteArray &data)
 
     w->pushOutputFrame()->setRequestOutput(2, "get_required_keys", param);
 
-    if (httpc) {
-        httpc->request(FunctionID::get_required_keys, param);
-        connect(httpc, &HttpClient::responseData, this, &PushFrame::get_required_keys_returned);
-    }
+    httpcs[FunctionID::get_required_keys]->request(FunctionID::get_required_keys, param);
+    connect(httpcs[FunctionID::get_required_keys], &HttpClient::responseData, this, &PushFrame::get_required_keys_returned);
 }
 
 void PushFrame::get_required_keys_returned(const QByteArray &data)
 {
-    disconnect(httpc, &HttpClient::responseData, this, &PushFrame::get_required_keys_returned);
+    disconnect(httpcs[FunctionID::get_required_keys], &HttpClient::responseData, this, &PushFrame::get_required_keys_returned);
 
     w->pushOutputFrame()->setResponseOutput(2, data);
 
@@ -254,12 +262,10 @@ void PushFrame::get_required_keys_returned(const QByteArray &data)
 
     w->pushOutputFrame()->setRequestOutput(3, "push_transaction", param);
 
-    if (httpc) {
-        httpc->request(FunctionID::push_transaction, param);
-        connect(httpc, &HttpClient::responseData, [=](const QByteArray& d){
-            w->pushOutputFrame()->setResponseOutput(3, d);
-        });
-    }
+    httpcs[FunctionID::push_transaction]->request(FunctionID::push_transaction, param);
+    connect(httpcs[FunctionID::push_transaction], &HttpClient::responseData, [=](const QByteArray& d){
+        w->pushOutputFrame()->setResponseOutput(3, d);
+    });
 }
 
 void PushFrame::on_pushButtonGetAbi_clicked()
@@ -277,26 +283,25 @@ void PushFrame::on_pushButtonGetAbi_clicked()
     obj.insert("account_name", QJsonValue(contract));
     QByteArray param = QJsonDocument(obj).toJson();
 
+    w->pushOutputFrame()->clearOutput();
     w->pushOutputFrame()->setRequestOutput(0, "get_abi", param);
 
-    if (httpc) {
-        httpc->request(FunctionID::get_abi, param);
-        connect(httpc, &HttpClient::responseData, [&](const QByteArray& d){
-            w->pushOutputFrame()->setResponseOutput(0, d);
+    httpcs[FunctionID::get_abi]->request(FunctionID::get_abi, param);
+    connect(httpcs[FunctionID::get_abi], &HttpClient::responseData, [&](const QByteArray& d){
+        w->pushOutputFrame()->setResponseOutput(0, d);
 
-            QJsonObject obj = QJsonDocument::fromJson(d).object();
-            if (obj.isEmpty()) {
-                return;
-            }
+        QJsonObject obj = QJsonDocument::fromJson(d).object();
+        if (obj.isEmpty()) {
+            return;
+        }
 
-            if (obj.contains("code") || obj.contains("error")) {
-                return;
-            }
+        if (obj.contains("code") || obj.contains("error")) {
+            return;
+        }
 
-            contractAbi = d;
-            UpdateActionList();
-        });
-    }
+        contractAbi = d;
+        updateActionList();
+    });
 }
 
 void PushFrame::on_pushButtonFormInput_clicked()

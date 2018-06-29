@@ -2,8 +2,10 @@
 #define PUSHFRAME_H
 
 #include <QFrame>
+#include <QMap>
 
 #include "codebase/chain/signedtransaction.h"
+#include "codebase/utility/httpclient.h"
 
 namespace Ui {
 class PushFrame;
@@ -24,7 +26,8 @@ private:
     QByteArray packGetRequiredKeysParam();
     QByteArray packPushTransactionParam();
 
-    void UpdateActionList();
+    void updateActionList();
+    void initHttpClients();
 
 private slots:
     void on_pushButtonImportFile_clicked();
@@ -42,7 +45,7 @@ private slots:
 private:
     Ui::PushFrame *ui;
 
-    HttpClient *httpc;
+    QMap<FunctionID, HttpClient*> httpcs;
 
     QByteArray abiJsonToBinData;
     QByteArray getInfoData;
