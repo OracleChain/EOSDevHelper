@@ -50,6 +50,7 @@
 
 |Version|MD5|
 |------|---|
+|[WINDOWS v3.0(compliant with v1.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.0.7/EOSDevHelper_Windows_Release_V1.0.7.zip)|be0842924bda192167f3cfdf6198d900|
 |[WINDOWS_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/dawn-4.0/EOSDevHelper_Windows_Release_Dawn4.zip)|233597e64da072fb7ed95a4a61af6aa5|
 |[MAC_OSX_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/files/2008592/EOSDevHelper_OSX_Release_Dawn4.zip)|fe5a84a76e274169d7edb8af141b02f8|
 |[UBUNTU_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/dawn-4.0/EOSDevHelper_Ubuntu_Release_Dawn4.zip)|478a115eeab9578223120a33b58e33d3|
