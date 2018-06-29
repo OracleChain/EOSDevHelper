@@ -1,8 +1,6 @@
 #include "actioneditor.h"
 #include "ui_actioneditor.h"
 
-#include "codebase/chain/abiparser.h"
-
 #include <QMessageBox>
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -11,7 +9,6 @@
 
 #include <QLabel>
 #include <QLineEdit>
-#include <QComboBox>
 #include <QHBoxLayout>
 
 const QString lineEditStyle = "QLineEdit {"
@@ -54,9 +51,7 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
     }
 
     firstMap.clear();
-    //secondVec.clear();
 
-    ABIParser parser;
     for (int i = 0; i < array.size(); ++i) {
         QJsonObject obj = array.at(i).toObject();
         if (obj.isEmpty()) {
@@ -68,22 +63,20 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
 
         QObject *object = nullptr;
 
-        std::string t = type.toStdString();
-        if (parser.is_array(t)) {
+        if (isArrayType(type)) {
             object = new QVBoxLayout(nullptr);
             QList<QVariant> secondList;
             for (int j = 0; j < 10; ++j) {
                 QLineEdit *lineEdit = new QLineEdit;
-                secondList.append(QVariant((int)lineEdit));
+                secondList.append(QVariant(reinterpret_cast<int>(lineEdit)));
                 dynamic_cast<QVBoxLayout*>(object)->addWidget(lineEdit);
             }
 
             firstMap.insert(name, secondList);
-
         } else {
             object = new QLineEdit(this);
             dynamic_cast<QLineEdit*>(object)->setStyleSheet(lineEditStyle);
-            firstMap.insert(name, int(object));
+            firstMap.insert(name, reinterpret_cast<int>(object));
         }
 
         if (!object) {
@@ -105,9 +98,44 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
     }
 }
 
+bool ActionEditor::isArrayType(const QString &type)
+{
+    return type.endsWith("[]");
+}
+
 void ActionEditor::on_pushButtonOk_clicked()
 {
+    QJsonObject obj;
+    for (auto itr = firstMap.cbegin(); itr != firstMap.end(); ++itr) {
+        bool ok = false;
+        int in = itr.value().toInt(&ok);
+        if (ok) {
+            QLineEdit *lineEdit = reinterpret_cast<QLineEdit*>(in);
+            if (lineEdit) {
+                obj.insert(itr.key(), QJsonValue(lineEdit->text()));
+            }
+        } else {
+            QList<QVariant> list = itr.value().toList();
+            if (!list.isEmpty()) {
+                QJsonArray array;
+                for (int i = 0; i < list.size(); ++i) {
+                    bool ok2 = false;
+                    int in2 = list.at(i).toInt(&ok2);
+                    if (ok2) {
+                        QLineEdit *lineEdit = reinterpret_cast<QLineEdit*>(in2);
+                        if (lineEdit) {
+                            QString text = lineEdit->text();
+                            if (text.isEmpty()) continue;
+                            array.append(QJsonValue(text));
+                        }
+                    }
+                }
+                obj.insert(itr.key(), array);
+            }
+        }
+    }
 
+    emit ActionFinish(QJsonDocument(obj).toJson());
     close();
 }
 

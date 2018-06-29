@@ -330,6 +330,9 @@ void PushFrame::on_pushButtonFormInput_clicked()
         QString name = tmp.value("name").toString();
         if (name == action) {
             ActionEditor editor(action, QJsonDocument(tmp.value("fields").toArray()).toJson());
+            connect(&editor, &ActionEditor::ActionFinish, [&](const QByteArray& ba){
+                ui->textEditAction->setText(QString::fromStdString(ba.toStdString()));
+            });
             editor.exec();
             break;
         }

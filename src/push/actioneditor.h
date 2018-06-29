@@ -17,8 +17,12 @@ public:
     explicit ActionEditor(const QString& actionName, const QByteArray& actionFields, QWidget *parent = 0);
     ~ActionEditor();
 
+signals:
+    void ActionFinish(const QByteArray& ba);
+
 private:
     void updateFieldsUI(const QByteArray& fields);
+    bool isArrayType(const QString& type);
 
 private slots:
     void on_pushButtonOk_clicked();
