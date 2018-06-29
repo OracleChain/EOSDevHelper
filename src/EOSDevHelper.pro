@@ -70,7 +70,6 @@ SOURCES += main.cpp\
     codebase/chain/transactionextension.cpp \
     codebase/chain/typewaitweight.cpp \
     codebase/ec/sha256.cpp \
-    codebase/chain/abiparser.cpp \
     push/actioneditor.cpp
 
 HEADERS  += mainwindow.h \
@@ -124,8 +123,6 @@ HEADERS  += mainwindow.h \
     codebase/chain/transactionextension.h \
     codebase/chain/typewaitweight.h \
     codebase/ec/sha256.h \
-    codebase/chain/abiparser.h \
-    codebase/chain/abi_def.hpp \
     push/actioneditor.h
 
 FORMS    += mainwindow.ui \
