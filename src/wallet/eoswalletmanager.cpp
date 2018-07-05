@@ -10,11 +10,12 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QCoreApplication>
 
 EOSWalletManager::EOSWalletManager()
 {
     defaultExists = false;
-    dir = QDir::currentPath() + "/data";
+    dir = QCoreApplication::applicationDirPath() + "/data";
     if (!QFileInfo(dir).exists()) {
         QDir curDir;
         bool ret = curDir.mkpath(dir);

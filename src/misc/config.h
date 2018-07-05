@@ -4,6 +4,7 @@
 #include <QString>
 #include <QDir>
 #include <QSettings>
+#include <QCoreApplication>
 
 extern QString base_url;
 extern QString url_port;
@@ -45,8 +46,9 @@ public:
 private:
     QString iniFile()
     {
-        QDir cur = QDir::current();
-        QString strDataPath = cur.absolutePath() + "/data";
+        QString curDir = QCoreApplication::applicationDirPath();
+        QDir cur(curDir);
+        QString strDataPath = curDir + "/data";
         QDir data(strDataPath);
         if (!data.exists()) {
             cur.mkdir("data");
