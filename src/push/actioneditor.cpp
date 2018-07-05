@@ -68,7 +68,7 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
             QList<QVariant> secondList;
             for (int j = 0; j < 10; ++j) {
                 QLineEdit *lineEdit = new QLineEdit;
-                secondList.append(QVariant(reinterpret_cast<int>(lineEdit)));
+                secondList.append(QVariant(reinterpret_cast<qintptr>(lineEdit)));
                 dynamic_cast<QVBoxLayout*>(object)->addWidget(lineEdit);
             }
 
@@ -76,7 +76,7 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
         } else {
             object = new QLineEdit(this);
             dynamic_cast<QLineEdit*>(object)->setStyleSheet(lineEditStyle);
-            firstMap.insert(name, reinterpret_cast<int>(object));
+            firstMap.insert(name, reinterpret_cast<qintptr>(object));
         }
 
         if (!object) {
