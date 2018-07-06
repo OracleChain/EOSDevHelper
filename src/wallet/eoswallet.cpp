@@ -10,11 +10,6 @@ EOSWallet::EOSWallet()
 
 }
 
-void EOSWallet::setWalletFilePath(const QString &filePath)
-{
-    this->filePath = filePath;
-}
-
 void EOSWallet::setPassword(const QString &password)
 {
     if (!isNew()) {
@@ -32,18 +27,13 @@ void EOSWallet::setPassword(const QString &password)
 
 bool EOSWallet::saveFile(const QString &filePath)
 {
-    QString strTemp = filePath;
-    if (strTemp.isEmpty()) {
-        if (this->filePath.isEmpty()) {
-            return false;
-        }
-
-        strTemp = this->filePath;
+    if (filePath.isEmpty()) {
+        return false;
     }
 
     encryptKeys();
 
-    QFile file(strTemp);
+    QFile file(filePath);
     if (!file.open(QIODevice::WriteOnly)) {
         return false;
     }
@@ -53,16 +43,11 @@ bool EOSWallet::saveFile(const QString &filePath)
 
 bool EOSWallet::loadFile(const QString &filePath)
 {
-    QString strTemp = filePath;
-    if (strTemp.isEmpty()) {
-        if (this->filePath.isEmpty()) {
-            return false;
-        }
-
-        strTemp = this->filePath;
+    if (filePath.isEmpty()) {
+        return false;
     }
 
-    QFile file(strTemp);
+    QFile file(filePath);
     if (!file.exists()) {
         return false;
     }
@@ -72,7 +57,7 @@ bool EOSWallet::loadFile(const QString &filePath)
         return false;
     }
 
-    QByteArray data = file.readAll();
+    auto data = file.readAll();
     for (int i = 0; i < data.size(); ++i) {
         walletData.cipher_keys.push_back(data.at(i));
     }
@@ -86,7 +71,7 @@ bool EOSWallet::importKey(const eos_key &key)
         return false;
     }
 
-    QString eos_pub = QString::fromStdString(key.get_eos_public_key());
+    auto eos_pub = QString::fromStdString(key.get_eos_public_key());
     auto itr = this->keys.find(eos_pub);
     if (itr == this->keys.end()) {
         keys.insert(eos_pub, QString::fromStdString(key.get_wif_private_key()));
@@ -102,7 +87,7 @@ bool EOSWallet::importKey(const QString &wif)
         return false;
     }
 
-    QString eos_pub = QString::fromStdString(eos_key::get_eos_public_key_by_wif(wif.toStdString()));
+    auto eos_pub = QString::fromStdString(eos_key::get_eos_public_key_by_wif(wif.toStdString()));
     if (eos_pub.isEmpty()) {
         return false;
     }
@@ -136,12 +121,12 @@ void EOSWallet::unlock(const QString &password)
         return;
     }
 
-    auto pw = sha512::hash(password.toStdString());
-    std::vector<char> decrypted = aes_decrypt(pw, walletData.cipher_keys);
+    auto pw         = sha512::hash(password.toStdString());
+    auto decrypted  = aes_decrypt(pw, walletData.cipher_keys);
     plain_keys pk;
     Packer::unpack(decrypted, pk);
-    this->keys = pk.keys;
-    checksum = pk.checksum;
+    this->keys  = pk.keys;
+    checksum    = pk.checksum;
 }
 
 bool EOSWallet::isNew() const
@@ -174,8 +159,8 @@ void EOSWallet::encryptKeys()
     }
 
     plain_keys data;
-    data.keys = this->keys;
-    data.checksum = this->checksum;
-    auto plain_text = Packer::pack(data);
-    walletData.cipher_keys = aes_encrypt(data.checksum, plain_text);
+    data.keys               = this->keys;
+    data.checksum           = this->checksum;
+    auto plain_text         = Packer::pack(data);
+    walletData.cipher_keys  = aes_encrypt(data.checksum, plain_text);
 }

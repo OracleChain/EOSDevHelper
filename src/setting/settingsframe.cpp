@@ -16,10 +16,7 @@ SettingsFrame::SettingsFrame(QWidget *parent) :
     httpc (new HttpClient)
 {
     ui->setupUi(this);
-
-    QRegExp portRegex("(\\d{1,5})");
-    QRegExpValidator *portVadt = new QRegExpValidator(portRegex, this);
-    ui->lineEditPort->setValidator(portVadt);
+    ui->lineEditPort->setValidator(new QRegExpValidator(QRegExp("(\\d{1,5})"), this));
 
     ui->lineEditUrl->setText(base_url);
     ui->lineEditPort->setText(url_port);
@@ -46,8 +43,7 @@ void SettingsFrame::on_pushButtonConnect_clicked()
     if (httpc) {
         httpc->request(FunctionID::get_info);
         connect(httpc, &HttpClient::responseData, [=](const QByteArray& data){
-            QJsonDocument doc = QJsonDocument::fromJson(data);
-            QByteArray formatData = doc.toJson(QJsonDocument::Indented);
+            auto formatData = QJsonDocument::fromJson(data).toJson(QJsonDocument::Indented);
             ui->textEditOutput->setText(QString::fromStdString(formatData.toStdString()));
         });
     }

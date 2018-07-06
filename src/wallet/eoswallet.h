@@ -24,7 +24,6 @@ class EOSWallet
 public:
     EOSWallet();
 
-    void setWalletFilePath(const QString& filePath);
     void setPassword(const QString& password);
     bool saveFile(const QString& filePath = "");
     bool loadFile(const QString& filePath = "");
@@ -46,7 +45,6 @@ private:
     void encryptKeys();
 
 private:
-    QString filePath;
     wallet_data walletData;
 
     QMap<QString, QString> keys;

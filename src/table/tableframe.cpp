@@ -28,13 +28,12 @@ void TableFrame::formatPrint(const QByteArray &data, QTextEdit *edit)
         return;
     }
 
-    QJsonDocument doc = QJsonDocument::fromJson(data);
+    auto doc = QJsonDocument::fromJson(data);
     if (doc.isNull()) {
         return;
     }
 
-    QByteArray formatData = doc.toJson(QJsonDocument::Indented);
-    edit->setText(QString::fromStdString(formatData.toStdString()));
+    edit->setText(QString::fromStdString(doc.toJson(QJsonDocument::Indented).toStdString()));
 }
 
 void TableFrame::on_pushButtonGetTable_clicked()
@@ -49,8 +48,8 @@ void TableFrame::on_pushButtonGetTable_clicked()
     obj.insert("scope", QJsonValue(ui->lineEditScope->text()));
     obj.insert("table", QJsonValue(ui->lineEditTableName->text()));
 
-    QJsonDocument doc(obj);
-    QByteArray data = doc.toJson();
+    QJsonDocument   doc(obj);
+    auto            data = doc.toJson();
     formatPrint(data, ui->textEditInput);
 
     if (httpc) {

@@ -5,8 +5,6 @@
 #include "walletpassworddialog.h"
 #include "eoswalletmanager.h"
 
-#include <QHBoxLayout>
-#include <QPair>
 #include <QMessageBox>
 
 WalletFrame::WalletFrame(QWidget *parent) :
@@ -25,8 +23,8 @@ WalletFrame::~WalletFrame()
 
 void WalletFrame::addWalletToUIList(const QString &name)
 {
-    QListWidgetItem *item = new QListWidgetItem;
-    WalletItemFrame *wallet = new WalletItemFrame(this);
+    auto item   = new QListWidgetItem;
+    auto wallet = new WalletItemFrame(this);
     wallet->setWalletName(name);
     wallet->setLockState(EOSWalletManager::instance().isLocked(name));
     item->setSizeHint(wallet->sizeHint());
@@ -37,7 +35,7 @@ void WalletFrame::addWalletToUIList(const QString &name)
 void WalletFrame::initListUI()
 {
     EOSWalletManager::instance().openAll();
-    QVector<QPair<QString, bool>> wallets = EOSWalletManager::instance().listWallets(EOSWalletManager::ws_all);
+    auto wallets = EOSWalletManager::instance().listWallets(EOSWalletManager::ws_all);
     for (const auto& w : wallets) {
         addWalletToUIList(w.first);
     }
@@ -45,7 +43,7 @@ void WalletFrame::initListUI()
 
 void WalletFrame::on_pushButtonCreateAccount_clicked()
 {
-    QString wallet_name = ui->lineEditWalletName->text();
+    auto wallet_name = ui->lineEditWalletName->text();
     if (wallet_name.isEmpty()) {
         if (EOSWalletManager::instance().defaultWalletExists()) {
             QMessageBox::warning(nullptr, "Error", "default wallet already exists!");
@@ -54,7 +52,7 @@ void WalletFrame::on_pushButtonCreateAccount_clicked()
         wallet_name = EOSWalletManager::instance().defaultWalletName();
     }
 
-    QString passwd = EOSWalletManager::instance().create(wallet_name);
+    auto passwd = EOSWalletManager::instance().create(wallet_name);
     if (!passwd.isEmpty()) {
         WalletPasswordDialog dialog;
         dialog.setWalletName(wallet_name);

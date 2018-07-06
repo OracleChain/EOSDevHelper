@@ -2,6 +2,9 @@
 #define ACCOUNTFRAME_H
 
 #include <QFrame>
+#include <QMap>
+
+#include "codebase/utility/httpclient.h"
 
 namespace Ui {
 class AccountFrame;
@@ -15,7 +18,6 @@ class CreateAccountFrame;
 class GetTransactionDialog;
 class GetControlledAccountsDialog;
 class OutputFrame;
-class HttpClient;
 
 class AccountFrame : public QFrame
 {
@@ -31,6 +33,7 @@ public:
 
 private:
     void formatPrint(const QJsonDocument& doc, QTextEdit *edit);
+    void initHttpClients();
 
 private slots:
     void on_pushButtonGetAccount_clicked();
@@ -44,9 +47,7 @@ private:
     CreateAccountFrame *createAccountFrame;
     OutputFrame *createOutPutFrame;
 
-    HttpClient *httpcGetAccount;
-    HttpClient *httpcGetTransaction;
-    HttpClient *httpcGetServants;
+    QMap<FunctionID, HttpClient*> httpcs;
 };
 
 #endif // ACCOUNTFRAME_H

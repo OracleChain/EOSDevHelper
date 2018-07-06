@@ -35,5 +35,6 @@ void WalletPasswordDialog::on_pushButtonOk_clicked()
 
         EOSWalletManager::instance().addPasswords(walletName, password);
     }
+
     close();
 }

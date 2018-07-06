@@ -44,7 +44,7 @@ ActionEditor::~ActionEditor()
 
 void ActionEditor::updateFieldsUI(const QByteArray &fields)
 {
-    QJsonArray array = QJsonDocument::fromJson(fields).array();
+    auto array = QJsonDocument::fromJson(fields).array();
     if (array.isEmpty()) {
         QMessageBox::warning(nullptr, "Error", "empty fields in action struct.");
         close();
@@ -53,13 +53,13 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
     firstMap.clear();
 
     for (int i = 0; i < array.size(); ++i) {
-        QJsonObject obj = array.at(i).toObject();
+        auto obj = array.at(i).toObject();
         if (obj.isEmpty()) {
             continue;
         }
 
-        QString name = obj.value("name").toString();
-        QString type = obj.value("type").toString();
+        auto name = obj.value("name").toString();
+        auto type = obj.value("type").toString();
 
         QObject *object = nullptr;
 
@@ -67,7 +67,7 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
             object = new QVBoxLayout(nullptr);
             QList<QVariant> secondList;
             for (int j = 0; j < 10; ++j) {
-                QLineEdit *lineEdit = new QLineEdit;
+                auto lineEdit = new QLineEdit;
                 secondList.append(QVariant(reinterpret_cast<qintptr>(lineEdit)));
                 dynamic_cast<QVBoxLayout*>(object)->addWidget(lineEdit);
             }
@@ -83,11 +83,11 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
             continue;
         }
 
-        QLabel *label = new QLabel(this);
+        auto label = new QLabel(this);
         label->setStyleSheet(labelStyle);
         label->setText(name+" ("+type+"):");
 
-        QHBoxLayout *layout = new QHBoxLayout(nullptr);
+        auto layout = new QHBoxLayout(nullptr);
         layout->addWidget(label);
         if (QLineEdit* line = dynamic_cast<QLineEdit*>(object)) {
             layout->addWidget(line);
@@ -115,7 +115,7 @@ void ActionEditor::on_pushButtonOk_clicked()
                 obj.insert(itr.key(), QJsonValue(lineEdit->text()));
             }
         } else {
-            QList<QVariant> list = itr.value().toList();
+            auto list = itr.value().toList();
             if (!list.isEmpty()) {
                 QJsonArray array;
                 for (int i = 0; i < list.size(); ++i) {
@@ -124,7 +124,7 @@ void ActionEditor::on_pushButtonOk_clicked()
                     if (ok2) {
                         QLineEdit *lineEdit = reinterpret_cast<QLineEdit*>(in2);
                         if (lineEdit) {
-                            QString text = lineEdit->text();
+                            auto text = lineEdit->text();
                             if (text.isEmpty()) continue;
                             array.append(QJsonValue(text));
                         }

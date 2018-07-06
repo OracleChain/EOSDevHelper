@@ -45,7 +45,6 @@ QString EOSWalletManager::create(const QString &name)
 
     EOSWallet wallet;
     wallet.setPassword(password);
-    wallet.setWalletFilePath(fileInfo.absoluteFilePath());
     wallet.unlock(password);
     wallet.saveFile(fileInfo.absoluteFilePath());
     wallet.lock();
@@ -60,14 +59,12 @@ void EOSWalletManager::open(const QString &name)
 {
     QFileInfo info(QDir(dir), name);
     EOSWallet wallet;
-    wallet.setWalletFilePath(info.absoluteFilePath());
-
-    if (!wallet.loadFile("")) {
+    if (!wallet.loadFile(info.absoluteFilePath())) {
         return;
     }
 
-    QString nameWithoutExt = name;
-    QString strEnd = name.right(EOS_WALLET_FILE_EXT.length());
+    auto nameWithoutExt = name;
+    auto strEnd         = name.right(EOS_WALLET_FILE_EXT.length());
     if (strEnd.compare(EOS_WALLET_FILE_EXT, Qt::CaseInsensitive) == 0) {
         nameWithoutExt = name.left(name.length() - EOS_WALLET_FILE_EXT.length());
     }
@@ -81,7 +78,7 @@ void EOSWalletManager::openAll()
     QDir walletDir(dir);
     QStringList filters;
     filters << ("*" + EOS_WALLET_FILE_EXT);
-    QStringList files = walletDir.entryList(filters, QDir::Files);
+    auto files = walletDir.entryList(filters, QDir::Files);
     if (files.size()) {
         for (const auto& f : files) {
             open(f);
@@ -115,7 +112,7 @@ void EOSWalletManager::lock(const QString &name)
         return;
     }
 
-    EOSWallet& wallet = wallets[name];
+    auto& wallet = wallets[name];
     if (!wallet.isLocked()) {
         wallet.lock();
     }
@@ -128,7 +125,7 @@ void EOSWalletManager::unlock(const QString &name, const QString &password)
         return;
     }
 
-    EOSWallet& wallet = wallets[name];
+    auto& wallet = wallets[name];
     if (wallet.isLocked()) {
         wallet.unlock(password);
     }
@@ -140,7 +137,7 @@ void EOSWalletManager::importKey(const QString &name, const QString &wif)
         return;
     }
 
-    EOSWallet& wallet = wallets[name];
+    auto& wallet = wallets[name];
     if (wallet.isLocked()) {
         // wallet is locked, nothing we can do.
         return;
@@ -154,7 +151,7 @@ void EOSWalletManager::importKey(const QString &name, const QString &wif)
 QMap<QString, EOSWallet> EOSWalletManager::listKeys(wallet_state state)
 {
     QMap<QString, EOSWallet> result;
-    for (QMap<QString, EOSWallet>::const_iterator itr = wallets.cbegin();
+    for (auto itr = wallets.cbegin();
          itr != wallets.cend(); ++itr) {
         if (state == ws_all || state == itr.value().isLocked()) {
             result.insert(itr.key(), itr.value());
@@ -171,7 +168,7 @@ QVector<QPair<QString, bool> > EOSWalletManager::listWallets(wallet_state state)
         return result;
     }
 
-    for (QMap<QString, EOSWallet>::const_iterator itr = wallets.cbegin();
+    for (auto itr = wallets.cbegin();
          itr != wallets.cend(); ++itr) {
         if (state == ws_all || state == itr.value().isLocked()) {
             result.push_back(QPair<QString, bool>(itr.key(), itr.value().isLocked()));
@@ -183,30 +180,24 @@ QVector<QPair<QString, bool> > EOSWalletManager::listWallets(wallet_state state)
 
 void EOSWalletManager::loadPasswords()
 {
-    QString passwdFile = dir;
-    if (passwdFile.at(passwdFile.length() - 1) != '/' ||
-            passwdFile.at(passwdFile.length() - 1) != '\\')
-        passwdFile += '/';
-    passwdFile += "password";
-
-    QFile file(passwdFile);
+    QFile file(passwordsFile());
     if (!file.open(QIODevice::ReadOnly)) {
         return;
     }
 
-    QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+    auto doc = QJsonDocument::fromJson(file.readAll());
     if (doc.isNull()) {
         return;
     }
 
-    QJsonArray array = doc.array();
+    auto array = doc.array();
     for (int i = 0; i < array.size(); ++i) {
-        QJsonObject obj = array.at(i).toObject();
+        auto obj = array.at(i).toObject();
         if (obj.isEmpty()) {
             continue;
         }
 
-        QString key = obj.keys().at(0);
+        auto key = obj.keys().at(0);
         passwords.insert(key, obj.value(key).toString());
     }
 }
@@ -239,27 +230,20 @@ QString EOSWalletManager::getPassword(const QString &walletName)
 
 void EOSWalletManager::savePasswords()
 {
-    QString passwdFile = dir;
-    if (passwdFile.at(passwdFile.length() - 1) != '/' ||
-            passwdFile.at(passwdFile.length() - 1) != '\\')
-        passwdFile += '/';
-    passwdFile += "password";
-
-    QFile file(passwdFile);
+    QFile file(passwordsFile());
     if (!file.open(QIODevice::WriteOnly)) {
         return;
     }
 
     QJsonArray array;
-    for (QMap<QString, QString>::const_iterator itr = passwords.constBegin();
+    for (auto itr = passwords.constBegin();
          itr != passwords.constEnd(); ++itr) {
         QJsonObject obj;
         obj.insert(itr.key(), QJsonValue(itr.value()));
         array.append(QJsonValue(obj));
     }
 
-    QJsonDocument doc(array);
-    file.write(doc.toJson());
+    file.write(QJsonDocument(array).toJson());
 }
 
 void EOSWalletManager::signTransaction(SignedTransaction &txn, const std::vector<std::string> &pubKeys, const TypeChainId &cid)
@@ -271,18 +255,18 @@ void EOSWalletManager::signTransaction(SignedTransaction &txn, const std::vector
     for (const auto& k : pubKeys) {
         bool found = false;
 
-        for (QMap<QString, EOSWallet>::const_iterator itr = wallets.constBegin();
+        for (auto itr = wallets.constBegin();
              itr != wallets.constEnd(); ++itr) {
             if (itr.value().isLocked()) {
                 continue;
             }
 
-            std::string wif = itr.value().getPrivateKey(QString::fromStdString(k)).toStdString();
+            auto wif = itr.value().getPrivateKey(QString::fromStdString(k)).toStdString();
             if (wif.empty()) {
                 continue;
             }
 
-            std::vector<unsigned char> priKey = eos_key::get_private_key_by_wif(wif);
+            auto priKey = eos_key::get_private_key_by_wif(wif);
             txn.sign(priKey, cid);
 
             found = true;
@@ -299,6 +283,16 @@ QString EOSWalletManager::genPassword()
 {
     eos_key key;
     return EOS_WALLET_PASSWD_PREFIX + QString::fromStdString(key.get_wif_private_key());
+}
+
+QString EOSWalletManager::passwordsFile()
+{
+    auto passwdFile = dir;
+    if (passwdFile.at(passwdFile.length() - 1) != '/' ||
+            passwdFile.at(passwdFile.length() - 1) != '\\')
+        passwdFile += '/';
+    passwdFile += "password";
+    return passwdFile;
 }
 
 void EOSWalletManager::checkDefaultWallet(const QString &fileWithoutExt)

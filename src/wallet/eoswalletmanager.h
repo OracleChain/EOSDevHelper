@@ -50,6 +50,7 @@ private:
     EOSWalletManager();
 
     QString genPassword();
+    QString passwordsFile();
     void checkDefaultWallet(const QString& fileWithoutExt);
     void loadPasswords();
 

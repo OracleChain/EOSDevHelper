@@ -21,7 +21,7 @@ void UnlockWalletDialog::setWalletName(const QString &name)
     this->name = name;
     ui->labelWalletName->setText(name);
 
-    QString passwd = EOSWalletManager::instance().getPassword(name);
+    auto passwd = EOSWalletManager::instance().getPassword(name);
     if (!passwd.isEmpty()) {
         ui->textEditPasswd->setText(passwd);
     }

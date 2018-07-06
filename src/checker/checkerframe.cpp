@@ -24,25 +24,25 @@ void CheckerFrame::on_pushButtonCheck_clicked()
     ui->textEditOutput->clear();
 
 
-    QString rawAction = ui->textEditAction->toPlainText();
-    QByteArray ba = QByteArray::fromStdString(rawAction.toStdString());
-    QJsonDocument doc = QJsonDocument::fromJson(ba);
+    auto rawAction  = ui->textEditAction->toPlainText();
+    auto doc        = QJsonDocument::fromJson(QByteArray::fromStdString(rawAction.toStdString()));
     if (doc.isNull()) {
         QMessageBox::warning(nullptr, "Error", "Wrong json format for raw action!");
         return;
     }
 
-    QString signature = ui->textEditSignature->toPlainText();
-    QString pubKey = ui->textEditPublicKey->toPlainText();
+    auto signature  = ui->textEditSignature->toPlainText();
+    auto pubKey     = ui->textEditPublicKey->toPlainText();
 
     std::string result;
 
     HttpClient httpc;
     QEventLoop loop;
     connect(&httpc, &HttpClient::responseData, [&](const QByteArray& d){
-        QJsonObject obj = QJsonDocument::fromJson(d).object();
+        auto obj = QJsonDocument::fromJson(d).object();
         if (!obj.isEmpty()) {
-            ChainManager::ValidateSignature(rawAction.toStdString(), signature.toStdString(), pubKey.toStdString(), obj.value("chain_id").toString().toStdString(), result);
+            ChainManager::ValidateSignature(rawAction.toStdString(), signature.toStdString(),
+                                            pubKey.toStdString(), obj.value("chain_id").toString().toStdString(), result);
             loop.quit();
         }
 

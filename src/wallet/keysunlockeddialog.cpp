@@ -28,10 +28,10 @@ void KeysUnlockedDialog::showUnlockedKeys()
 {
     QString text = "No keys, try create wallet or unlock wallets.";
     QJsonArray array;
-    QMap<QString, EOSWallet> wallets = EOSWalletManager::instance().listKeys(EOSWalletManager::ws_unlocked);
+    auto wallets = EOSWalletManager::instance().listKeys(EOSWalletManager::ws_unlocked);
     for (const auto& w : wallets) {
-        QMap<QString, QString> keys = w.listKeys();
-        for (QMap<QString, QString>::const_iterator itr = keys.cbegin();
+        auto keys = w.listKeys();
+        for (auto itr = keys.cbegin();
              itr != keys.cend(); ++itr) {
             QJsonArray arr;
             arr.push_back(itr.key());
@@ -41,8 +41,7 @@ void KeysUnlockedDialog::showUnlockedKeys()
     }
 
     if (array.size()) {
-        QJsonDocument doc(array);
-        QByteArray formatedData = doc.toJson(QJsonDocument::Indented);
+        QByteArray formatedData = QJsonDocument(array).toJson(QJsonDocument::Indented);
         text = QString::fromStdString(formatedData.toStdString());
     }
 

@@ -39,28 +39,28 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::InitUI()
 {
-    QHBoxLayout *walletHLayout = new QHBoxLayout(ui->tabWallet);
+    auto walletHLayout = new QHBoxLayout(ui->tabWallet);
     walletHLayout->addWidget(std::move(new WalletFrame(ui->tabWallet)));
 
     acntFrame = new AccountFrame(ui->tabAccount);
-    QVBoxLayout *accountVLayout = new QVBoxLayout(ui->tabAccount);
+    auto accountVLayout = new QVBoxLayout(ui->tabAccount);
     accountVLayout->addWidget(acntFrame);
 
     pushOutput = new OutputFrame(ui->tabPush);
 
-    QHBoxLayout *pushHLayout = new QHBoxLayout(ui->tabPush);
+    auto pushHLayout = new QHBoxLayout(ui->tabPush);
     pushHLayout->addWidget(std::move(new PushFrame(ui->tabPush)));
     pushHLayout->addWidget(pushOutput);
     pushHLayout->setStretch(0, 1);
     pushHLayout->setStretch(1, 4);
 
-    QHBoxLayout *tableHLayout = new QHBoxLayout(ui->tabGetTable);
+    auto tableHLayout = new QHBoxLayout(ui->tabGetTable);
     tableHLayout->addWidget(std::move(new TableFrame(ui->tabGetTable)));
 
-    QHBoxLayout *checkerLayout = new QHBoxLayout(ui->tabChecker);
+    auto checkerLayout = new QHBoxLayout(ui->tabChecker);
     checkerLayout->addWidget(std::move(new CheckerFrame(ui->tabChecker)));
 
-    QHBoxLayout *settingLayout = new QHBoxLayout(ui->tabSettings);
+    auto settingLayout = new QHBoxLayout(ui->tabSettings);
     settingLayout->addWidget(std::move(new SettingsFrame(ui->tabSettings)));
 
     about = new AboutFrame(this);
@@ -71,7 +71,7 @@ void MainWindow::updateAbout()
 {
     if (about) {
         QPoint p(this->rect().bottomLeft().x(), this->rect().bottomLeft().y());
-        QRect rect = about->geometry();
+        auto rect = about->geometry();
         p.setY(p.y() - rect.height());
         about->move(p);
     }
