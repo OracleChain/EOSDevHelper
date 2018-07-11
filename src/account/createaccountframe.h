@@ -32,7 +32,10 @@ private slots:
     void get_required_keys_returned(const QByteArray& data);
     void push_transaction_returned(const QByteArray& data);
 
+    void on_checkBoxPractical_stateChanged(int arg1);
+
 private:
+    void enable_resource_ui(bool enable);
     void geneate_keys();
 
     QByteArray packGetRequiredKeysParam();

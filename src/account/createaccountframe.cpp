@@ -29,6 +29,9 @@ CreateAccountFrame::CreateAccountFrame(QWidget *parent) :
     ui->lineEditCreatorName->setValidator(accountVadt);
     ui->lineEditNewName->setValidator(accountVadt);
 
+    ui->checkBoxPractical->setChecked(false);
+    enable_resource_ui(false);
+
     initHttpClients();
 }
 
@@ -206,4 +209,16 @@ void CreateAccountFrame::initHttpClients()
     httpcs[FunctionID::get_info]            = new HttpClient;
     httpcs[FunctionID::get_required_keys]   = new HttpClient;
     httpcs[FunctionID::push_transaction]    = new HttpClient;
+}
+
+void CreateAccountFrame::on_checkBoxPractical_stateChanged(int arg1)
+{
+    enable_resource_ui(arg1 == Qt::Checked);
+}
+
+void CreateAccountFrame::enable_resource_ui(bool enable)
+{
+    ui->lineEditCPU->setEnabled(enable);
+    ui->lineEditNET->setEnabled(enable);
+    ui->lineEditRAM ->setEnabled(enable);
 }
