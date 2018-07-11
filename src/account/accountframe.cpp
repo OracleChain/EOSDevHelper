@@ -91,10 +91,10 @@ void AccountFrame::on_pushButtonGetAccount_clicked()
     QJsonDocument doc(obj);
     formatPrint(doc, ui->textEditGetAccountInput);
 
-    httpcs[FunctionID::get_account]->request(FunctionID::get_account, doc.toJson());
     connect(httpcs[FunctionID::get_account], &HttpClient::responseData, [=](const QByteArray& d){
         formatPrint(QJsonDocument::fromJson(d), ui->textEditGetAccountOutput);
     });
+    httpcs[FunctionID::get_account]->request(FunctionID::get_account, doc.toJson());
 }
 
 void AccountFrame::on_pushButtonGetTransactions_clicked()
@@ -105,10 +105,10 @@ void AccountFrame::on_pushButtonGetTransactions_clicked()
     QJsonDocument doc(obj);
     formatPrint(doc, ui->textEditGetTransactionsInput);
 
-    httpcs[FunctionID::get_transaction]->request(FunctionID::get_transaction, doc.toJson());
     connect(httpcs[FunctionID::get_transaction], &HttpClient::responseData, [=](const QByteArray& d){
         formatPrint(QJsonDocument::fromJson(d), ui->textEditGetTransactionsOutput);
     });
+    httpcs[FunctionID::get_transaction]->request(FunctionID::get_transaction, doc.toJson());
 }
 
 void AccountFrame::on_pushButtonGetServants_clicked()
@@ -119,8 +119,8 @@ void AccountFrame::on_pushButtonGetServants_clicked()
     QJsonDocument doc(obj);
     formatPrint(doc, ui->textEditGetServantsInput);
 
-    httpcs[FunctionID::get_controlled_accounts]->request(FunctionID::get_controlled_accounts, doc.toJson());
     connect(httpcs[FunctionID::get_controlled_accounts], &HttpClient::responseData, [=](const QByteArray& d){
         formatPrint(QJsonDocument::fromJson(d), ui->textEditGetServantsOutput);
     });
+    httpcs[FunctionID::get_controlled_accounts]->request(FunctionID::get_controlled_accounts, doc.toJson());
 }

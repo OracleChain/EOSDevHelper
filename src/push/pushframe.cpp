@@ -192,8 +192,8 @@ void PushFrame::on_pushButtonSend_clicked()
     w->pushOutputFrame()->clearOutput();
     w->pushOutputFrame()->setRequestOutput(0, "abi_json_to_bin", param);
 
-    httpcs[FunctionID::abi_json_to_bin]->request(FunctionID::abi_json_to_bin, param);
     connect(httpcs[FunctionID::abi_json_to_bin], &HttpClient::responseData, this, &PushFrame::abi_json_to_bin_returned);
+    httpcs[FunctionID::abi_json_to_bin]->request(FunctionID::abi_json_to_bin, param);
 }
 
 void PushFrame::abi_json_to_bin_returned(const QByteArray &data)
@@ -207,8 +207,8 @@ void PushFrame::abi_json_to_bin_returned(const QByteArray &data)
 
     w->pushOutputFrame()->setRequestOutput(1, "get_info", QByteArray());
 
-    httpcs[FunctionID::get_info]->request(FunctionID::get_info);
     connect(httpcs[FunctionID::get_info], &HttpClient::responseData, this, &PushFrame::get_info_returned);
+    httpcs[FunctionID::get_info]->request(FunctionID::get_info);
 }
 
 void PushFrame::get_info_returned(const QByteArray &data)
@@ -227,8 +227,8 @@ void PushFrame::get_info_returned(const QByteArray &data)
 
     w->pushOutputFrame()->setRequestOutput(2, "get_required_keys", param);
 
-    httpcs[FunctionID::get_required_keys]->request(FunctionID::get_required_keys, param);
     connect(httpcs[FunctionID::get_required_keys], &HttpClient::responseData, this, &PushFrame::get_required_keys_returned);
+    httpcs[FunctionID::get_required_keys]->request(FunctionID::get_required_keys, param);
 }
 
 void PushFrame::get_required_keys_returned(const QByteArray &data)
@@ -247,10 +247,10 @@ void PushFrame::get_required_keys_returned(const QByteArray &data)
 
     w->pushOutputFrame()->setRequestOutput(3, "push_transaction", param);
 
-    httpcs[FunctionID::push_transaction]->request(FunctionID::push_transaction, param);
     connect(httpcs[FunctionID::push_transaction], &HttpClient::responseData, [=](const QByteArray& d){
         w->pushOutputFrame()->setResponseOutput(3, d);
     });
+    httpcs[FunctionID::push_transaction]->request(FunctionID::push_transaction, param);
 }
 
 void PushFrame::on_pushButtonGetAbi_clicked()
@@ -271,7 +271,6 @@ void PushFrame::on_pushButtonGetAbi_clicked()
     w->pushOutputFrame()->clearOutput();
     w->pushOutputFrame()->setRequestOutput(0, "get_abi", param);
 
-    httpcs[FunctionID::get_abi]->request(FunctionID::get_abi, param);
     connect(httpcs[FunctionID::get_abi], &HttpClient::responseData, [&](const QByteArray& d){
         w->pushOutputFrame()->setResponseOutput(0, d);
 
@@ -287,6 +286,7 @@ void PushFrame::on_pushButtonGetAbi_clicked()
         contractAbi = d;
         updateActionList();
     });
+    httpcs[FunctionID::get_abi]->request(FunctionID::get_abi, param);
 }
 
 void PushFrame::on_pushButtonFormInput_clicked()

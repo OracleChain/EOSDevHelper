@@ -53,9 +53,9 @@ void TableFrame::on_pushButtonGetTable_clicked()
     formatPrint(data, ui->textEditInput);
 
     if (httpc) {
-        httpc->request(FunctionID::get_table, data);
         connect(httpc, &HttpClient::responseData, [=](const QByteArray& d){
             formatPrint(d, ui->textEditOutput);
         });
+        httpc->request(FunctionID::get_table, data);
     }
 }

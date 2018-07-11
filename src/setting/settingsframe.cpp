@@ -41,10 +41,10 @@ void SettingsFrame::on_pushButtonConnect_clicked()
     cfg.saveSettings();
 
     if (httpc) {
-        httpc->request(FunctionID::get_info);
         connect(httpc, &HttpClient::responseData, [=](const QByteArray& data){
             auto formatData = QJsonDocument::fromJson(data).toJson(QJsonDocument::Indented);
             ui->textEditOutput->setText(QString::fromStdString(formatData.toStdString()));
         });
+        httpc->request(FunctionID::get_info);
     }
 }
