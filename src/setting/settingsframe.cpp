@@ -8,7 +8,6 @@
 
 extern QString base_url;
 extern QString url_port;
-extern bool skip_signature;
 
 SettingsFrame::SettingsFrame(QWidget *parent) :
     QFrame(parent),
@@ -20,9 +19,6 @@ SettingsFrame::SettingsFrame(QWidget *parent) :
 
     ui->lineEditUrl->setText(base_url);
     ui->lineEditPort->setText(url_port);
-    ui->checkBoxSkipSignature->setChecked(skip_signature);
-
-    ui->checkBoxSkipSignature->setVisible(false);
 }
 
 SettingsFrame::~SettingsFrame()
@@ -35,7 +31,6 @@ void SettingsFrame::on_pushButtonConnect_clicked()
 {
     base_url = ui->lineEditUrl->text();
     url_port = ui->lineEditPort->text();
-    skip_signature = ui->checkBoxSkipSignature->isChecked();
 
     Config cfg;
     cfg.saveSettings();

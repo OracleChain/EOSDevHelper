@@ -8,7 +8,6 @@
 
 extern QString base_url;
 extern QString url_port;
-extern bool skip_signature;
 
 class Config
 {
@@ -30,7 +29,6 @@ public:
         if (settings) {
             base_url = settings->value("Network/url", "").toString();
             url_port = settings->value("Network/port", "").toString();
-            skip_signature = settings->value("Common/skip-signature", 1).toBool();
         }
     }
 
@@ -39,7 +37,6 @@ public:
         if (settings) {
             settings->setValue("Network/url", base_url);
             settings->setValue("Network/port", url_port);
-            settings->setValue("Common/skip-signature", skip_signature);
         }
     }
 

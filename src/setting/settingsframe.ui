@@ -164,29 +164,6 @@ border-radius: 4px;</string>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBoxSkipSignature">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>Arial</family>
-         <pointsize>14</pointsize>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(37, 37, 37);
-color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="text">
-        <string>Skip sign</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
