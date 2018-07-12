@@ -32,7 +32,12 @@ private slots:
     void get_required_keys_returned(const QByteArray& data);
     void push_transaction_returned(const QByteArray& data);
 
+    void on_checkBoxPractical_stateChanged(int arg1);
+
 private:
+    void enable_resource_ui(bool enable);
+    void serilize_json();
+
     void geneate_keys();
 
     QByteArray packGetRequiredKeysParam();
@@ -41,13 +46,17 @@ private:
 private:
     Ui::CreateAccountFrame *ui;
 
-    QVector<eos_key> keys;
-    QMap<FunctionID, HttpClient*> httpcs;
+    QVector<eos_key>                keys;
+    QMap<FunctionID, HttpClient*>   httpcs;
+    QMap<std::string, std::string>  binargs;
+
+    HttpClient *delegatebw_httpc;
+    HttpClient *buyram_httpc;
 
     QByteArray getInfoData;
     QByteArray getRequiredKeysData;
 
-    SignedTransaction signedTxn;
+    SignedTransaction *signedTxn;
 };
 
 #endif // CREATEACCOUNTFRAME_H

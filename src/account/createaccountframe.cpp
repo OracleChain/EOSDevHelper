@@ -22,12 +22,16 @@ extern MainWindow *w;
 
 CreateAccountFrame::CreateAccountFrame(QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::CreateAccountFrame)
+    ui(new Ui::CreateAccountFrame),
+    signedTxn(nullptr)
 {
     ui->setupUi(this);
     auto *accountVadt = new QRegExpValidator(QRegExp(eos_account_regex), this);
     ui->lineEditCreatorName->setValidator(accountVadt);
     ui->lineEditNewName->setValidator(accountVadt);
+
+    ui->checkBoxPractical->setChecked(false);
+    enable_resource_ui(false);
 
     initHttpClients();
 }
@@ -40,14 +44,17 @@ CreateAccountFrame::~CreateAccountFrame()
         delete itr.value();
     }
     httpcs.clear();
+
+    delete delegatebw_httpc;
+    delete buyram_httpc;
 }
 
 void CreateAccountFrame::on_pushButtonOk_clicked()
 {
     auto creator     = ui->lineEditCreatorName->text();
-    auto newAccount  = ui->lineEditNewName->text();
+    auto newName     = ui->lineEditNewName->text();
     auto wallet      = ui->comboBoxWallet->currentData().toString();
-    if (creator.isEmpty() || newAccount.isEmpty() || wallet.isEmpty()) {
+    if (creator.isEmpty() || newName.isEmpty() || wallet.isEmpty()) {
         QMessageBox::warning(nullptr, "Error", "Wrong parameter!");
         return;
     }
@@ -55,6 +62,8 @@ void CreateAccountFrame::on_pushButtonOk_clicked()
     w->accountFrame()->clearOutput();
 
     geneate_keys();
+
+    serilize_json();
 
     w->accountFrame()->printCreateAccountInfo(0, true, QByteArray(), "get_info");
 
@@ -150,8 +159,20 @@ QByteArray CreateAccountFrame::packGetRequiredKeysParam()
                              creator.toStdString());
 
     auto hexData = newAccount.dataAsHex();
-    signedTxn = ChainManager::createTransaction(EOS_SYSTEM_ACCOUNT, newAccount.getActionName(), std::string(hexData.begin(), hexData.end()),
-                                                ChainManager::getActivePermission(creator.toStdString()), getInfoData);
+    auto active  = ChainManager::getActivePermission(creator.toStdString());
+
+    if (signedTxn) {
+        delete signedTxn;
+        signedTxn = nullptr;
+    }
+    signedTxn = new SignedTransaction;
+    ChainManager::setTransactionHeaderInfo(*signedTxn, getInfoData);
+    ChainManager::addAction(*signedTxn, EOS_SYSTEM_ACCOUNT, newAccount.getActionName(), std::string(hexData.begin(), hexData.end()), active);
+
+    if (ui->checkBoxPractical->isChecked()) {
+        ChainManager::addAction(*signedTxn, EOS_SYSTEM_ACCOUNT, "delegatebw", binargs["delegatebw"], active);
+        ChainManager::addAction(*signedTxn, EOS_SYSTEM_ACCOUNT, "buyram", binargs["buyram"], active);
+    }
 
     QJsonArray  avaibleKeys;
     auto        UnlockedWallets = EOSWalletManager::instance().listKeys(EOSWalletManager::ws_unlocked);
@@ -165,7 +186,7 @@ QByteArray CreateAccountFrame::packGetRequiredKeysParam()
 
     QJsonObject obj;
     obj.insert("available_keys", avaibleKeys);
-    obj.insert("transaction", signedTxn.toJson().toObject());
+    obj.insert("transaction", signedTxn->toJson().toObject());
     return QJsonDocument(obj).toJson();
 }
 
@@ -186,8 +207,8 @@ QByteArray CreateAccountFrame::packPushTransactionParam()
         return QByteArray();
     }
 
-    EOSWalletManager::instance().signTransaction(signedTxn, keys, TypeChainId::fromHex(infoObj.value("chain_id").toString().toStdString()));
-    return QJsonDocument(PackedTransaction(signedTxn, "none").toJson().toObject()).toJson();
+    EOSWalletManager::instance().signTransaction(*signedTxn, keys, TypeChainId::fromHex(infoObj.value("chain_id").toString().toStdString()));
+    return QJsonDocument(PackedTransaction(*signedTxn, "none").toJson().toObject()).toJson();
 }
 
 void CreateAccountFrame::initWallets()
@@ -206,4 +227,80 @@ void CreateAccountFrame::initHttpClients()
     httpcs[FunctionID::get_info]            = new HttpClient;
     httpcs[FunctionID::get_required_keys]   = new HttpClient;
     httpcs[FunctionID::push_transaction]    = new HttpClient;
+
+    // It's better to construct these two httpcs as needed, but for simplicity just construct here.
+    delegatebw_httpc = new HttpClient;
+    buyram_httpc     = new HttpClient;
+}
+
+void CreateAccountFrame::on_checkBoxPractical_stateChanged(int arg1)
+{
+    enable_resource_ui(arg1 == Qt::Checked);
+}
+
+void CreateAccountFrame::enable_resource_ui(bool enable)
+{
+    ui->lineEditCPU->setEnabled(enable);
+    ui->lineEditNET->setEnabled(enable);
+    ui->lineEditRAM ->setEnabled(enable);
+}
+
+void CreateAccountFrame::serilize_json()
+{
+    if (!ui->checkBoxPractical->isChecked()) {
+        return;
+    }
+
+    int count = 0;
+    QEventLoop loop;
+
+    auto creator  = ui->lineEditCreatorName->text();
+    auto newName  = ui->lineEditNewName->text();
+    auto stakeNet = ui->lineEditNET->text();
+    auto stakeCpu = ui->lineEditCPU->text();
+    auto buyram   = ui->lineEditRAM->text();
+
+    QJsonObject de_objArgs, de_obj;
+    de_objArgs.insert("from", QJsonValue(creator));
+    de_objArgs.insert("receiver", QJsonValue(newName));
+    de_objArgs.insert("stake_net_quantity", QJsonValue(stakeNet));
+    de_objArgs.insert("stake_cpu_quantity", QJsonValue(stakeCpu));
+    de_objArgs.insert("transfer", QJsonValue(false));
+
+    de_obj.insert("code", QJsonValue("eosio"));
+    de_obj.insert("action", QJsonValue("delegatebw"));
+    de_obj.insert("args", de_objArgs);
+
+    connect(delegatebw_httpc, &HttpClient::responseData, [&](const QByteArray& ba){
+        auto abiBinObj = QJsonDocument::fromJson(ba).object();
+        binargs["delegatebw"] = abiBinObj.value("binargs").toString().toStdString();
+
+        count++;
+        if (count == 2) {
+            loop.quit();
+        }
+    });
+    delegatebw_httpc->request(FunctionID::abi_json_to_bin, QJsonDocument(de_obj).toJson());
+
+    QJsonObject buy_objArgs, buy_obj;
+    buy_objArgs.insert("payer", QJsonValue(creator));
+    buy_objArgs.insert("receiver", QJsonValue(newName));
+    buy_objArgs.insert("quant", QJsonValue(buyram));
+
+    buy_obj.insert("code", QJsonValue("eosio"));
+    buy_obj.insert("action", QJsonValue("buyram"));
+    buy_obj.insert("args", buy_objArgs);
+
+    connect(buyram_httpc, &HttpClient::responseData, [&](const QByteArray& ba){
+        auto abiBinObj = QJsonDocument::fromJson(ba).object();
+        binargs["buyram"] = abiBinObj.value("binargs").toString().toStdString();
+
+        count++;
+        if (count == 2) {
+            loop.quit();
+        }
+    });
+    buyram_httpc->request(FunctionID::abi_json_to_bin, QJsonDocument(buy_obj).toJson());
+
+    loop.exec();    // we don't know abis are ready when pack signedTxn, so here we just wait for two request finished.
 }
