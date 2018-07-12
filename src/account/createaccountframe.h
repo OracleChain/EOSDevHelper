@@ -56,7 +56,7 @@ private:
     QByteArray getInfoData;
     QByteArray getRequiredKeysData;
 
-    SignedTransaction signedTxn;
+    SignedTransaction *signedTxn;
 };
 
 #endif // CREATEACCOUNTFRAME_H

@@ -22,7 +22,8 @@ extern MainWindow *w;
 
 CreateAccountFrame::CreateAccountFrame(QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::CreateAccountFrame)
+    ui(new Ui::CreateAccountFrame),
+    signedTxn(nullptr)
 {
     ui->setupUi(this);
     auto *accountVadt = new QRegExpValidator(QRegExp(eos_account_regex), this);
@@ -160,12 +161,17 @@ QByteArray CreateAccountFrame::packGetRequiredKeysParam()
     auto hexData = newAccount.dataAsHex();
     auto active  = ChainManager::getActivePermission(creator.toStdString());
 
-    ChainManager::setTransactionHeaderInfo(signedTxn, getInfoData);
-    ChainManager::addAction(signedTxn, EOS_SYSTEM_ACCOUNT, newAccount.getActionName(), std::string(hexData.begin(), hexData.end()), active);
+    if (signedTxn) {
+        delete signedTxn;
+        signedTxn = nullptr;
+    }
+    signedTxn = new SignedTransaction;
+    ChainManager::setTransactionHeaderInfo(*signedTxn, getInfoData);
+    ChainManager::addAction(*signedTxn, EOS_SYSTEM_ACCOUNT, newAccount.getActionName(), std::string(hexData.begin(), hexData.end()), active);
 
     if (ui->checkBoxPractical->isChecked()) {
-        ChainManager::addAction(signedTxn, EOS_SYSTEM_ACCOUNT, "delegatebw", binargs["delegatebw"], active);
-        ChainManager::addAction(signedTxn, EOS_SYSTEM_ACCOUNT, "buyram", binargs["buyram"], active);
+        ChainManager::addAction(*signedTxn, EOS_SYSTEM_ACCOUNT, "delegatebw", binargs["delegatebw"], active);
+        ChainManager::addAction(*signedTxn, EOS_SYSTEM_ACCOUNT, "buyram", binargs["buyram"], active);
     }
 
     QJsonArray  avaibleKeys;
@@ -180,7 +186,7 @@ QByteArray CreateAccountFrame::packGetRequiredKeysParam()
 
     QJsonObject obj;
     obj.insert("available_keys", avaibleKeys);
-    obj.insert("transaction", signedTxn.toJson().toObject());
+    obj.insert("transaction", signedTxn->toJson().toObject());
     return QJsonDocument(obj).toJson();
 }
 
@@ -201,8 +207,8 @@ QByteArray CreateAccountFrame::packPushTransactionParam()
         return QByteArray();
     }
 
-    EOSWalletManager::instance().signTransaction(signedTxn, keys, TypeChainId::fromHex(infoObj.value("chain_id").toString().toStdString()));
-    return QJsonDocument(PackedTransaction(signedTxn, "none").toJson().toObject()).toJson();
+    EOSWalletManager::instance().signTransaction(*signedTxn, keys, TypeChainId::fromHex(infoObj.value("chain_id").toString().toStdString()));
+    return QJsonDocument(PackedTransaction(*signedTxn, "none").toJson().toObject()).toJson();
 }
 
 void CreateAccountFrame::initWallets()
