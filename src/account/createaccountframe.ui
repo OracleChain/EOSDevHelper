@@ -274,7 +274,7 @@ border-radius: 4px;</string>
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string>Buy resource while creating account</string>
+      <string>system newaccount</string>
      </property>
     </widget>
    </item>

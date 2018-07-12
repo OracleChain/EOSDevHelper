@@ -36,6 +36,8 @@ private slots:
 
 private:
     void enable_resource_ui(bool enable);
+    void serilize_json();
+
     void geneate_keys();
 
     QByteArray packGetRequiredKeysParam();
@@ -44,8 +46,12 @@ private:
 private:
     Ui::CreateAccountFrame *ui;
 
-    QVector<eos_key> keys;
-    QMap<FunctionID, HttpClient*> httpcs;
+    QVector<eos_key>                keys;
+    QMap<FunctionID, HttpClient*>   httpcs;
+    QMap<std::string, std::string>  binargs;
+
+    HttpClient *delegatebw_httpc;
+    HttpClient *buyram_httpc;
 
     QByteArray getInfoData;
     QByteArray getRequiredKeysData;
