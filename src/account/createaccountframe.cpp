@@ -47,6 +47,10 @@ CreateAccountFrame::~CreateAccountFrame()
 
     delete delegatebw_httpc;
     delete buyram_httpc;
+
+    if (signedTxn) {
+        delete signedTxn;
+    }
 }
 
 void CreateAccountFrame::on_pushButtonOk_clicked()
