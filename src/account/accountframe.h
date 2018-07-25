@@ -3,6 +3,7 @@
 
 #include <QFrame>
 #include <QMap>
+#include <memory>
 
 #include "codebase/utility/httpclient.h"
 
@@ -34,6 +35,7 @@ public:
 private:
     void formatPrint(const QJsonDocument& doc, QTextEdit *edit);
     void initHttpClients();
+    void initUI();
 
 private slots:
     void on_pushButtonGetAccount_clicked();
@@ -47,7 +49,7 @@ private:
     CreateAccountFrame *createAccountFrame;
     OutputFrame *createOutPutFrame;
 
-    QMap<FunctionID, HttpClient*> httpcs;
+    QMap<FunctionID, std::shared_ptr<HttpClient>> httpcs;
 };
 
 #endif // ACCOUNTFRAME_H

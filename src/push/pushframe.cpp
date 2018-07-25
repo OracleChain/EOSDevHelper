@@ -33,9 +33,6 @@ PushFrame::~PushFrame()
 {
     delete ui;
 
-    for (auto itr = httpcs.begin(); itr != httpcs.end(); ++itr) {
-        delete itr.value();
-    }
     httpcs.clear();
 }
 
@@ -110,7 +107,7 @@ QByteArray PushFrame::packPushTransactionParam()
     }
 
     std::vector<std::string> keys;
-    for (int i = 0; i < array.size(); ++i) {
+    for (auto i = 0; i < array.size(); ++i) {
         keys.push_back(array.at(i).toString().toStdString());
     }
 
@@ -145,7 +142,7 @@ void PushFrame::updateActionList()
     }
 
     ui->comboBoxContractAction->clear();
-    for (int i = 0; i < actions.size(); ++i) {
+    for (auto i = 0; i < actions.size(); ++i) {
         auto tmp = actions.at(i).toObject();
         if (tmp.isEmpty()) {
             continue;
@@ -159,11 +156,11 @@ void PushFrame::updateActionList()
 
 void PushFrame::initHttpClients()
 {
-    httpcs[FunctionID::get_info]            = new HttpClient;
-    httpcs[FunctionID::abi_json_to_bin]     = new HttpClient;
-    httpcs[FunctionID::get_required_keys]   = new HttpClient;
-    httpcs[FunctionID::push_transaction]    = new HttpClient;
-    httpcs[FunctionID::get_abi]             = new HttpClient;
+    httpcs[FunctionID::get_info]            = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::abi_json_to_bin]     = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::get_required_keys]   = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::push_transaction]    = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::get_abi]             = std::make_shared<HttpClient>(nullptr);
 }
 
 void PushFrame::on_pushButtonImportFile_clicked()
@@ -178,7 +175,7 @@ void PushFrame::on_pushButtonImportFile_clicked()
 
     QTextStream in(&file);
     auto ba = QByteArray::fromStdString(in.readAll().toStdString());
-    QByteArray formatedData = QJsonDocument::fromJson(ba).toJson(QJsonDocument::Indented);
+    auto formatedData = QJsonDocument::fromJson(ba).toJson(QJsonDocument::Indented);
     ui->textEditAction->setText(QString::fromStdString(formatedData.toStdString()));
 }
 
@@ -192,13 +189,13 @@ void PushFrame::on_pushButtonSend_clicked()
     w->pushOutputFrame()->clearOutput();
     w->pushOutputFrame()->setRequestOutput(0, "abi_json_to_bin", param);
 
-    connect(httpcs[FunctionID::abi_json_to_bin], &HttpClient::responseData, this, &PushFrame::abi_json_to_bin_returned);
+    connect(httpcs[FunctionID::abi_json_to_bin].get(), &HttpClient::responseData, this, &PushFrame::abi_json_to_bin_returned);
     httpcs[FunctionID::abi_json_to_bin]->request(FunctionID::abi_json_to_bin, param);
 }
 
 void PushFrame::abi_json_to_bin_returned(const QByteArray &data)
 {
-    disconnect(httpcs[FunctionID::abi_json_to_bin], &HttpClient::responseData, this, &PushFrame::abi_json_to_bin_returned);
+    disconnect(httpcs[FunctionID::abi_json_to_bin].get(), &HttpClient::responseData, this, &PushFrame::abi_json_to_bin_returned);
 
     w->pushOutputFrame()->setResponseOutput(0, data);
 
@@ -207,13 +204,13 @@ void PushFrame::abi_json_to_bin_returned(const QByteArray &data)
 
     w->pushOutputFrame()->setRequestOutput(1, "get_info", QByteArray());
 
-    connect(httpcs[FunctionID::get_info], &HttpClient::responseData, this, &PushFrame::get_info_returned);
+    connect(httpcs[FunctionID::get_info].get(), &HttpClient::responseData, this, &PushFrame::get_info_returned);
     httpcs[FunctionID::get_info]->request(FunctionID::get_info);
 }
 
 void PushFrame::get_info_returned(const QByteArray &data)
 {
-    disconnect(httpcs[FunctionID::get_info], &HttpClient::responseData, this, &PushFrame::get_info_returned);
+    disconnect(httpcs[FunctionID::get_info].get(), &HttpClient::responseData, this, &PushFrame::get_info_returned);
 
     w->pushOutputFrame()->setResponseOutput(1, data);
 
@@ -227,13 +224,13 @@ void PushFrame::get_info_returned(const QByteArray &data)
 
     w->pushOutputFrame()->setRequestOutput(2, "get_required_keys", param);
 
-    connect(httpcs[FunctionID::get_required_keys], &HttpClient::responseData, this, &PushFrame::get_required_keys_returned);
+    connect(httpcs[FunctionID::get_required_keys].get(), &HttpClient::responseData, this, &PushFrame::get_required_keys_returned);
     httpcs[FunctionID::get_required_keys]->request(FunctionID::get_required_keys, param);
 }
 
 void PushFrame::get_required_keys_returned(const QByteArray &data)
 {
-    disconnect(httpcs[FunctionID::get_required_keys], &HttpClient::responseData, this, &PushFrame::get_required_keys_returned);
+    disconnect(httpcs[FunctionID::get_required_keys].get(), &HttpClient::responseData, this, &PushFrame::get_required_keys_returned);
 
     w->pushOutputFrame()->setResponseOutput(2, data);
 
@@ -247,7 +244,7 @@ void PushFrame::get_required_keys_returned(const QByteArray &data)
 
     w->pushOutputFrame()->setRequestOutput(3, "push_transaction", param);
 
-    connect(httpcs[FunctionID::push_transaction], &HttpClient::responseData, [=](const QByteArray& d){
+    connect(httpcs[FunctionID::push_transaction].get(), &HttpClient::responseData, [=](const QByteArray& d){
         w->pushOutputFrame()->setResponseOutput(3, d);
     });
     httpcs[FunctionID::push_transaction]->request(FunctionID::push_transaction, param);
@@ -271,7 +268,7 @@ void PushFrame::on_pushButtonGetAbi_clicked()
     w->pushOutputFrame()->clearOutput();
     w->pushOutputFrame()->setRequestOutput(0, "get_abi", param);
 
-    connect(httpcs[FunctionID::get_abi], &HttpClient::responseData, [&](const QByteArray& d){
+    connect(httpcs[FunctionID::get_abi].get(), &HttpClient::responseData, [&](const QByteArray& d){
         w->pushOutputFrame()->setResponseOutput(0, d);
 
         auto obj = QJsonDocument::fromJson(d).object();

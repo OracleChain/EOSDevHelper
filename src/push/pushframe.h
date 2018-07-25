@@ -3,6 +3,7 @@
 
 #include <QFrame>
 #include <QMap>
+#include <memory>
 
 #include "codebase/chain/signedtransaction.h"
 #include "codebase/utility/httpclient.h"
@@ -40,7 +41,7 @@ private slots:
 private:
     Ui::PushFrame *ui;
 
-    QMap<FunctionID, HttpClient*> httpcs;
+    QMap<FunctionID, std::shared_ptr<HttpClient>> httpcs;
 
     QByteArray abiJsonToBinData;
     QByteArray getInfoData;

@@ -12,7 +12,7 @@ extern QString url_port;
 SettingsFrame::SettingsFrame(QWidget *parent) :
     QFrame(parent),
     ui(new Ui::SettingsFrame),
-    httpc (new HttpClient)
+    httpc (std::make_shared<HttpClient>(nullptr))
 {
     ui->setupUi(this);
     ui->lineEditPort->setValidator(new QRegExpValidator(QRegExp("(\\d{1,5})"), this));
@@ -24,7 +24,6 @@ SettingsFrame::SettingsFrame(QWidget *parent) :
 SettingsFrame::~SettingsFrame()
 {
     delete ui;
-    delete httpc;
 }
 
 void SettingsFrame::on_pushButtonConnect_clicked()
@@ -35,11 +34,9 @@ void SettingsFrame::on_pushButtonConnect_clicked()
     Config cfg;
     cfg.saveSettings();
 
-    if (httpc) {
-        connect(httpc, &HttpClient::responseData, [=](const QByteArray& data){
-            auto formatData = QJsonDocument::fromJson(data).toJson(QJsonDocument::Indented);
-            ui->textEditOutput->setText(QString::fromStdString(formatData.toStdString()));
-        });
-        httpc->request(FunctionID::get_info);
-    }
+    connect(httpc.get(), &HttpClient::responseData, [=](const QByteArray& data){
+        auto formatData = QJsonDocument::fromJson(data).toJson(QJsonDocument::Indented);
+        ui->textEditOutput->setText(QString::fromStdString(formatData.toStdString()));
+    });
+    httpc->request(FunctionID::get_info);
 }

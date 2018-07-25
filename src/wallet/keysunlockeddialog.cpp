@@ -41,8 +41,7 @@ void KeysUnlockedDialog::showUnlockedKeys()
     }
 
     if (array.size()) {
-        QByteArray formatedData = QJsonDocument(array).toJson(QJsonDocument::Indented);
-        text = QString::fromStdString(formatedData.toStdString());
+        text = QString::fromStdString(QJsonDocument(array).toJson(QJsonDocument::Indented).toStdString());
     }
 
     ui->textEditKeys->setText(text);

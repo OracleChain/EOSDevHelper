@@ -10,7 +10,7 @@
 TableFrame::TableFrame(QWidget *parent) :
     QFrame(parent),
     ui(new Ui::TableFrame),
-    httpc(new HttpClient)
+    httpc(std::make_shared<HttpClient>(nullptr))
 {
     ui->setupUi(this);
     ui->lineEditScope->setValidator(new QRegExpValidator(QRegExp(eos_account_regex), this));
@@ -19,7 +19,6 @@ TableFrame::TableFrame(QWidget *parent) :
 TableFrame::~TableFrame()
 {
     delete ui;
-    delete httpc;
 }
 
 void TableFrame::formatPrint(const QByteArray &data, QTextEdit *edit)
@@ -52,10 +51,8 @@ void TableFrame::on_pushButtonGetTable_clicked()
     auto            data = doc.toJson();
     formatPrint(data, ui->textEditInput);
 
-    if (httpc) {
-        connect(httpc, &HttpClient::responseData, [=](const QByteArray& d){
-            formatPrint(d, ui->textEditOutput);
-        });
-        httpc->request(FunctionID::get_table, data);
-    }
+    connect(httpc.get(), &HttpClient::responseData, [=](const QByteArray& d){
+        formatPrint(d, ui->textEditOutput);
+    });
+    httpc->request(FunctionID::get_table, data);
 }

@@ -55,7 +55,7 @@ void OutputFrame::setRequestOutput(int index, const QString &title, const QByteA
 
     labeltitle->setText(title);
 
-    QByteArray formatData = QJsonDocument::fromJson(data).toJson(QJsonDocument::Indented);
+    auto formatData = QJsonDocument::fromJson(data).toJson(QJsonDocument::Indented);
     textEdit->setText(QString::fromStdString(formatData.toStdString()));
 }
 
@@ -92,7 +92,7 @@ void OutputFrame::setResponseOutput(int index, const QByteArray &data)
         return;
     }
 
-    QByteArray formatData = QJsonDocument::fromJson(data).toJson(QJsonDocument::Indented);
+    auto formatData = QJsonDocument::fromJson(data).toJson(QJsonDocument::Indented);
     textEdit->setText(QString::fromStdString(formatData.toStdString()));
 }
 

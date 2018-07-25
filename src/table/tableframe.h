@@ -2,6 +2,7 @@
 #define TABLEFRAME_H
 
 #include <QFrame>
+#include <memory>
 
 namespace Ui {
 class TableFrame;
@@ -25,9 +26,8 @@ private slots:
     void on_pushButtonGetTable_clicked();
 
 private:
-    Ui::TableFrame *ui;
-
-    HttpClient *httpc;
+    Ui::TableFrame              *ui;
+    std::shared_ptr<HttpClient> httpc;
 };
 
 #endif // TABLEFRAME_H

@@ -52,7 +52,7 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
 
     firstMap.clear();
 
-    for (int i = 0; i < array.size(); ++i) {
+    for (auto i = 0; i < array.size(); ++i) {
         auto obj = array.at(i).toObject();
         if (obj.isEmpty()) {
             continue;
@@ -61,7 +61,7 @@ void ActionEditor::updateFieldsUI(const QByteArray &fields)
         auto name = obj.value("name").toString();
         auto type = obj.value("type").toString();
 
-        QObject *object = nullptr;
+        QObject *object = nullptr;  // this eventually add to ui, so just use QT way: new, add to ui and leave it alone.
 
         if (isArrayType(type)) {
             object = new QVBoxLayout(nullptr);
@@ -107,23 +107,21 @@ void ActionEditor::on_pushButtonOk_clicked()
 {
     QJsonObject obj;
     for (auto itr = firstMap.cbegin(); itr != firstMap.end(); ++itr) {
-        bool ok = false;
-        int in = itr.value().toInt(&ok);
+        auto ok = false;
+        auto in = itr.value().toInt(&ok);
         if (ok) {
-            QLineEdit *lineEdit = reinterpret_cast<QLineEdit*>(in);
-            if (lineEdit) {
+            if (QLineEdit *lineEdit = reinterpret_cast<QLineEdit*>(in)) {
                 obj.insert(itr.key(), QJsonValue(lineEdit->text()));
             }
         } else {
             auto list = itr.value().toList();
             if (!list.isEmpty()) {
                 QJsonArray array;
-                for (int i = 0; i < list.size(); ++i) {
-                    bool ok2 = false;
-                    int in2 = list.at(i).toInt(&ok2);
+                for (auto i = 0; i < list.size(); ++i) {
+                    auto ok2 = false;
+                    auto in2 = list.at(i).toInt(&ok2);
                     if (ok2) {
-                        QLineEdit *lineEdit = reinterpret_cast<QLineEdit*>(in2);
-                        if (lineEdit) {
+                        if (QLineEdit *lineEdit = reinterpret_cast<QLineEdit*>(in2)) {
                             auto text = lineEdit->text();
                             if (text.isEmpty()) continue;
                             array.append(QJsonValue(text));

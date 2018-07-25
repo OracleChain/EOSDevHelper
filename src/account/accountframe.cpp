@@ -16,29 +16,13 @@ AccountFrame::AccountFrame(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    createAccountFrame  = new CreateAccountFrame(ui->tabCreateAccount);
-    auto createVLayout  = new QVBoxLayout;
-    createVLayout->addWidget(createAccountFrame);
-    createVLayout->addStretch();
-    createVLayout->setSpacing(0);
-
-    createOutPutFrame   = new OutputFrame(ui->tabCreateAccount);
-    auto createHLayout  = new QHBoxLayout(ui->tabCreateAccount);
-    createHLayout->addLayout(createVLayout);
-    createHLayout->addWidget(createOutPutFrame);
-    createHLayout->setStretch(0, 1);
-    createHLayout->setStretch(1, 2);
-
+    initUI();
     initHttpClients();
 }
 
 AccountFrame::~AccountFrame()
 {
     delete ui;
-
-    for (auto itr = httpcs.begin(); itr != httpcs.end(); ++itr) {
-        delete itr.value();
-    }
     httpcs.clear();
 }
 
@@ -78,9 +62,26 @@ void AccountFrame::formatPrint(const QJsonDocument &doc, QTextEdit *edit)
 
 void AccountFrame::initHttpClients()
 {
-    httpcs[FunctionID::get_account]             = new HttpClient;
-    httpcs[FunctionID::get_transaction]         = new HttpClient;
-    httpcs[FunctionID::get_controlled_accounts] = new HttpClient;
+    httpcs[FunctionID::get_account]             = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::get_transaction]         = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::get_controlled_accounts] = std::make_shared<HttpClient>(nullptr);
+}
+
+void AccountFrame::initUI()
+{
+    createAccountFrame  = new CreateAccountFrame(ui->tabCreateAccount);
+    auto createVLayout  = new QVBoxLayout;
+    createVLayout->addWidget(createAccountFrame);
+    createVLayout->addStretch();
+    createVLayout->setSpacing(0);
+
+    createOutPutFrame   = new OutputFrame(ui->tabCreateAccount);
+    auto createHLayout  = new QHBoxLayout(nullptr);
+    createHLayout->addLayout(createVLayout);
+    createHLayout->addWidget(createOutPutFrame);
+    createHLayout->setStretch(0, 1);
+    createHLayout->setStretch(1, 2);
+    ui->tabCreateAccount->setLayout(createHLayout);
 }
 
 void AccountFrame::on_pushButtonGetAccount_clicked()
@@ -91,7 +92,7 @@ void AccountFrame::on_pushButtonGetAccount_clicked()
     QJsonDocument doc(obj);
     formatPrint(doc, ui->textEditGetAccountInput);
 
-    connect(httpcs[FunctionID::get_account], &HttpClient::responseData, [=](const QByteArray& d){
+    connect(httpcs[FunctionID::get_account].get(), &HttpClient::responseData, [=](const QByteArray& d){
         formatPrint(QJsonDocument::fromJson(d), ui->textEditGetAccountOutput);
     });
     httpcs[FunctionID::get_account]->request(FunctionID::get_account, doc.toJson());
@@ -105,7 +106,7 @@ void AccountFrame::on_pushButtonGetTransactions_clicked()
     QJsonDocument doc(obj);
     formatPrint(doc, ui->textEditGetTransactionsInput);
 
-    connect(httpcs[FunctionID::get_transaction], &HttpClient::responseData, [=](const QByteArray& d){
+    connect(httpcs[FunctionID::get_transaction].get(), &HttpClient::responseData, [=](const QByteArray& d){
         formatPrint(QJsonDocument::fromJson(d), ui->textEditGetTransactionsOutput);
     });
     httpcs[FunctionID::get_transaction]->request(FunctionID::get_transaction, doc.toJson());
@@ -119,7 +120,7 @@ void AccountFrame::on_pushButtonGetServants_clicked()
     QJsonDocument doc(obj);
     formatPrint(doc, ui->textEditGetServantsInput);
 
-    connect(httpcs[FunctionID::get_controlled_accounts], &HttpClient::responseData, [=](const QByteArray& d){
+    connect(httpcs[FunctionID::get_controlled_accounts].get(), &HttpClient::responseData, [=](const QByteArray& d){
         formatPrint(QJsonDocument::fromJson(d), ui->textEditGetServantsOutput);
     });
     httpcs[FunctionID::get_controlled_accounts]->request(FunctionID::get_controlled_accounts, doc.toJson());

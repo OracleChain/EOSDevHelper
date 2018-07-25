@@ -23,7 +23,6 @@ void CheckerFrame::on_pushButtonCheck_clicked()
 {
     ui->textEditOutput->clear();
 
-
     auto rawAction  = ui->textEditAction->toPlainText();
     auto doc        = QJsonDocument::fromJson(QByteArray::fromStdString(rawAction.toStdString()));
     if (doc.isNull()) {

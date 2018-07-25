@@ -2,6 +2,7 @@
 #define SETTINGSFRAME_H
 
 #include <QFrame>
+#include <memory>
 
 namespace Ui {
 class SettingsFrame;
@@ -21,8 +22,8 @@ private slots:
     void on_pushButtonConnect_clicked();
 
 private:
-    Ui::SettingsFrame *ui;
-    HttpClient *httpc;
+    Ui::SettingsFrame           *ui;
+    std::shared_ptr<HttpClient> httpc;
 };
 
 #endif // SETTINGSFRAME_H
