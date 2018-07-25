@@ -4,6 +4,7 @@
 #include <QFrame>
 #include <QPair>
 #include <QMap>
+#include <memory>
 
 #include "codebase/chain/signedtransaction.h"
 #include "codebase/utility/httpclient.h"
@@ -46,17 +47,16 @@ private:
 private:
     Ui::CreateAccountFrame *ui;
 
-    QVector<eos_key>                keys;
-    QMap<FunctionID, HttpClient*>   httpcs;
+    QVector<eos_key>                                keys;
+    QMap<FunctionID, std::shared_ptr<HttpClient>>   httpcs;
+    std::shared_ptr<HttpClient>                     delegatebw_httpc;
+    std::shared_ptr<HttpClient>                     buyram_httpc;
+    std::unique_ptr<SignedTransaction>              signedTxn;
     QMap<std::string, std::string>  binargs;
-
-    HttpClient *delegatebw_httpc;
-    HttpClient *buyram_httpc;
 
     QByteArray getInfoData;
     QByteArray getRequiredKeysData;
 
-    SignedTransaction *signedTxn;
 };
 
 #endif // CREATEACCOUNTFRAME_H

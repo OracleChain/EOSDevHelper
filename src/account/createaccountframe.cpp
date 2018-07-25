@@ -22,8 +22,7 @@ extern MainWindow *w;
 
 CreateAccountFrame::CreateAccountFrame(QWidget *parent) :
     QFrame(parent),
-    ui(new Ui::CreateAccountFrame),
-    signedTxn(nullptr)
+    ui(new Ui::CreateAccountFrame)
 {
     ui->setupUi(this);
     auto *accountVadt = new QRegExpValidator(QRegExp(eos_account_regex), this);
@@ -39,18 +38,7 @@ CreateAccountFrame::CreateAccountFrame(QWidget *parent) :
 CreateAccountFrame::~CreateAccountFrame()
 {
     delete ui;
-
-    for (auto itr = httpcs.begin(); itr != httpcs.end(); ++itr) {
-        delete itr.value();
-    }
     httpcs.clear();
-
-    delete delegatebw_httpc;
-    delete buyram_httpc;
-
-    if (signedTxn) {
-        delete signedTxn;
-    }
 }
 
 void CreateAccountFrame::on_pushButtonOk_clicked()
@@ -71,13 +59,13 @@ void CreateAccountFrame::on_pushButtonOk_clicked()
 
     w->accountFrame()->printCreateAccountInfo(0, true, QByteArray(), "get_info");
 
-    connect(httpcs[FunctionID::get_info], &HttpClient::responseData, this, &CreateAccountFrame::get_info_returned);
+    connect(httpcs[FunctionID::get_info].get(), &HttpClient::responseData, this, &CreateAccountFrame::get_info_returned);
     httpcs[FunctionID::get_info]->request(FunctionID::get_info);
 }
 
 void CreateAccountFrame::get_info_returned(const QByteArray &data)
 {
-    disconnect(httpcs[FunctionID::get_info], &HttpClient::responseData, this, &CreateAccountFrame::get_info_returned);
+    disconnect(httpcs[FunctionID::get_info].get(), &HttpClient::responseData, this, &CreateAccountFrame::get_info_returned);
 
     w->accountFrame()->printCreateAccountInfo(0, false, data, "get_info");
 
@@ -90,14 +78,14 @@ void CreateAccountFrame::get_info_returned(const QByteArray &data)
         return;
     }
 
-    connect(httpcs[FunctionID::get_required_keys], &HttpClient::responseData,
+    connect(httpcs[FunctionID::get_required_keys].get(), &HttpClient::responseData,
             this, &CreateAccountFrame::get_required_keys_returned);
     httpcs[FunctionID::get_required_keys]->request(FunctionID::get_required_keys, param);
 }
 
 void CreateAccountFrame::get_required_keys_returned(const QByteArray &data)
 {
-    disconnect(httpcs[FunctionID::get_required_keys], &HttpClient::responseData,
+    disconnect(httpcs[FunctionID::get_required_keys].get(), &HttpClient::responseData,
             this, &CreateAccountFrame::get_required_keys_returned);
 
     w->accountFrame()->printCreateAccountInfo(1, false, data);
@@ -111,14 +99,14 @@ void CreateAccountFrame::get_required_keys_returned(const QByteArray &data)
         return;
     }
 
-    connect(httpcs[FunctionID::push_transaction], &HttpClient::responseData,
+    connect(httpcs[FunctionID::push_transaction].get(), &HttpClient::responseData,
             this, &CreateAccountFrame::push_transaction_returned);
     httpcs[FunctionID::push_transaction]->request(FunctionID::push_transaction, param);
 }
 
 void CreateAccountFrame::push_transaction_returned(const QByteArray &data)
 {
-    disconnect(httpcs[FunctionID::push_transaction], &HttpClient::responseData,
+    disconnect(httpcs[FunctionID::push_transaction].get(), &HttpClient::responseData,
             this, &CreateAccountFrame::push_transaction_returned);
 
     w->accountFrame()->printCreateAccountInfo(2, false, data);
@@ -165,17 +153,13 @@ QByteArray CreateAccountFrame::packGetRequiredKeysParam()
     auto hexData = newAccount.dataAsHex();
     auto active  = ChainManager::getActivePermission(creator.toStdString());
 
-    if (signedTxn) {
-        delete signedTxn;
-        signedTxn = nullptr;
-    }
-    signedTxn = new SignedTransaction;
-    ChainManager::setTransactionHeaderInfo(*signedTxn, getInfoData);
-    ChainManager::addAction(*signedTxn, EOS_SYSTEM_ACCOUNT, newAccount.getActionName(), std::string(hexData.begin(), hexData.end()), active);
+    signedTxn.reset(new SignedTransaction());
+    ChainManager::setTransactionHeaderInfo(*signedTxn.get(), getInfoData);
+    ChainManager::addAction(*signedTxn.get(), EOS_SYSTEM_ACCOUNT, newAccount.getActionName(), std::string(hexData.begin(), hexData.end()), active);
 
     if (ui->checkBoxPractical->isChecked()) {
-        ChainManager::addAction(*signedTxn, EOS_SYSTEM_ACCOUNT, "delegatebw", binargs["delegatebw"], active);
-        ChainManager::addAction(*signedTxn, EOS_SYSTEM_ACCOUNT, "buyram", binargs["buyram"], active);
+        ChainManager::addAction(*signedTxn.get(), EOS_SYSTEM_ACCOUNT, "delegatebw", binargs["delegatebw"], active);
+        ChainManager::addAction(*signedTxn.get(), EOS_SYSTEM_ACCOUNT, "buyram", binargs["buyram"], active);
     }
 
     QJsonArray  avaibleKeys;
@@ -211,8 +195,8 @@ QByteArray CreateAccountFrame::packPushTransactionParam()
         return QByteArray();
     }
 
-    EOSWalletManager::instance().signTransaction(*signedTxn, keys, TypeChainId::fromHex(infoObj.value("chain_id").toString().toStdString()));
-    return QJsonDocument(PackedTransaction(*signedTxn, "none").toJson().toObject()).toJson();
+    EOSWalletManager::instance().signTransaction(*signedTxn.get(), keys, TypeChainId::fromHex(infoObj.value("chain_id").toString().toStdString()));
+    return QJsonDocument(PackedTransaction(*signedTxn.get(), "none").toJson().toObject()).toJson();
 }
 
 void CreateAccountFrame::initWallets()
@@ -228,13 +212,13 @@ void CreateAccountFrame::initWallets()
 
 void CreateAccountFrame::initHttpClients()
 {
-    httpcs[FunctionID::get_info]            = new HttpClient;
-    httpcs[FunctionID::get_required_keys]   = new HttpClient;
-    httpcs[FunctionID::push_transaction]    = new HttpClient;
+    httpcs[FunctionID::get_info]            = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::get_required_keys]   = std::make_shared<HttpClient>(nullptr);
+    httpcs[FunctionID::push_transaction]    = std::make_shared<HttpClient>(nullptr);
 
     // It's better to construct these two httpcs as needed, but for simplicity just construct here.
-    delegatebw_httpc = new HttpClient;
-    buyram_httpc     = new HttpClient;
+    delegatebw_httpc = std::make_shared<HttpClient>(nullptr);
+    buyram_httpc     = std::make_shared<HttpClient>(nullptr);
 }
 
 void CreateAccountFrame::on_checkBoxPractical_stateChanged(int arg1)
@@ -275,7 +259,7 @@ void CreateAccountFrame::serilize_json()
     de_obj.insert("action", QJsonValue("delegatebw"));
     de_obj.insert("args", de_objArgs);
 
-    connect(delegatebw_httpc, &HttpClient::responseData, [&](const QByteArray& ba){
+    connect(delegatebw_httpc.get(), &HttpClient::responseData, [&](const QByteArray& ba){
         auto abiBinObj = QJsonDocument::fromJson(ba).object();
         binargs["delegatebw"] = abiBinObj.value("binargs").toString().toStdString();
 
@@ -295,7 +279,7 @@ void CreateAccountFrame::serilize_json()
     buy_obj.insert("action", QJsonValue("buyram"));
     buy_obj.insert("args", buy_objArgs);
 
-    connect(buyram_httpc, &HttpClient::responseData, [&](const QByteArray& ba){
+    connect(buyram_httpc.get(), &HttpClient::responseData, [&](const QByteArray& ba){
         auto abiBinObj = QJsonDocument::fromJson(ba).object();
         binargs["buyram"] = abiBinObj.value("binargs").toString().toStdString();
 
