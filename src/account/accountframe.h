@@ -45,9 +45,9 @@ private slots:
     void on_pushButtonGetServants_clicked();
 
 private:
-    Ui::AccountFrame *ui;
-    CreateAccountFrame *createAccountFrame;
-    OutputFrame *createOutPutFrame;
+    Ui::AccountFrame    *ui;
+    CreateAccountFrame  *createAccountFrame;
+    OutputFrame         *createOutPutFrame;
 
     QMap<FunctionID, std::shared_ptr<HttpClient>> httpcs;
 };
