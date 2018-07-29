@@ -45,10 +45,9 @@ private:
     void encryptKeys();
 
 private:
-    wallet_data walletData;
-
-    QMap<QString, QString> keys;
-    sha512 checksum;
+    wallet_data             walletData;
+    QMap<QString, QString>  keys;
+    sha512                  checksum;
 };
 
 #endif // EOSWALLET_H
