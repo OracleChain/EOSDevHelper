@@ -32,11 +32,10 @@ private slots:
 private:
     Ui::ActionEditor *ui;
 
-    QString actionName;
-    QByteArray action;
+    QString     actionName;
+    QByteArray  action;
 
     QMap<QString, QVariant> firstMap;
-    //QVector<QLineEdit*> secondVec;
 };
 
 #endif // ACTIONEDITOR_H
