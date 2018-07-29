@@ -36,8 +36,8 @@ private:
     Ui::MainWindow *ui;
 
     AccountFrame *acntFrame;
-    OutputFrame *pushOutput;
-    AboutFrame *about;
+    OutputFrame  *pushOutput;
+    AboutFrame   *about;
 };
 
 #endif // MAINWINDOW_H
