@@ -52,7 +52,7 @@ private:
     std::shared_ptr<HttpClient>                     delegatebw_httpc;
     std::shared_ptr<HttpClient>                     buyram_httpc;
     std::unique_ptr<SignedTransaction>              signedTxn;
-    QMap<std::string, std::string>  binargs;
+    QMap<std::string, std::string>                  binargs;
 
     QByteArray getInfoData;
     QByteArray getRequiredKeysData;
