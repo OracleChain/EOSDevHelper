@@ -42,13 +42,10 @@ private:
     Ui::PushFrame *ui;
 
     QMap<FunctionID, std::shared_ptr<HttpClient>> httpcs;
-
     QByteArray abiJsonToBinData;
     QByteArray getInfoData;
     QByteArray getRequiredKeysData;
-
     QByteArray contractAbi;
-
     SignedTransaction signedTxn;
 };
 
