@@ -55,15 +55,15 @@ private:
     void loadPasswords();
 
 private:
-    const QString EOS_WALLET_PASSWD_PREFIX = "PW";
-    const QString EOS_WALLET_FILE_EXT = ".wallet";
-    const QString EOS_WALLET_DEFAULT_NAME = "default";
-
+    const QString EOS_WALLET_PASSWD_PREFIX  = "PW";
+    const QString EOS_WALLET_FILE_EXT       = ".wallet";
+    const QString EOS_WALLET_DEFAULT_NAME   = "default";  
+    
+    QMap<QString, EOSWallet>    wallets;
+    QMap<QString, QString>      passwords;
+    
     QString dir;
-
-    QMap<QString, EOSWallet> wallets;
-    QMap<QString, QString> passwords;
-    bool defaultExists;
+    bool    defaultExists;
 };
 
 #endif // EOSWALLETMANAGER_H
