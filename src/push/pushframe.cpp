@@ -84,11 +84,11 @@ QByteArray PushFrame::packGetRequiredKeysParam()
                                                 ChainManager::getActivePermission(permission.toStdString()), getInfoData);
 
     QJsonArray avaibleKeys;
-    auto UnlockedWallets = EOSWalletManager::instance().listKeys(EOSWalletManager::ws_unlocked);
-    for (const auto& w : UnlockedWallets) {
+    auto unlockedWallets = EOSWalletManager::instance().listKeys(EOSWalletManager::ws_unlocked);
+    for (const auto& w : unlockedWallets) {
         auto keys = w.listKeys();
         auto list = keys.keys();
-        for (int i = 0; i < list.size(); ++i) {
+        for (auto i = 0; i < list.size(); ++i) {
             avaibleKeys.append(QJsonValue(list.at(i)));
         }
     }
@@ -308,7 +308,7 @@ void PushFrame::on_pushButtonFormInput_clicked()
         return;
     }
 
-    for (int i = 0; i < structs.size(); ++i) {
+    for (auto i = 0; i < structs.size(); ++i) {
         auto tmp = structs.at(i).toObject();
         if (tmp.isEmpty()) {
             continue;
