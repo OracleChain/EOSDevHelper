@@ -4,6 +4,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QScrollArea>
+#include <QTabBar>
 
 #include "wallet/walletframe.h"
 #include "account/accountframe.h"

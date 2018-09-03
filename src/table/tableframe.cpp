@@ -6,6 +6,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QJsonValue>
+#include <QRegExpValidator>
 
 TableFrame::TableFrame(QWidget *parent) :
     QFrame(parent),

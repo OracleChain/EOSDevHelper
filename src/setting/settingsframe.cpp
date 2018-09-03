@@ -5,6 +5,7 @@
 #include "codebase/utility/httpclient.h"
 
 #include <QJsonDocument>
+#include <QRegExpValidator>
 
 extern QString base_url;
 extern QString url_port;
