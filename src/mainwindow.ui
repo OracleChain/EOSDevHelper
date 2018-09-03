@@ -37,6 +37,10 @@ border-color: rgba(255, 255, 255, 0);</string>
     border: 0px;
 }
 
+QTabWidget::tab-bar {
+	left: 0;
+}
+
 QTabBar {
 	color: rgb(255, 255, 255);
 	background-color: rgb(32, 32, 32);
