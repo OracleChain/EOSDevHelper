@@ -108,7 +108,7 @@ void ActionEditor::on_pushButtonOk_clicked()
     QJsonObject obj;
     for (auto itr = firstMap.cbegin(); itr != firstMap.end(); ++itr) {
         auto ok = false;
-        auto in = itr.value().toInt(&ok);
+        auto in = itr.value().toLongLong(&ok);  // clang make qint64 to qint32, don't know why.
         if (ok) {
             if (QLineEdit *lineEdit = reinterpret_cast<QLineEdit*>(in)) {
                 obj.insert(itr.key(), QJsonValue(lineEdit->text()));
@@ -119,7 +119,7 @@ void ActionEditor::on_pushButtonOk_clicked()
                 QJsonArray array;
                 for (auto i = 0; i < list.size(); ++i) {
                     auto ok2 = false;
-                    auto in2 = list.at(i).toInt(&ok2);
+                    auto in2 = list.at(i).toLongLong(&ok2);
                     if (ok2) {
                         if (QLineEdit *lineEdit = reinterpret_cast<QLineEdit*>(in2)) {
                             auto text = lineEdit->text();
