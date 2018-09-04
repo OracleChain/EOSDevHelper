@@ -34,3 +34,6 @@
 # Qt's
 src/*.pro.user
 build-EOSDevHelper*
+
+# OSX
+.DS_Store
