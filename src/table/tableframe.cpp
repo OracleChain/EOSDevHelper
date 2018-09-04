@@ -43,7 +43,13 @@ void TableFrame::on_pushButtonGetTable_clicked()
     obj.insert("table_key", QJsonValue(QString()));
     obj.insert("lower_bound", QJsonValue(QString()));
     obj.insert("upper_bound", QJsonValue(QString()));
-    obj.insert("limit", QJsonValue(10));
+    bool ok = false;
+    int limit = 10;
+    limit = ui->lineEditTableLimit->text().toInt(&ok);
+    if (!ok) {
+        limit = 10;
+    }
+    obj.insert("limit", QJsonValue(limit));
     obj.insert("code", QJsonValue(ui->lineEditCode->text()));
     obj.insert("scope", QJsonValue(ui->lineEditScope->text()));
     obj.insert("table", QJsonValue(ui->lineEditTableName->text()));
