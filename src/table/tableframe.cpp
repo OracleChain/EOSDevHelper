@@ -41,8 +41,8 @@ void TableFrame::on_pushButtonGetTable_clicked()
     QJsonObject obj;
     obj.insert("json", QJsonValue(true));
     obj.insert("table_key", QJsonValue(QString()));
-    obj.insert("lower_bound", QJsonValue(QString()));
-    obj.insert("upper_bound", QJsonValue(QString()));
+    obj.insert("lower_bound", QJsonValue(ui->lineEditTableLowerBound->text()));
+    obj.insert("upper_bound", QJsonValue(ui->lineEditTableUpperBound->text()));
     bool ok = false;
     int limit = 10;
     limit = ui->lineEditTableLimit->text().toInt(&ok);
