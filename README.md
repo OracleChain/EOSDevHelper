@@ -1,4 +1,4 @@
-![](https://github.com/OracleChain/EOSDevHelper/blob/master/src/resource/logo.png)
+<img src="https://github.com/OracleChain/EOSDevHelper/blob/master/src/resource/logo.png" width="200">
 ---
 # About/关于
 
