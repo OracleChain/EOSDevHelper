@@ -1,4 +1,9 @@
-<img src="https://github.com/OracleChain/EOSDevHelper/blob/master/src/resource/logo.png" width="200">
+<a name="logo"/>
+<div align="center">
+<a href="https://oraclechain.io/">
+<img src="https://github.com/OracleChain/EOSDevHelper/blob/master/src/resource/logo.png" alt="EOSDevHelper Logo" width="210"></img>
+</a>
+</div>
 
 # About/关于
 
