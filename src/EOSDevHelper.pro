@@ -150,3 +150,5 @@ RESOURCES += \
 CONFIG += c++11
 
 RC_ICONS = resource/logo.ico
+
+ICON = resource/logo.icns
