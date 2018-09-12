@@ -148,3 +148,5 @@ RESOURCES += \
     resource.qrc
 
 CONFIG += c++11
+
+RC_ICONS = resource/logo.ico
