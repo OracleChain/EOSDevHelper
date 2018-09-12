@@ -1,5 +1,5 @@
 <img src="https://github.com/OracleChain/EOSDevHelper/blob/master/src/resource/logo.png" width="200">
----
+
 # About/关于
 
 **EOSDevHelper** is a cross-platform EOS PC wallet tool,which is developed by [OracleChain.io](https://oraclechain.io).
