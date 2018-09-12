@@ -62,6 +62,7 @@ Just using this command to install:
 
 |Version|MD5|
 |------|---|
+|[WINDOWS v3.1(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.2.5/EOSDevHelper_Windows_Release_V1.2.5.zip)|209d8fc86406682e0ca97caa146e218b|
 |[MAC_OSX_v3.0(compliant with v1.0.0)](https://github.com/OracleChain/EOSDevHelper/files/2347420/EOSDevHelper-mac.tar.gz)|4221fd1f43d092533aa7726a696be26b|
 |[WINDOWS v3.0(compliant with v1.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.0.7/EOSDevHelper_Windows_Release_V1.0.7.zip)|be0842924bda192167f3cfdf6198d900|
 |[WINDOWS_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/dawn-4.0/EOSDevHelper_Windows_Release_Dawn4.zip)|233597e64da072fb7ed95a4a61af6aa5|
