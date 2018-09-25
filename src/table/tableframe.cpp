@@ -7,7 +7,6 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonValue>
-#include <QRegExpValidator>
 #include <QMessageBox>
 
 TableFrame::TableFrame(QWidget *parent) :
@@ -15,7 +14,6 @@ TableFrame::TableFrame(QWidget *parent) :
     ui(new Ui::TableFrame)
 {
     ui->setupUi(this);
-    ui->lineEditScope->setValidator(new QRegExpValidator(QRegExp(eos_account_regex), this));
 
     initHttpClients();
 }
