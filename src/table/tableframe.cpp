@@ -93,6 +93,9 @@ void TableFrame::on_pushButtonGetTable_clicked()
     obj.insert("code", QJsonValue(ui->lineEditCode->text()));
     obj.insert("scope", QJsonValue(ui->lineEditScope->text()));
     obj.insert("table", QJsonValue(ui->comboBoxTableName->currentData().toString()));
+    if (ui->checkBoxNameKeyType->isChecked()) {
+        obj.insert("key_type", QJsonValue("name"));
+    }
 
     QJsonDocument   doc(obj);
     auto            data = doc.toJson();

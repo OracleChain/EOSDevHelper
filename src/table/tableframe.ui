@@ -529,6 +529,22 @@ border-radius: 4px;</string>
       </spacer>
      </item>
      <item>
+      <widget class="QCheckBox" name="checkBoxNameKeyType">
+       <property name="font">
+        <font>
+         <family>Arial</family>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Name key type</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="pushButtonGetTable">
        <property name="minimumSize">
         <size>
