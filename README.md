@@ -62,8 +62,8 @@ Just using this command to install:
 
 |Version|MD5|
 |------|---|
-|[MAC_OSX_v3.2(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.3.0/EOSDevHelper.tar.gz)|d3e02e07fa7d82e627614380931b45dd|
-|[WINDOWS_v3.2(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.3.0/EOSDevHelper_Windows_Release_V1.3.0.zip)|59c534e6fee0010bfce428327be5c1eb|
+|[MAC_OSX_v3.2(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.3.0/EOSDevHelper.tar.gz)|c8a7a7b5a0b3ba5959641bab8bdf618a|
+|[WINDOWS_v3.2(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.3.0/EOSDevHelper_Windows_Release_V1.3.0.zip)|a5b58100dd4c8627a30b36f71cf5a2a8|
 |[MAC_OSX_v3.1(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.2.5/EOSDevHelper-mac.tar.gz)|168de2f134e936081bce1a8bccf16dbb|
 |[WINDOWS_v3.1(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.2.5/EOSDevHelper_Windows_Release_V1.2.5.zip)|209d8fc86406682e0ca97caa146e218b|
 |[MAC_OSX_v3.0(compliant with v1.0.0)](https://github.com/OracleChain/EOSDevHelper/files/2347420/EOSDevHelper-mac.tar.gz)|4221fd1f43d092533aa7726a696be26b|
