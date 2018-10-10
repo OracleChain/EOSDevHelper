@@ -20,7 +20,7 @@ class CreateAccountFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit CreateAccountFrame(QWidget *parent = 0);
+    explicit CreateAccountFrame(QWidget *parent = nullptr);
     ~CreateAccountFrame();
 
     void initWallets();

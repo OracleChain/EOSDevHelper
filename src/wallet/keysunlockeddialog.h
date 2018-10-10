@@ -12,7 +12,7 @@ class KeysUnlockedDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit KeysUnlockedDialog(QWidget *parent = 0);
+    explicit KeysUnlockedDialog(QWidget *parent = nullptr);
     ~KeysUnlockedDialog();
 
     void showUnlockedKeys();

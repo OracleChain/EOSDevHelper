@@ -25,7 +25,7 @@ class AccountFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit AccountFrame(QWidget *parent = 0);
+    explicit AccountFrame(QWidget *parent = nullptr);
     ~AccountFrame();
 
     void refreshCreateAccountFrame();

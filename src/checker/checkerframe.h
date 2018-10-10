@@ -12,7 +12,7 @@ class CheckerFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit CheckerFrame(QWidget *parent = 0);
+    explicit CheckerFrame(QWidget *parent = nullptr);
     ~CheckerFrame();
 
 private slots:

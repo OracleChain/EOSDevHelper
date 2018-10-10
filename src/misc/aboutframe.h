@@ -12,7 +12,7 @@ class AboutFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit AboutFrame(QWidget *parent = 0);
+    explicit AboutFrame(QWidget *parent = nullptr);
     ~AboutFrame();
 
 private slots:

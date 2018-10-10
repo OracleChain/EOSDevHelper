@@ -12,7 +12,7 @@ class WalletFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit WalletFrame(QWidget *parent = 0);
+    explicit WalletFrame(QWidget *parent = nullptr);
     ~WalletFrame();
 
 private:

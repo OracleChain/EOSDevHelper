@@ -14,7 +14,7 @@ class ActionEditor : public QDialog
     Q_OBJECT
 
 public:
-    explicit ActionEditor(const QString& actionName, const QByteArray& actionFields, QWidget *parent = 0);
+    explicit ActionEditor(const QString& actionName, const QByteArray& actionFields, QWidget *parent = nullptr);
     ~ActionEditor();
 
 signals:

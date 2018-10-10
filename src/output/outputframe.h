@@ -12,7 +12,7 @@ class OutputFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit OutputFrame(QWidget *parent = 0);
+    explicit OutputFrame(QWidget *parent = nullptr);
     ~OutputFrame();
 
     void setRequestOutput(int index, const QString& title, const QByteArray& data);

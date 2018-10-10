@@ -12,7 +12,7 @@ class ImportKeyDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ImportKeyDialog(QWidget *parent = 0);
+    explicit ImportKeyDialog(QWidget *parent = nullptr);
     ~ImportKeyDialog();
 
     void setWalletName(const QString& name);

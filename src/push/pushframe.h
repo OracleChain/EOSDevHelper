@@ -17,7 +17,7 @@ class PushFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit PushFrame(QWidget *parent = 0);
+    explicit PushFrame(QWidget *parent = nullptr);
     ~PushFrame();
 
 private:

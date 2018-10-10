@@ -12,7 +12,7 @@ class WalletItemFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit WalletItemFrame(QWidget *parent = 0);
+    explicit WalletItemFrame(QWidget *parent = nullptr);
     ~WalletItemFrame();
 
     void setWalletName(const QString& name);

@@ -15,7 +15,7 @@ class SettingsFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit SettingsFrame(QWidget *parent = 0);
+    explicit SettingsFrame(QWidget *parent = nullptr);
     ~SettingsFrame();
 
 private slots:

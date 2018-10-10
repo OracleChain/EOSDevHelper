@@ -14,7 +14,7 @@ namespace Packer {
 std::vector<char> pack(const plain_keys &data)
 {
     QJsonArray hash;
-    for (auto i = 0; i < data.checksum.size(); ++i) {
+    for (auto i = 0; i < static_cast<int>(data.checksum.size()); ++i) {
         // It seems that QJsonValue take a ulonglong QVariant number Scientific notation,
         // e.g, 8153218187713844392 to 8.15321818771e+18
         // and this is NOT what we want.

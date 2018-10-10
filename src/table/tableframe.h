@@ -18,7 +18,7 @@ class TableFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit TableFrame(QWidget *parent = 0);
+    explicit TableFrame(QWidget *parent = nullptr);
     ~TableFrame();
 
 private:

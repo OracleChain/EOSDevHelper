@@ -12,7 +12,7 @@ class WalletPasswordDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit WalletPasswordDialog(QWidget *parent = 0);
+    explicit WalletPasswordDialog(QWidget *parent = nullptr);
     ~WalletPasswordDialog();
 
     void setWalletName(const QString& name);

@@ -3,7 +3,7 @@
 
 #include <vector>
 
-class plain_keys;
+struct plain_keys;
 
 namespace Packer {
     std::vector<char> pack(const plain_keys& data);

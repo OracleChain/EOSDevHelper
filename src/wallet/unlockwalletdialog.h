@@ -12,7 +12,7 @@ class UnlockWalletDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit UnlockWalletDialog(QWidget *parent = 0);
+    explicit UnlockWalletDialog(QWidget *parent = nullptr);
     ~UnlockWalletDialog();
 
     void setWalletName(const QString& name);
