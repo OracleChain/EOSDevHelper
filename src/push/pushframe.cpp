@@ -318,8 +318,7 @@ void PushFrame::on_pushButtonFormInput_clicked()
         if (name == action) {
             auto array = tmp.value("fields").toArray();
             if (array.isEmpty()) {
-                QMessageBox::warning(nullptr, "Error", "empty fields in action struct.");
-                ui->textEditAction->append("{}");
+                ui->textEditAction->setText("{}");
             } else {
                 ActionEditor editor(action, QJsonDocument(array).toJson());
                 connect(&editor, &ActionEditor::ActionFinish, [&](const QByteArray& ba){
