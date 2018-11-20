@@ -45,11 +45,6 @@ ActionEditor::~ActionEditor()
 void ActionEditor::updateFieldsUI(const QByteArray &fields)
 {
     auto array = QJsonDocument::fromJson(fields).array();
-    if (array.isEmpty()) {
-        QMessageBox::warning(nullptr, "Error", "empty fields in action struct.");
-        close();
-    }
-
     firstMap.clear();
 
     for (auto i = 0; i < array.size(); ++i) {
