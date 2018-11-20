@@ -64,8 +64,7 @@ Just using this command to install:
 |------|---|
 |[MAC_OSX_v3.3(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.4.0/EOSDevHelper.tar.gz)|45d5d57787c8c6582e5ef21f881dceb2|
 |[WINDOWS_v3.3(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.4.0/EOSDevHelper_Windows_Release_V1.4.0.zip)|414f9e2e79897c26270b139b9a0dcd3f|
-
-[History version/历史版本](https://github.com/OracleChain/EOSDevHelper/releases)
+|[History version/历史版本](https://github.com/OracleChain/EOSDevHelper/releases)||
 
 
 > For Ubuntu: Tested on Ubuntu 16.04 x64, you should `chmod +x start.sh`, then use `./start.sh` . 
