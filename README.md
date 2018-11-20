@@ -64,18 +64,9 @@ Just using this command to install:
 |------|---|
 |[MAC_OSX_v3.3(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.4.0/EOSDevHelper.tar.gz)|45d5d57787c8c6582e5ef21f881dceb2|
 |[WINDOWS_v3.3(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.4.0/EOSDevHelper_Windows_Release_V1.4.0.zip)|414f9e2e79897c26270b139b9a0dcd3f|
-|[MAC_OSX_v3.2(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.3.0/EOSDevHelper.tar.gz)|c8a7a7b5a0b3ba5959641bab8bdf618a|
-|[WINDOWS_v3.2(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.3.0/EOSDevHelper_Windows_Release_V1.3.0.zip)|a5b58100dd4c8627a30b36f71cf5a2a8|
-|[MAC_OSX_v3.1(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.2.5/EOSDevHelper-mac.tar.gz)|168de2f134e936081bce1a8bccf16dbb|
-|[WINDOWS_v3.1(compliant with v1.x)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.2.5/EOSDevHelper_Windows_Release_V1.2.5.zip)|209d8fc86406682e0ca97caa146e218b|
-|[MAC_OSX_v3.0(compliant with v1.0.0)](https://github.com/OracleChain/EOSDevHelper/files/2347420/EOSDevHelper-mac.tar.gz)|4221fd1f43d092533aa7726a696be26b|
-|[WINDOWS v3.0(compliant with v1.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/v1.0.7/EOSDevHelper_Windows_Release_V1.0.7.zip)|be0842924bda192167f3cfdf6198d900|
-|[WINDOWS_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/dawn-4.0/EOSDevHelper_Windows_Release_Dawn4.zip)|233597e64da072fb7ed95a4a61af6aa5|
-|[MAC_OSX_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/files/2008592/EOSDevHelper_OSX_Release_Dawn4.zip)|fe5a84a76e274169d7edb8af141b02f8|
-|[UBUNTU_v2.0(compliant with dawn-v4.0.0)](https://github.com/OracleChain/EOSDevHelper/releases/download/dawn-4.0/EOSDevHelper_Ubuntu_Release_Dawn4.zip)|478a115eeab9578223120a33b58e33d3|
-|[WINDOWS_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/files/1937575/EOSDevHelper_Windows_Release.zip)|aa0539bddc17007fb47938b5ff9c80c6|
-|[MAC_OSX_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/releases/download/1.0/EOSDevHelper_OSX_Release.zip)|65e580e2372646a99af9a4f0d14e4340|
-|[UBUNTU_v1.0(compliant with DAWN-2018-04-27-ALPHA)](https://github.com/OracleChain/EOSDevHelper/releases/download/1.0/EOSDevHelper_Ubuntu_Release.zip)|d20869f374cdd6fc39ed842114ad658c|
+
+[History version/历史版本](https://github.com/OracleChain/EOSDevHelper/releases)
+
 
 > For Ubuntu: Tested on Ubuntu 16.04 x64, you should `chmod +x start.sh`, then use `./start.sh` . 
 
